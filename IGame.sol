@@ -17,7 +17,6 @@ interface IGame {
 	// equipment attributes
 	struct Equipment {
 		uint256 sword_strength;
-
     }
 	
 	// monster attributes
@@ -27,13 +26,6 @@ interface IGame {
 		uint256 mosnter_current_health;
     }
 	
-	// duel attributes
-	
-	struct Duel {
-		uint256 opponent_life;
-		uint256 opponent_current_life;
-	}
-	
 	// trade attributes
 	struct Trade {
 		uint256 opponent_money;
@@ -41,7 +33,7 @@ interface IGame {
 	}
 
     //mapping(address => Player) players;
-	//mapping(address => Duel) duel_match;
+	//mapping(address => address) duel_match;
 
     /*
      * @notice: Player attacks a monster.
