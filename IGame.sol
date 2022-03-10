@@ -12,19 +12,21 @@ interface IGame {
 		uint256 attack;
 		uint256 max_health;
 		uint256 current_health;
-		string name;
+		string player_name;
+		array[] equipment_storage;
 		Equipment equipename;
     }
 	
 	// equipment attributes
 	struct Equipment {
 		uint256 sword_strength;
+		int equipment_id
     }
 	
 	// monster attributes
 	struct Monster {
 		uint256 monster_attack;
-		uint256 mosnter_current_health;
+		uint256 monster_current_health;
 		string monster_name;
     }
 
