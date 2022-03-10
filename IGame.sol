@@ -4,6 +4,7 @@ pragma solidity 0.8.0;
  * @Game Contract
  * @core contract and code
  */
+ 
 interface IGame {
     
 	// player attributes
@@ -11,6 +12,7 @@ interface IGame {
 		uint256 attack;
 		uint256 max_health;
 		uint256 current_health;
+		string name;
 		Equipment equipename;
     }
 	
@@ -22,15 +24,9 @@ interface IGame {
 	// monster attributes
 	struct Monster {
 		uint256 monster_attack;
-		uint256 monster_max_health;
 		uint256 mosnter_current_health;
+		string monster_name;
     }
-	
-	// trade attributes
-	struct Trade {
-		uint256 opponent_money;
-		Equipment equipname;
-	}
 
     //mapping(address => Player) players;
 	//mapping(address => address) duel_match;
