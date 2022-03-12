@@ -13,14 +13,15 @@ interface IGame {
 		uint256 max_health;
 		uint256 current_health;
 		string player_name;
-		int[] equipment_storage;
-		Equipment equipename;
+		Equipment[] equipment_storage;
+		Equipment equipment;
     }
 	
 	// equipment attributes
 	struct Equipment {
 		uint256 sword_strength;
-		int equipment_id;
+		uint256 equipment_id;
+        string equipment_name;
     }
 	
 	// monster attributes
@@ -30,8 +31,8 @@ interface IGame {
 		string monster_name;
     }
 
-    //mapping(address => Player) players;
-	//mapping(address => address) duel_match;
+    mapping(address => Player) players;
+	mapping(address => address) duel_match;
 
     /*
      * @notice: Player attacks a monster.
@@ -50,7 +51,10 @@ interface IGame {
 	
 	/*
      * @notice invites another player to duel. Depends on you can only send one invite at a time.
+     * to judge if duel doesn't exist. add a variable
+
 	 * Modifies: duel_match
+     * dont use player_address, use inviter 
      */
 	function invite_duel(address player_address) external returns(bool result);
 

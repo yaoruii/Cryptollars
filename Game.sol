@@ -11,14 +11,18 @@ pragma solidity 0.8.0;
 		uint256 max_health;
 		uint256 current_health;
 		string player_name;
-		int[] equipment_storage;
-		Equipment equipename;
+		Equipment[] equipment_storage;
+		Equipment equipment;
+		bool is_pending;
     }
-	
+	constructor Game{
+		players[msg.sender].is_pending = false;
+	}
 	// equipment attributes
 	struct Equipment {
 		uint256 sword_strength;
-		int equipment_id;
+		uint256 equipment_id;
+		string equipment_name;
     }
 	
 	// monster attributes
@@ -38,22 +42,20 @@ pragma solidity 0.8.0;
      * @return result True = kill the monster; False = get killed.
      */
     function attack_monster(uint256 monster_id) external returns(bool result){
-        uint256 current_attack = players[msg.sender].attack+equipename.sword_strength;
+        
         uint256 monster_freq = players[msg.sender].current_health/monsters[monster_id].attack;
-        uint256 player_freq = monsters[monster_id].monster_current_health/current_attack;
+        uint256 player_freq = monsters[monster_id].monster_current_health/players[msg.sender].attack;
 		if(player_freq<=monster_freq){
 			result=true;
-			players[msg.sender].current_health-=player_freq*monsters[monster_id].attack;
+			players[msg.sender].current_health-=(player_freq-1)*monsters[monster_id].attack;
 			/*
 			add equipment and money
 			*/
+			return true;
 		}
-		else{
-			result=false;
-			reborn();
-		}
-		return result;
-		
+		result=false;
+		reborn();
+		return false;
     }
 	/*
      * @notice Player is reborned. Depends on the result of attack_monster
@@ -75,5 +77,41 @@ pragma solidity 0.8.0;
 	 * Modifies: player attack_strength, equipment sale status
      */
 	function unequip(uint equipment_id) external;
+	/*
+     * @notice invites another player to duel. Depends on you can only send one invite at a time.
+     * to judge if duel doesn't exist. add a variable
+
+	 * Modifies: duel_match
+     * dont use player_address, use inviter 
+     */
+	function invite_duel(address invitee) external returns(bool result){
+		require(players[msg.sender].is_pending==false&&players[invitee].is_pending==false);
+		players[msg.sender].is_pending=true;
+		duel_match[msg.sender]=invitee;
+		return true;
+	}
+
+	/*
+     * @notice accepts another player to duel. Depends if you receive an invite
+	 * Modifies: duel_match, current_health, max_health, opponent_life
+	 * return means if the inviter wins
+     */
+	function accept_duel(address inviter) external returns(bool result){
+		//received the invite
+		require(duel_match[inviter]==msg.sender);
+		players[msg.sender].is_pending=true;
+        uint256 opponent_freq = players[inviter].current_health/players[msg.sender].attack;
+        uint256 player_freq = monsters[monster_id].monster_current_health/current_attack;
+		if(player_freq<=monster_freq){
+			result=true;
+			players[msg.sender].current_health-=(player_freq-1)*monsters[monster_id].attack;
+			/*
+			add equipment and money
+			*/
+			return true;
+		}
+	}
+	
+	
 	
  }
