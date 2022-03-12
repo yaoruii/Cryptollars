@@ -1,4 +1,5 @@
-pragma solidity 0.8.0;
+//SPDX-License-Identifier: MIT
+pragma solidity >=0.8.0;
 
 /*
  * @Game Contract
@@ -15,6 +16,7 @@ interface IGame {
 		string player_name;
 		Equipment[] equipment_storage;
 		Equipment equipment;
+        bool is_pending;
     }
 	
 	// equipment attributes
@@ -26,13 +28,13 @@ interface IGame {
 	
 	// monster attributes
 	struct Monster {
-		uint256 monster_attack;
+		uint256 attack;
 		uint256 monster_current_health;
 		string monster_name;
     }
 
-    mapping(address => Player) players;
-	mapping(address => address) duel_match;
+    //mapping(address => Player) players;
+	//mapping(address => address) duel_match;
 
     /*
      * @notice: Player attacks a monster.
@@ -56,7 +58,7 @@ interface IGame {
 	 * Modifies: duel_match
      * dont use player_address, use inviter 
      */
-	function invite_duel(address player_address) external returns(bool result);
+	function invite_duel(address invitee) external returns(bool result);
 
 	/*
      * @notice accepts another player to duel. Depends if you receive an invite

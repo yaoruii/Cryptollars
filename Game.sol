@@ -1,39 +1,37 @@
-//SPDX-License-Identifier: MIT;
-pragma solidity 0.8.0;
+//SPDX-License-Identifier: MIT
+pragma solidity >=0.8.0;
+import "./IGame.sol";
 
 /**
  * @title Bank contract
  */
  contract Game is IGame{
-     // player attributes
-    struct Player {
-		uint256 attack;
-		uint256 max_health;
-		uint256 current_health;
-		string player_name;
-		Equipment[] equipment_storage;
-		Equipment equipment;
-		bool is_pending;
-    }
-	constructor Game{
+    
+   
+	constructor () {
 		players[msg.sender].is_pending = false;
 	}
 	// equipment attributes
-	struct Equipment {
-		uint256 sword_strength;
-		uint256 equipment_id;
-		string equipment_name;
-    }
 	
-	// monster attributes
-	struct Monster {
-		uint256 monster_attack;
-		uint256 monster_current_health;
-		string monster_name;
-    }
     mapping(address => Player) players;
 	mapping(address => address) duel_match;
 	mapping(int => Equipment) equipments;
+	Monster[] monsters;
+	Equipment new_sword = Equipment(0, 12345, "new_sword");
+	/*
+     * @notice Player is reborned. Depends on the result of attack_monster
+	 * Modifies: equipment, player health and current health
+     */
+	function reborn() public{
+
+		players[msg.sender].current_health=players[msg.sender].max_health;
+		delete players[msg.sender].equipment_storage[0];
+		if(players[msg.sender].equipment_storage.length==0){
+			
+			players[msg.sender].equipment_storage.push(10,1,"new_sword");
+		}
+
+	}
     /*
      * @notice: Player attacks a monster.
 	 * Depends on the monster's health, attack strength and player's attack strength and health 
@@ -57,15 +55,7 @@ pragma solidity 0.8.0;
 		reborn();
 		return false;
     }
-	/*
-     * @notice Player is reborned. Depends on the result of attack_monster
-	 * Modifies: equipment, player health and current health
-     */
-	function reborn() external{
-
-		players[msg.sender].current_health=players[msg.sender].max_health;
-
-	}
+	
 	/*
      * @notice equipes player with equipment. Depends if equipment is avaliable
 	 * Modifies: player attack_strength, equipment sale status
@@ -100,18 +90,31 @@ pragma solidity 0.8.0;
 		//received the invite
 		require(duel_match[inviter]==msg.sender);
 		players[msg.sender].is_pending=true;
-        uint256 opponent_freq = players[inviter].current_health/players[msg.sender].attack;
-        uint256 player_freq = monsters[monster_id].monster_current_health/current_attack;
-		if(player_freq<=monster_freq){
-			result=true;
-			players[msg.sender].current_health-=(player_freq-1)*monsters[monster_id].attack;
+        uint256 opponent_freq = players[msg.sender].current_health/players[inviter].attack;
+        uint256 player_freq = players[inviter].current_health/players[msg.sender].attack;
+		if(player_freq<=opponent_freq){
+			players[inviter].current_health-=(player_freq-1)*players[msg.sender].attack;
 			/*
-			add equipment and money
+			add equipment
 			*/
-			return true;
+			
+			result = true;
+		}else{
+			result=false;
 		}
+		players[msg.sender].is_pending=false;
+		players[inviter].is_pending=false;
+		return result;
 	}
-	
+	/*
+     * @notice rejects another player to duel. Depends if you receive an invite
+     */
+	function reject_duel(address inviter) external returns(bool result){
+		//received the invite
+		require(duel_match[inviter]==msg.sender);
+		players[msg.sender].is_pending=false;
+		players[inviter].is_pending=false;
+	}
 	
 	
  }
