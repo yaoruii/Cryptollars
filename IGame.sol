@@ -22,7 +22,7 @@ interface IGame {
 	// equipment attributes
 	struct Equipment {
 		uint256 sword_strength;
-		uint256 equipment_id;
+		uint256 id;
         string equipment_name;
     }
 	

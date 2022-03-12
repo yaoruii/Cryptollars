@@ -15,9 +15,10 @@ import "./IGame.sol";
 	
     mapping(address => Player) players;
 	mapping(address => address) duel_match;
-	mapping(int => Equipment) equipments;
+	
 	Monster[] monsters;
 	Equipment new_sword = Equipment(0, 12345, "new_sword");
+	Equipment empty = Equipment(0, 12345, "");
 	/*
      * @notice Player is reborned. Depends on the result of attack_monster
 	 * Modifies: equipment, player health and current health
@@ -28,7 +29,7 @@ import "./IGame.sol";
 		delete players[msg.sender].equipment_storage[0];
 		if(players[msg.sender].equipment_storage.length==0){
 			
-			players[msg.sender].equipment_storage.push(10,1,"new_sword");
+			players[msg.sender].equipment_storage.push(new_sword);
 		}
 
 	}
@@ -60,13 +61,35 @@ import "./IGame.sol";
      * @notice equipes player with equipment. Depends if equipment is avaliable
 	 * Modifies: player attack_strength, equipment sale status
      */
-	function equip(uint equipment_id) external;
+	function equip(uint equipment_id) external{
+		 bool gear;
+        uint256 i; 
+		require(players[msg.sender].equipment.id == empty.id);
+        
+        for(i  = 0; i < players[msg.sender].equipment_storage.length; i++){
+			if (players[msg.sender].equipment_storage[i].id == equipment_id) {
+			gear = true;
+			}
+		}
+
+		require(gear == true);
+		
+		players[msg.sender].attack = players[msg.sender].attack + players[msg.sender].equipment_storage[i].sword_strength;
+		
+		players[msg.sender].equipment = players[msg.sender].equipment_storage[i];
+	}
 	
 	/*
      * @notice unequipes player with equipment. Depends if the equipment is equiped
 	 * Modifies: player attack_strength, equipment sale status
      */
-	function unequip(uint equipment_id) external;
+	function unequip(uint equipment_id) external{
+		require(players[msg.sender].equipment.id != empty.id);
+		
+		players[msg.sender].attack = players[msg.sender].attack - players[msg.sender].equipment.sword_strength;
+		
+		players[msg.sender].equipment = empty;
+	}
 	/*
      * @notice invites another player to duel. Depends on you can only send one invite at a time.
      * to judge if duel doesn't exist. add a variable
@@ -114,6 +137,8 @@ import "./IGame.sol";
 		require(duel_match[inviter]==msg.sender);
 		players[msg.sender].is_pending=false;
 		players[inviter].is_pending=false;
+		return true;
+
 	}
 	
 	
