@@ -2,13 +2,12 @@
 pragma solidity >=0.8.0;
 import "./IGame.sol";
 import "./IPlayer.sol";
-import "./IEquip.sol";
 
 /**
  * @title Bank contract
  */
 
-contract Game is IGame, IPlayer {
+contract Game is IGame {
     constructor() {
         players[msg.sender].is_pending = false;
     }
@@ -17,10 +16,29 @@ contract Game is IGame, IPlayer {
 
     mapping(address => Player) players;
     mapping(address => address) duel_match;
+    //mapping (uint => Monster) public monsters;
+    Monster[] public monsters;
 
-    Monster[] monsters;
     Equipment new_sword = Equipment(0, 12345, "new_sword");
     Equipment empty = Equipment(0, 12345, "");
+
+    function push_master(
+        uint256 attack,
+        uint256 monster_current_health,
+        string calldata monster_name
+    ) external {
+        monsters.push(Monster(attack, monster_current_health, monster_name));
+    }
+
+    function add_equipment(
+        uint256 sword_strength,
+        uint256 id,
+        string memory equipment_name
+    ) internal {
+        players[msg.sender].equipment_storage.push(
+            Equipment(sword_strength, id, equipment_name)
+        );
+    }
 
     /*
      * @notice Player is reborned. Depends on the result of attack_monster
@@ -52,9 +70,7 @@ contract Game is IGame, IPlayer {
             players[msg.sender].current_health -=
                 (player_freq - 1) *
                 monsters[monster_id].attack;
-            /*
-			add equipment and money
-			*/
+            add_equipment(100, 2, "good_sword");
             return true;
         }
 

@@ -1,7 +1,7 @@
 {
     "contractName": "IPlayer",
     "abi": [],
-    "metadata": "{\"compiler\":{\"version\":\"0.8.12+commit.f00d7308\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IPlayer.sol\":\"IPlayer\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IEquip.sol\":{\"keccak256\":\"0x5baea6613099ec2c211e521404de7de75676352f16118f7d4c4110f841c0ab84\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6e8f3b0c8d7cd1f6252ca6b8419bae26c16e365d6a004a984a9b1089a6ebd875\",\"dweb:/ipfs/QmUEVUUyh7zJ8Ms33cy1sZZRVmnEasGa5onLEAj9M7Lvt7\"]},\"/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IPlayer.sol\":{\"keccak256\":\"0x74372545d1243d79e98da550163733e452b1cd48d02240d9ebe5f634f37d57b6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ac112a55227a27a234d2d5c2a503d00f873c79b571da83e21dd2f171fed7f367\",\"dweb:/ipfs/QmRTLQgENP8UeTjwd6AwGr5uFNuDuJrBsdXLahC6TryE1e\"]}},\"version\":1}",
+    "metadata": "{\"compiler\":{\"version\":\"0.8.12+commit.f00d7308\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IPlayer.sol\":\"IPlayer\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IPlayer.sol\":{\"keccak256\":\"0xb67fbe090a2044bdc6c03cb62c8dbd302a36ea791643f94eab058e9efb6e7819\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0ed8b3c9fa238ab8392035baddd21a8043ea0df81bc99372d1b1d52b73d2900d\",\"dweb:/ipfs/QmdwTNpt8Fe3iDF6B1c1fC9LvckCshYgRDWt4kjrQZ93Vb\"]}},\"version\":1}",
     "bytecode": "",
     "deployedBytecode": "",
     "sourceMap": "",
@@ -14,19 +14,16 @@
     "ast": {
         "absolutePath": "/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IPlayer.sol",
         "exportedSymbols": {
-            "IEquip": [
-                497
-            ],
             "IPlayer": [
-                572
+                614
             ]
         },
-        "id": 573,
+        "id": 615,
         "license": "MIT",
         "nodeType": "SourceUnit",
         "nodes": [
             {
-                "id": 550,
+                "id": 588,
                 "literals": [
                     "solidity",
                     ">=",
@@ -34,62 +31,36 @@
                     ".0"
                 ],
                 "nodeType": "PragmaDirective",
-                "src": "31:24:3"
-            },
-            {
-                "absolutePath": "/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IEquip.sol",
-                "file": "./IEquip.sol",
-                "id": 551,
-                "nameLocation": "-1:-1:-1",
-                "nodeType": "ImportDirective",
-                "scope": 573,
-                "sourceUnit": 498,
-                "src": "56:22:3",
-                "symbolAliases": [],
-                "unitAlias": ""
+                "src": "31:24:2"
             },
             {
                 "abstract": false,
-                "baseContracts": [
-                    {
-                        "baseName": {
-                            "id": 552,
-                            "name": "IEquip",
-                            "nodeType": "IdentifierPath",
-                            "referencedDeclaration": 497,
-                            "src": "101:6:3"
-                        },
-                        "id": 553,
-                        "nodeType": "InheritanceSpecifier",
-                        "src": "101:6:3"
-                    }
-                ],
+                "baseContracts": [],
                 "canonicalName": "IPlayer",
                 "contractDependencies": [],
                 "contractKind": "interface",
                 "fullyImplemented": true,
-                "id": 572,
+                "id": 614,
                 "linearizedBaseContracts": [
-                    572,
-                    497
+                    614
                 ],
                 "name": "IPlayer",
-                "nameLocation": "90:7:3",
+                "nameLocation": "67:7:2",
                 "nodeType": "ContractDefinition",
                 "nodes": [
                     {
                         "canonicalName": "IPlayer.Player",
-                        "id": 571,
+                        "id": 606,
                         "members": [
                             {
                                 "constant": false,
-                                "id": 555,
+                                "id": 590,
                                 "mutability": "mutable",
                                 "name": "attack",
-                                "nameLocation": "171:6:3",
+                                "nameLocation": "138:6:2",
                                 "nodeType": "VariableDeclaration",
-                                "scope": 571,
-                                "src": "163:14:3",
+                                "scope": 606,
+                                "src": "130:14:2",
                                 "stateVariable": false,
                                 "storageLocation": "default",
                                 "typeDescriptions": {
@@ -97,10 +68,10 @@
                                     "typeString": "uint256"
                                 },
                                 "typeName": {
-                                    "id": 554,
+                                    "id": 589,
                                     "name": "uint256",
                                     "nodeType": "ElementaryTypeName",
-                                    "src": "163:7:3",
+                                    "src": "130:7:2",
                                     "typeDescriptions": {
                                         "typeIdentifier": "t_uint256",
                                         "typeString": "uint256"
@@ -110,13 +81,13 @@
                             },
                             {
                                 "constant": false,
-                                "id": 557,
+                                "id": 592,
                                 "mutability": "mutable",
                                 "name": "max_health",
-                                "nameLocation": "195:10:3",
+                                "nameLocation": "162:10:2",
                                 "nodeType": "VariableDeclaration",
-                                "scope": 571,
-                                "src": "187:18:3",
+                                "scope": 606,
+                                "src": "154:18:2",
                                 "stateVariable": false,
                                 "storageLocation": "default",
                                 "typeDescriptions": {
@@ -124,10 +95,10 @@
                                     "typeString": "uint256"
                                 },
                                 "typeName": {
-                                    "id": 556,
+                                    "id": 591,
                                     "name": "uint256",
                                     "nodeType": "ElementaryTypeName",
-                                    "src": "187:7:3",
+                                    "src": "154:7:2",
                                     "typeDescriptions": {
                                         "typeIdentifier": "t_uint256",
                                         "typeString": "uint256"
@@ -137,13 +108,13 @@
                             },
                             {
                                 "constant": false,
-                                "id": 559,
+                                "id": 594,
                                 "mutability": "mutable",
                                 "name": "current_health",
-                                "nameLocation": "223:14:3",
+                                "nameLocation": "190:14:2",
                                 "nodeType": "VariableDeclaration",
-                                "scope": 571,
-                                "src": "215:22:3",
+                                "scope": 606,
+                                "src": "182:22:2",
                                 "stateVariable": false,
                                 "storageLocation": "default",
                                 "typeDescriptions": {
@@ -151,10 +122,10 @@
                                     "typeString": "uint256"
                                 },
                                 "typeName": {
-                                    "id": 558,
+                                    "id": 593,
                                     "name": "uint256",
                                     "nodeType": "ElementaryTypeName",
-                                    "src": "215:7:3",
+                                    "src": "182:7:2",
                                     "typeDescriptions": {
                                         "typeIdentifier": "t_uint256",
                                         "typeString": "uint256"
@@ -164,13 +135,13 @@
                             },
                             {
                                 "constant": false,
-                                "id": 561,
+                                "id": 596,
                                 "mutability": "mutable",
                                 "name": "player_name",
-                                "nameLocation": "254:11:3",
+                                "nameLocation": "221:11:2",
                                 "nodeType": "VariableDeclaration",
-                                "scope": 571,
-                                "src": "247:18:3",
+                                "scope": 606,
+                                "src": "214:18:2",
                                 "stateVariable": false,
                                 "storageLocation": "default",
                                 "typeDescriptions": {
@@ -178,10 +149,10 @@
                                     "typeString": "string"
                                 },
                                 "typeName": {
-                                    "id": 560,
+                                    "id": 595,
                                     "name": "string",
                                     "nodeType": "ElementaryTypeName",
-                                    "src": "247:6:3",
+                                    "src": "214:6:2",
                                     "typeDescriptions": {
                                         "typeIdentifier": "t_string_storage_ptr",
                                         "typeString": "string"
@@ -191,90 +162,90 @@
                             },
                             {
                                 "constant": false,
-                                "id": 565,
+                                "id": 600,
                                 "mutability": "mutable",
                                 "name": "equipment_storage",
-                                "nameLocation": "287:17:3",
+                                "nameLocation": "254:17:2",
                                 "nodeType": "VariableDeclaration",
-                                "scope": 571,
-                                "src": "275:29:3",
+                                "scope": 606,
+                                "src": "242:29:2",
                                 "stateVariable": false,
                                 "storageLocation": "default",
                                 "typeDescriptions": {
-                                    "typeIdentifier": "t_array$_t_struct$_Equipment_$496_storage_$dyn_storage_ptr",
-                                    "typeString": "struct IEquip.Equipment[]"
+                                    "typeIdentifier": "t_array$_t_struct$_Equipment_$613_storage_$dyn_storage_ptr",
+                                    "typeString": "struct IPlayer.Equipment[]"
                                 },
                                 "typeName": {
                                     "baseType": {
-                                        "id": 563,
+                                        "id": 598,
                                         "nodeType": "UserDefinedTypeName",
                                         "pathNode": {
-                                            "id": 562,
+                                            "id": 597,
                                             "name": "Equipment",
                                             "nodeType": "IdentifierPath",
-                                            "referencedDeclaration": 496,
-                                            "src": "275:9:3"
+                                            "referencedDeclaration": 613,
+                                            "src": "242:9:2"
                                         },
-                                        "referencedDeclaration": 496,
-                                        "src": "275:9:3",
+                                        "referencedDeclaration": 613,
+                                        "src": "242:9:2",
                                         "typeDescriptions": {
-                                            "typeIdentifier": "t_struct$_Equipment_$496_storage_ptr",
-                                            "typeString": "struct IEquip.Equipment"
+                                            "typeIdentifier": "t_struct$_Equipment_$613_storage_ptr",
+                                            "typeString": "struct IPlayer.Equipment"
                                         }
                                     },
-                                    "id": 564,
+                                    "id": 599,
                                     "nodeType": "ArrayTypeName",
-                                    "src": "275:11:3",
+                                    "src": "242:11:2",
                                     "typeDescriptions": {
-                                        "typeIdentifier": "t_array$_t_struct$_Equipment_$496_storage_$dyn_storage_ptr",
-                                        "typeString": "struct IEquip.Equipment[]"
+                                        "typeIdentifier": "t_array$_t_struct$_Equipment_$613_storage_$dyn_storage_ptr",
+                                        "typeString": "struct IPlayer.Equipment[]"
                                     }
                                 },
                                 "visibility": "internal"
                             },
                             {
                                 "constant": false,
-                                "id": 568,
+                                "id": 603,
                                 "mutability": "mutable",
                                 "name": "equipment",
-                                "nameLocation": "324:9:3",
+                                "nameLocation": "291:9:2",
                                 "nodeType": "VariableDeclaration",
-                                "scope": 571,
-                                "src": "314:19:3",
+                                "scope": 606,
+                                "src": "281:19:2",
                                 "stateVariable": false,
                                 "storageLocation": "default",
                                 "typeDescriptions": {
-                                    "typeIdentifier": "t_struct$_Equipment_$496_storage_ptr",
-                                    "typeString": "struct IEquip.Equipment"
+                                    "typeIdentifier": "t_struct$_Equipment_$613_storage_ptr",
+                                    "typeString": "struct IPlayer.Equipment"
                                 },
                                 "typeName": {
-                                    "id": 567,
+                                    "id": 602,
                                     "nodeType": "UserDefinedTypeName",
                                     "pathNode": {
-                                        "id": 566,
+                                        "id": 601,
                                         "name": "Equipment",
                                         "nodeType": "IdentifierPath",
-                                        "referencedDeclaration": 496,
-                                        "src": "314:9:3"
+                                        "referencedDeclaration": 613,
+                                        "src": "281:9:2"
                                     },
-                                    "referencedDeclaration": 496,
-                                    "src": "314:9:3",
+                                    "referencedDeclaration": 613,
+                                    "src": "281:9:2",
                                     "typeDescriptions": {
-                                        "typeIdentifier": "t_struct$_Equipment_$496_storage_ptr",
-                                        "typeString": "struct IEquip.Equipment"
+                                        "typeIdentifier": "t_struct$_Equipment_$613_storage_ptr",
+                                        "typeString": "struct IPlayer.Equipment"
                                     }
                                 },
                                 "visibility": "internal"
                             },
                             {
                                 "constant": false,
-                                "id": 570,
+                                "id": 605,
                                 "mutability": "mutable",
                                 "name": "is_pending",
-                                "nameLocation": "348:10:3",
+                                "nameLocation": "315:10:2",
                                 "nodeType": "VariableDeclaration",
-                                "scope": 571,
-                                "src": "343:15:3",
+                                "scope": 606,
+                                "src": "310:15:2",
                                 "stateVariable": false,
                                 "storageLocation": "default",
                                 "typeDescriptions": {
@@ -282,10 +253,10 @@
                                     "typeString": "bool"
                                 },
                                 "typeName": {
-                                    "id": 569,
+                                    "id": 604,
                                     "name": "bool",
                                     "nodeType": "ElementaryTypeName",
-                                    "src": "343:4:3",
+                                    "src": "310:4:2",
                                     "typeDescriptions": {
                                         "typeIdentifier": "t_bool",
                                         "typeString": "bool"
@@ -295,19 +266,112 @@
                             }
                         ],
                         "name": "Player",
-                        "nameLocation": "146:6:3",
+                        "nameLocation": "113:6:2",
                         "nodeType": "StructDefinition",
-                        "scope": 572,
-                        "src": "139:226:3",
+                        "scope": 614,
+                        "src": "106:226:2",
+                        "visibility": "public"
+                    },
+                    {
+                        "canonicalName": "IPlayer.Equipment",
+                        "id": 613,
+                        "members": [
+                            {
+                                "constant": false,
+                                "id": 608,
+                                "mutability": "mutable",
+                                "name": "sword_strength",
+                                "nameLocation": "372:14:2",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 613,
+                                "src": "364:22:2",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                },
+                                "typeName": {
+                                    "id": 607,
+                                    "name": "uint256",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "364:7:2",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    }
+                                },
+                                "visibility": "internal"
+                            },
+                            {
+                                "constant": false,
+                                "id": 610,
+                                "mutability": "mutable",
+                                "name": "id",
+                                "nameLocation": "404:2:2",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 613,
+                                "src": "396:10:2",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                },
+                                "typeName": {
+                                    "id": 609,
+                                    "name": "uint256",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "396:7:2",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    }
+                                },
+                                "visibility": "internal"
+                            },
+                            {
+                                "constant": false,
+                                "id": 612,
+                                "mutability": "mutable",
+                                "name": "equipment_name",
+                                "nameLocation": "423:14:2",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 613,
+                                "src": "416:21:2",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_string_storage_ptr",
+                                    "typeString": "string"
+                                },
+                                "typeName": {
+                                    "id": 611,
+                                    "name": "string",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "416:6:2",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_string_storage_ptr",
+                                        "typeString": "string"
+                                    }
+                                },
+                                "visibility": "internal"
+                            }
+                        ],
+                        "name": "Equipment",
+                        "nameLocation": "344:9:2",
+                        "nodeType": "StructDefinition",
+                        "scope": 614,
+                        "src": "337:107:2",
                         "visibility": "public"
                     }
                 ],
-                "scope": 573,
-                "src": "80:287:3",
+                "scope": 615,
+                "src": "57:389:2",
                 "usedErrors": []
             }
         ],
-        "src": "31:337:3"
+        "src": "31:416:2"
     },
     "functionHashes": {},
     "gasEstimates": null

@@ -1,6 +1,5 @@
 //SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
-import "./IEquip.sol";
 
 interface IPlayer {
     // player attributes
@@ -12,6 +11,7 @@ interface IPlayer {
         Equipment[] equipment_storage;
         Equipment equipment;
         bool is_pending;
+        bool is_initialized;
     }
     struct Equipment {
         uint256 sword_strength;
