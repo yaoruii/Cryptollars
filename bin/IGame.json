@@ -72,13 +72,6 @@
             "type": "function"
         },
         {
-            "inputs": [],
-            "name": "reborn",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
             "inputs": [
                 {
                     "internalType": "address",
@@ -111,7 +104,7 @@
             "type": "function"
         }
     ],
-    "metadata": "{\"compiler\":{\"version\":\"0.8.12+commit.f00d7308\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"player_address\",\"type\":\"address\"}],\"name\":\"accept_duel\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"result\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"monster_id\",\"type\":\"uint256\"}],\"name\":\"attack_monster\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"result\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"equipment_id\",\"type\":\"uint256\"}],\"name\":\"equip\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"invitee\",\"type\":\"address\"}],\"name\":\"invite_duel\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"result\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"reborn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"player_address\",\"type\":\"address\"}],\"name\":\"reject_duel\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"result\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"equipment_id\",\"type\":\"uint256\"}],\"name\":\"unequip\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IGame.sol\":\"IGame\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IGame.sol\":{\"keccak256\":\"0xc49579175f71d3172f7c56bfc660fd2c2b06025b5f0bff8b5d4779331b33696e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://525954e01d969dcf6948fc2f42635129b89f43af6c6517f53cf20d6bfe105101\",\"dweb:/ipfs/QmW544sdB2aWZrUjK2KzkgcU7ZBktR8MeT8r9oXD5ZKF5K\"]}},\"version\":1}",
+    "metadata": "{\"compiler\":{\"version\":\"0.8.12+commit.f00d7308\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"player_address\",\"type\":\"address\"}],\"name\":\"accept_duel\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"result\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"monster_id\",\"type\":\"uint256\"}],\"name\":\"attack_monster\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"result\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"equipment_id\",\"type\":\"uint256\"}],\"name\":\"equip\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"invitee\",\"type\":\"address\"}],\"name\":\"invite_duel\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"result\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"player_address\",\"type\":\"address\"}],\"name\":\"reject_duel\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"result\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"equipment_id\",\"type\":\"uint256\"}],\"name\":\"unequip\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IGame.sol\":\"IGame\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IEquip.sol\":{\"keccak256\":\"0x5baea6613099ec2c211e521404de7de75676352f16118f7d4c4110f841c0ab84\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6e8f3b0c8d7cd1f6252ca6b8419bae26c16e365d6a004a984a9b1089a6ebd875\",\"dweb:/ipfs/QmUEVUUyh7zJ8Ms33cy1sZZRVmnEasGa5onLEAj9M7Lvt7\"]},\"/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IGame.sol\":{\"keccak256\":\"0x597168f9402889fff5ae01a4cf85281fddede796bc329c57451160b88963c71b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://541945a0377d3c670141a299583526ca7315a3d6df997a8228d9b8a11a574b14\",\"dweb:/ipfs/QmYATooqGog6LKgFgH9FqBmTgXxwqvjapa5zWP1HpUfthz\"]},\"/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IPlayer.sol\":{\"keccak256\":\"0x74372545d1243d79e98da550163733e452b1cd48d02240d9ebe5f634f37d57b6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ac112a55227a27a234d2d5c2a503d00f873c79b571da83e21dd2f171fed7f367\",\"dweb:/ipfs/QmRTLQgENP8UeTjwd6AwGr5uFNuDuJrBsdXLahC6TryE1e\"]}},\"version\":1}",
     "bytecode": "",
     "deployedBytecode": "",
     "sourceMap": "",
@@ -124,16 +117,22 @@
     "ast": {
         "absolutePath": "/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IGame.sol",
         "exportedSymbols": {
+            "IEquip": [
+                497
+            ],
             "IGame": [
-                554
+                548
+            ],
+            "IPlayer": [
+                572
             ]
         },
-        "id": 555,
+        "id": 549,
         "license": "MIT",
         "nodeType": "SourceUnit",
         "nodes": [
             {
-                "id": 480,
+                "id": 499,
                 "literals": [
                     "solidity",
                     ">=",
@@ -141,364 +140,74 @@
                     ".0"
                 ],
                 "nodeType": "PragmaDirective",
-                "src": "31:24:1"
+                "src": "31:24:2"
+            },
+            {
+                "absolutePath": "/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IPlayer.sol",
+                "file": "./IPlayer.sol",
+                "id": 500,
+                "nameLocation": "-1:-1:-1",
+                "nodeType": "ImportDirective",
+                "scope": 549,
+                "sourceUnit": 573,
+                "src": "56:23:2",
+                "symbolAliases": [],
+                "unitAlias": ""
             },
             {
                 "abstract": false,
-                "baseContracts": [],
+                "baseContracts": [
+                    {
+                        "baseName": {
+                            "id": 501,
+                            "name": "IPlayer",
+                            "nodeType": "IdentifierPath",
+                            "referencedDeclaration": 572,
+                            "src": "153:7:2"
+                        },
+                        "id": 502,
+                        "nodeType": "InheritanceSpecifier",
+                        "src": "153:7:2"
+                    }
+                ],
                 "canonicalName": "IGame",
                 "contractDependencies": [],
                 "contractKind": "interface",
                 "fullyImplemented": false,
-                "id": 554,
+                "id": 548,
                 "linearizedBaseContracts": [
-                    554
+                    548,
+                    572,
+                    497
                 ],
                 "name": "IGame",
-                "nameLocation": "121:5:1",
+                "nameLocation": "144:5:2",
                 "nodeType": "ContractDefinition",
                 "nodes": [
                     {
-                        "canonicalName": "IGame.Player",
-                        "id": 498,
+                        "canonicalName": "IGame.Monster",
+                        "id": 509,
                         "members": [
-                            {
-                                "constant": false,
-                                "id": 482,
-                                "mutability": "mutable",
-                                "name": "attack",
-                                "nameLocation": "186:6:1",
-                                "nodeType": "VariableDeclaration",
-                                "scope": 498,
-                                "src": "178:14:1",
-                                "stateVariable": false,
-                                "storageLocation": "default",
-                                "typeDescriptions": {
-                                    "typeIdentifier": "t_uint256",
-                                    "typeString": "uint256"
-                                },
-                                "typeName": {
-                                    "id": 481,
-                                    "name": "uint256",
-                                    "nodeType": "ElementaryTypeName",
-                                    "src": "178:7:1",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_uint256",
-                                        "typeString": "uint256"
-                                    }
-                                },
-                                "visibility": "internal"
-                            },
-                            {
-                                "constant": false,
-                                "id": 484,
-                                "mutability": "mutable",
-                                "name": "max_health",
-                                "nameLocation": "204:10:1",
-                                "nodeType": "VariableDeclaration",
-                                "scope": 498,
-                                "src": "196:18:1",
-                                "stateVariable": false,
-                                "storageLocation": "default",
-                                "typeDescriptions": {
-                                    "typeIdentifier": "t_uint256",
-                                    "typeString": "uint256"
-                                },
-                                "typeName": {
-                                    "id": 483,
-                                    "name": "uint256",
-                                    "nodeType": "ElementaryTypeName",
-                                    "src": "196:7:1",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_uint256",
-                                        "typeString": "uint256"
-                                    }
-                                },
-                                "visibility": "internal"
-                            },
-                            {
-                                "constant": false,
-                                "id": 486,
-                                "mutability": "mutable",
-                                "name": "current_health",
-                                "nameLocation": "226:14:1",
-                                "nodeType": "VariableDeclaration",
-                                "scope": 498,
-                                "src": "218:22:1",
-                                "stateVariable": false,
-                                "storageLocation": "default",
-                                "typeDescriptions": {
-                                    "typeIdentifier": "t_uint256",
-                                    "typeString": "uint256"
-                                },
-                                "typeName": {
-                                    "id": 485,
-                                    "name": "uint256",
-                                    "nodeType": "ElementaryTypeName",
-                                    "src": "218:7:1",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_uint256",
-                                        "typeString": "uint256"
-                                    }
-                                },
-                                "visibility": "internal"
-                            },
-                            {
-                                "constant": false,
-                                "id": 488,
-                                "mutability": "mutable",
-                                "name": "player_name",
-                                "nameLocation": "251:11:1",
-                                "nodeType": "VariableDeclaration",
-                                "scope": 498,
-                                "src": "244:18:1",
-                                "stateVariable": false,
-                                "storageLocation": "default",
-                                "typeDescriptions": {
-                                    "typeIdentifier": "t_string_storage_ptr",
-                                    "typeString": "string"
-                                },
-                                "typeName": {
-                                    "id": 487,
-                                    "name": "string",
-                                    "nodeType": "ElementaryTypeName",
-                                    "src": "244:6:1",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_string_storage_ptr",
-                                        "typeString": "string"
-                                    }
-                                },
-                                "visibility": "internal"
-                            },
-                            {
-                                "constant": false,
-                                "id": 492,
-                                "mutability": "mutable",
-                                "name": "equipment_storage",
-                                "nameLocation": "278:17:1",
-                                "nodeType": "VariableDeclaration",
-                                "scope": 498,
-                                "src": "266:29:1",
-                                "stateVariable": false,
-                                "storageLocation": "default",
-                                "typeDescriptions": {
-                                    "typeIdentifier": "t_array$_t_struct$_Equipment_$505_storage_$dyn_storage_ptr",
-                                    "typeString": "struct IGame.Equipment[]"
-                                },
-                                "typeName": {
-                                    "baseType": {
-                                        "id": 490,
-                                        "nodeType": "UserDefinedTypeName",
-                                        "pathNode": {
-                                            "id": 489,
-                                            "name": "Equipment",
-                                            "nodeType": "IdentifierPath",
-                                            "referencedDeclaration": 505,
-                                            "src": "266:9:1"
-                                        },
-                                        "referencedDeclaration": 505,
-                                        "src": "266:9:1",
-                                        "typeDescriptions": {
-                                            "typeIdentifier": "t_struct$_Equipment_$505_storage_ptr",
-                                            "typeString": "struct IGame.Equipment"
-                                        }
-                                    },
-                                    "id": 491,
-                                    "nodeType": "ArrayTypeName",
-                                    "src": "266:11:1",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_array$_t_struct$_Equipment_$505_storage_$dyn_storage_ptr",
-                                        "typeString": "struct IGame.Equipment[]"
-                                    }
-                                },
-                                "visibility": "internal"
-                            },
-                            {
-                                "constant": false,
-                                "id": 495,
-                                "mutability": "mutable",
-                                "name": "equipment",
-                                "nameLocation": "309:9:1",
-                                "nodeType": "VariableDeclaration",
-                                "scope": 498,
-                                "src": "299:19:1",
-                                "stateVariable": false,
-                                "storageLocation": "default",
-                                "typeDescriptions": {
-                                    "typeIdentifier": "t_struct$_Equipment_$505_storage_ptr",
-                                    "typeString": "struct IGame.Equipment"
-                                },
-                                "typeName": {
-                                    "id": 494,
-                                    "nodeType": "UserDefinedTypeName",
-                                    "pathNode": {
-                                        "id": 493,
-                                        "name": "Equipment",
-                                        "nodeType": "IdentifierPath",
-                                        "referencedDeclaration": 505,
-                                        "src": "299:9:1"
-                                    },
-                                    "referencedDeclaration": 505,
-                                    "src": "299:9:1",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_struct$_Equipment_$505_storage_ptr",
-                                        "typeString": "struct IGame.Equipment"
-                                    }
-                                },
-                                "visibility": "internal"
-                            },
-                            {
-                                "constant": false,
-                                "id": 497,
-                                "mutability": "mutable",
-                                "name": "is_pending",
-                                "nameLocation": "333:10:1",
-                                "nodeType": "VariableDeclaration",
-                                "scope": 498,
-                                "src": "328:15:1",
-                                "stateVariable": false,
-                                "storageLocation": "default",
-                                "typeDescriptions": {
-                                    "typeIdentifier": "t_bool",
-                                    "typeString": "bool"
-                                },
-                                "typeName": {
-                                    "id": 496,
-                                    "name": "bool",
-                                    "nodeType": "ElementaryTypeName",
-                                    "src": "328:4:1",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_bool",
-                                        "typeString": "bool"
-                                    }
-                                },
-                                "visibility": "internal"
-                            }
-                        ],
-                        "name": "Player",
-                        "nameLocation": "167:6:1",
-                        "nodeType": "StructDefinition",
-                        "scope": 554,
-                        "src": "160:190:1",
-                        "visibility": "public"
-                    },
-                    {
-                        "canonicalName": "IGame.Equipment",
-                        "id": 505,
-                        "members": [
-                            {
-                                "constant": false,
-                                "id": 500,
-                                "mutability": "mutable",
-                                "name": "sword_strength",
-                                "nameLocation": "408:14:1",
-                                "nodeType": "VariableDeclaration",
-                                "scope": 505,
-                                "src": "400:22:1",
-                                "stateVariable": false,
-                                "storageLocation": "default",
-                                "typeDescriptions": {
-                                    "typeIdentifier": "t_uint256",
-                                    "typeString": "uint256"
-                                },
-                                "typeName": {
-                                    "id": 499,
-                                    "name": "uint256",
-                                    "nodeType": "ElementaryTypeName",
-                                    "src": "400:7:1",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_uint256",
-                                        "typeString": "uint256"
-                                    }
-                                },
-                                "visibility": "internal"
-                            },
-                            {
-                                "constant": false,
-                                "id": 502,
-                                "mutability": "mutable",
-                                "name": "id",
-                                "nameLocation": "434:2:1",
-                                "nodeType": "VariableDeclaration",
-                                "scope": 505,
-                                "src": "426:10:1",
-                                "stateVariable": false,
-                                "storageLocation": "default",
-                                "typeDescriptions": {
-                                    "typeIdentifier": "t_uint256",
-                                    "typeString": "uint256"
-                                },
-                                "typeName": {
-                                    "id": 501,
-                                    "name": "uint256",
-                                    "nodeType": "ElementaryTypeName",
-                                    "src": "426:7:1",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_uint256",
-                                        "typeString": "uint256"
-                                    }
-                                },
-                                "visibility": "internal"
-                            },
                             {
                                 "constant": false,
                                 "id": 504,
                                 "mutability": "mutable",
-                                "name": "equipment_name",
-                                "nameLocation": "453:14:1",
+                                "name": "attack",
+                                "nameLocation": "226:6:2",
                                 "nodeType": "VariableDeclaration",
-                                "scope": 505,
-                                "src": "446:21:1",
+                                "scope": 509,
+                                "src": "218:14:2",
                                 "stateVariable": false,
                                 "storageLocation": "default",
                                 "typeDescriptions": {
-                                    "typeIdentifier": "t_string_storage_ptr",
-                                    "typeString": "string"
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
                                 },
                                 "typeName": {
                                     "id": 503,
-                                    "name": "string",
-                                    "nodeType": "ElementaryTypeName",
-                                    "src": "446:6:1",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_string_storage_ptr",
-                                        "typeString": "string"
-                                    }
-                                },
-                                "visibility": "internal"
-                            }
-                        ],
-                        "name": "Equipment",
-                        "nameLocation": "386:9:1",
-                        "nodeType": "StructDefinition",
-                        "scope": 554,
-                        "src": "379:95:1",
-                        "visibility": "public"
-                    },
-                    {
-                        "canonicalName": "IGame.Monster",
-                        "id": 512,
-                        "members": [
-                            {
-                                "constant": false,
-                                "id": 507,
-                                "mutability": "mutable",
-                                "name": "attack",
-                                "nameLocation": "528:6:1",
-                                "nodeType": "VariableDeclaration",
-                                "scope": 512,
-                                "src": "520:14:1",
-                                "stateVariable": false,
-                                "storageLocation": "default",
-                                "typeDescriptions": {
-                                    "typeIdentifier": "t_uint256",
-                                    "typeString": "uint256"
-                                },
-                                "typeName": {
-                                    "id": 506,
                                     "name": "uint256",
                                     "nodeType": "ElementaryTypeName",
-                                    "src": "520:7:1",
+                                    "src": "218:7:2",
                                     "typeDescriptions": {
                                         "typeIdentifier": "t_uint256",
                                         "typeString": "uint256"
@@ -508,13 +217,13 @@
                             },
                             {
                                 "constant": false,
-                                "id": 509,
+                                "id": 506,
                                 "mutability": "mutable",
                                 "name": "monster_current_health",
-                                "nameLocation": "546:22:1",
+                                "nameLocation": "250:22:2",
                                 "nodeType": "VariableDeclaration",
-                                "scope": 512,
-                                "src": "538:30:1",
+                                "scope": 509,
+                                "src": "242:30:2",
                                 "stateVariable": false,
                                 "storageLocation": "default",
                                 "typeDescriptions": {
@@ -522,10 +231,10 @@
                                     "typeString": "uint256"
                                 },
                                 "typeName": {
-                                    "id": 508,
+                                    "id": 505,
                                     "name": "uint256",
                                     "nodeType": "ElementaryTypeName",
-                                    "src": "538:7:1",
+                                    "src": "242:7:2",
                                     "typeDescriptions": {
                                         "typeIdentifier": "t_uint256",
                                         "typeString": "uint256"
@@ -535,13 +244,13 @@
                             },
                             {
                                 "constant": false,
-                                "id": 511,
+                                "id": 508,
                                 "mutability": "mutable",
                                 "name": "monster_name",
-                                "nameLocation": "579:12:1",
+                                "nameLocation": "289:12:2",
                                 "nodeType": "VariableDeclaration",
-                                "scope": 512,
-                                "src": "572:19:1",
+                                "scope": 509,
+                                "src": "282:19:2",
                                 "stateVariable": false,
                                 "storageLocation": "default",
                                 "typeDescriptions": {
@@ -549,10 +258,10 @@
                                     "typeString": "string"
                                 },
                                 "typeName": {
-                                    "id": 510,
+                                    "id": 507,
                                     "name": "string",
                                     "nodeType": "ElementaryTypeName",
-                                    "src": "572:6:1",
+                                    "src": "282:6:2",
                                     "typeDescriptions": {
                                         "typeIdentifier": "t_string_storage_ptr",
                                         "typeString": "string"
@@ -562,22 +271,56 @@
                             }
                         ],
                         "name": "Monster",
-                        "nameLocation": "508:7:1",
+                        "nameLocation": "200:7:2",
                         "nodeType": "StructDefinition",
-                        "scope": 554,
-                        "src": "501:97:1",
+                        "scope": 548,
+                        "src": "193:115:2",
                         "visibility": "public"
                     },
                     {
                         "functionSelector": "355b0370",
-                        "id": 519,
+                        "id": 516,
                         "implemented": false,
                         "kind": "function",
                         "modifiers": [],
                         "name": "attack_monster",
-                        "nameLocation": "1053:14:1",
+                        "nameLocation": "771:14:2",
                         "nodeType": "FunctionDefinition",
                         "parameters": {
+                            "id": 512,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 511,
+                                    "mutability": "mutable",
+                                    "name": "monster_id",
+                                    "nameLocation": "794:10:2",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 516,
+                                    "src": "786:18:2",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 510,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "786:7:2",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "785:20:2"
+                        },
+                        "returnParameters": {
                             "id": 515,
                             "nodeType": "ParameterList",
                             "parameters": [
@@ -585,45 +328,11 @@
                                     "constant": false,
                                     "id": 514,
                                     "mutability": "mutable",
-                                    "name": "monster_id",
-                                    "nameLocation": "1076:10:1",
-                                    "nodeType": "VariableDeclaration",
-                                    "scope": 519,
-                                    "src": "1068:18:1",
-                                    "stateVariable": false,
-                                    "storageLocation": "default",
-                                    "typeDescriptions": {
-                                        "typeIdentifier": "t_uint256",
-                                        "typeString": "uint256"
-                                    },
-                                    "typeName": {
-                                        "id": 513,
-                                        "name": "uint256",
-                                        "nodeType": "ElementaryTypeName",
-                                        "src": "1068:7:1",
-                                        "typeDescriptions": {
-                                            "typeIdentifier": "t_uint256",
-                                            "typeString": "uint256"
-                                        }
-                                    },
-                                    "visibility": "internal"
-                                }
-                            ],
-                            "src": "1067:20:1"
-                        },
-                        "returnParameters": {
-                            "id": 518,
-                            "nodeType": "ParameterList",
-                            "parameters": [
-                                {
-                                    "constant": false,
-                                    "id": 517,
-                                    "mutability": "mutable",
                                     "name": "result",
-                                    "nameLocation": "1110:6:1",
+                                    "nameLocation": "829:6:2",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 519,
-                                    "src": "1105:11:1",
+                                    "scope": 516,
+                                    "src": "824:11:2",
                                     "stateVariable": false,
                                     "storageLocation": "default",
                                     "typeDescriptions": {
@@ -631,10 +340,10 @@
                                         "typeString": "bool"
                                     },
                                     "typeName": {
-                                        "id": 516,
+                                        "id": 513,
                                         "name": "bool",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "1105:4:1",
+                                        "src": "824:4:2",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_bool",
                                             "typeString": "bool"
@@ -643,63 +352,36 @@
                                     "visibility": "internal"
                                 }
                             ],
-                            "src": "1104:13:1"
+                            "src": "823:13:2"
                         },
-                        "scope": 554,
-                        "src": "1044:74:1",
-                        "stateMutability": "nonpayable",
-                        "virtual": false,
-                        "visibility": "external"
-                    },
-                    {
-                        "functionSelector": "528d910a",
-                        "id": 522,
-                        "implemented": false,
-                        "kind": "function",
-                        "modifiers": [],
-                        "name": "reborn",
-                        "nameLocation": "1276:6:1",
-                        "nodeType": "FunctionDefinition",
-                        "parameters": {
-                            "id": 520,
-                            "nodeType": "ParameterList",
-                            "parameters": [],
-                            "src": "1282:2:1"
-                        },
-                        "returnParameters": {
-                            "id": 521,
-                            "nodeType": "ParameterList",
-                            "parameters": [],
-                            "src": "1293:0:1"
-                        },
-                        "scope": 554,
-                        "src": "1267:27:1",
+                        "scope": 548,
+                        "src": "762:75:2",
                         "stateMutability": "nonpayable",
                         "virtual": false,
                         "visibility": "external"
                     },
                     {
                         "functionSelector": "b4c0e1b1",
-                        "id": 529,
+                        "id": 523,
                         "implemented": false,
                         "kind": "function",
                         "modifiers": [],
                         "name": "invite_duel",
-                        "nameLocation": "1542:11:1",
+                        "nameLocation": "1090:11:2",
                         "nodeType": "FunctionDefinition",
                         "parameters": {
-                            "id": 525,
+                            "id": 519,
                             "nodeType": "ParameterList",
                             "parameters": [
                                 {
                                     "constant": false,
-                                    "id": 524,
+                                    "id": 518,
                                     "mutability": "mutable",
                                     "name": "invitee",
-                                    "nameLocation": "1562:7:1",
+                                    "nameLocation": "1110:7:2",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 529,
-                                    "src": "1554:15:1",
+                                    "scope": 523,
+                                    "src": "1102:15:2",
                                     "stateVariable": false,
                                     "storageLocation": "default",
                                     "typeDescriptions": {
@@ -707,10 +389,10 @@
                                         "typeString": "address"
                                     },
                                     "typeName": {
-                                        "id": 523,
+                                        "id": 517,
                                         "name": "address",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "1554:7:1",
+                                        "src": "1102:7:2",
                                         "stateMutability": "nonpayable",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_address",
@@ -720,21 +402,21 @@
                                     "visibility": "internal"
                                 }
                             ],
-                            "src": "1553:17:1"
+                            "src": "1101:17:2"
                         },
                         "returnParameters": {
-                            "id": 528,
+                            "id": 522,
                             "nodeType": "ParameterList",
                             "parameters": [
                                 {
                                     "constant": false,
-                                    "id": 527,
+                                    "id": 521,
                                     "mutability": "mutable",
                                     "name": "result",
-                                    "nameLocation": "1593:6:1",
+                                    "nameLocation": "1142:6:2",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 529,
-                                    "src": "1588:11:1",
+                                    "scope": 523,
+                                    "src": "1137:11:2",
                                     "stateVariable": false,
                                     "storageLocation": "default",
                                     "typeDescriptions": {
@@ -742,10 +424,10 @@
                                         "typeString": "bool"
                                     },
                                     "typeName": {
-                                        "id": 526,
+                                        "id": 520,
                                         "name": "bool",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "1588:4:1",
+                                        "src": "1137:4:2",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_bool",
                                             "typeString": "bool"
@@ -754,36 +436,36 @@
                                     "visibility": "internal"
                                 }
                             ],
-                            "src": "1587:13:1"
+                            "src": "1136:13:2"
                         },
-                        "scope": 554,
-                        "src": "1533:68:1",
+                        "scope": 548,
+                        "src": "1081:69:2",
                         "stateMutability": "nonpayable",
                         "virtual": false,
                         "visibility": "external"
                     },
                     {
                         "functionSelector": "e7ac8c61",
-                        "id": 536,
+                        "id": 530,
                         "implemented": false,
                         "kind": "function",
                         "modifiers": [],
                         "name": "accept_duel",
-                        "nameLocation": "1773:11:1",
+                        "nameLocation": "1331:11:2",
                         "nodeType": "FunctionDefinition",
                         "parameters": {
-                            "id": 532,
+                            "id": 526,
                             "nodeType": "ParameterList",
                             "parameters": [
                                 {
                                     "constant": false,
-                                    "id": 531,
+                                    "id": 525,
                                     "mutability": "mutable",
                                     "name": "player_address",
-                                    "nameLocation": "1793:14:1",
+                                    "nameLocation": "1351:14:2",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 536,
-                                    "src": "1785:22:1",
+                                    "scope": 530,
+                                    "src": "1343:22:2",
                                     "stateVariable": false,
                                     "storageLocation": "default",
                                     "typeDescriptions": {
@@ -791,10 +473,10 @@
                                         "typeString": "address"
                                     },
                                     "typeName": {
-                                        "id": 530,
+                                        "id": 524,
                                         "name": "address",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "1785:7:1",
+                                        "src": "1343:7:2",
                                         "stateMutability": "nonpayable",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_address",
@@ -804,21 +486,21 @@
                                     "visibility": "internal"
                                 }
                             ],
-                            "src": "1784:24:1"
+                            "src": "1342:24:2"
                         },
                         "returnParameters": {
-                            "id": 535,
+                            "id": 529,
                             "nodeType": "ParameterList",
                             "parameters": [
                                 {
                                     "constant": false,
-                                    "id": 534,
+                                    "id": 528,
                                     "mutability": "mutable",
                                     "name": "result",
-                                    "nameLocation": "1831:6:1",
+                                    "nameLocation": "1390:6:2",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 536,
-                                    "src": "1826:11:1",
+                                    "scope": 530,
+                                    "src": "1385:11:2",
                                     "stateVariable": false,
                                     "storageLocation": "default",
                                     "typeDescriptions": {
@@ -826,10 +508,10 @@
                                         "typeString": "bool"
                                     },
                                     "typeName": {
-                                        "id": 533,
+                                        "id": 527,
                                         "name": "bool",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "1826:4:1",
+                                        "src": "1385:4:2",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_bool",
                                             "typeString": "bool"
@@ -838,36 +520,36 @@
                                     "visibility": "internal"
                                 }
                             ],
-                            "src": "1825:13:1"
+                            "src": "1384:13:2"
                         },
-                        "scope": 554,
-                        "src": "1764:75:1",
+                        "scope": 548,
+                        "src": "1322:76:2",
                         "stateMutability": "nonpayable",
                         "virtual": false,
                         "visibility": "external"
                     },
                     {
                         "functionSelector": "7a2444e1",
-                        "id": 543,
+                        "id": 537,
                         "implemented": false,
                         "kind": "function",
                         "modifiers": [],
                         "name": "reject_duel",
-                        "nameLocation": "1944:11:1",
+                        "nameLocation": "1508:11:2",
                         "nodeType": "FunctionDefinition",
                         "parameters": {
-                            "id": 539,
+                            "id": 533,
                             "nodeType": "ParameterList",
                             "parameters": [
                                 {
                                     "constant": false,
-                                    "id": 538,
+                                    "id": 532,
                                     "mutability": "mutable",
                                     "name": "player_address",
-                                    "nameLocation": "1964:14:1",
+                                    "nameLocation": "1528:14:2",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 543,
-                                    "src": "1956:22:1",
+                                    "scope": 537,
+                                    "src": "1520:22:2",
                                     "stateVariable": false,
                                     "storageLocation": "default",
                                     "typeDescriptions": {
@@ -875,10 +557,10 @@
                                         "typeString": "address"
                                     },
                                     "typeName": {
-                                        "id": 537,
+                                        "id": 531,
                                         "name": "address",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "1956:7:1",
+                                        "src": "1520:7:2",
                                         "stateMutability": "nonpayable",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_address",
@@ -888,21 +570,21 @@
                                     "visibility": "internal"
                                 }
                             ],
-                            "src": "1955:24:1"
+                            "src": "1519:24:2"
                         },
                         "returnParameters": {
-                            "id": 542,
+                            "id": 536,
                             "nodeType": "ParameterList",
                             "parameters": [
                                 {
                                     "constant": false,
-                                    "id": 541,
+                                    "id": 535,
                                     "mutability": "mutable",
                                     "name": "result",
-                                    "nameLocation": "2002:6:1",
+                                    "nameLocation": "1567:6:2",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 543,
-                                    "src": "1997:11:1",
+                                    "scope": 537,
+                                    "src": "1562:11:2",
                                     "stateVariable": false,
                                     "storageLocation": "default",
                                     "typeDescriptions": {
@@ -910,10 +592,10 @@
                                         "typeString": "bool"
                                     },
                                     "typeName": {
-                                        "id": 540,
+                                        "id": 534,
                                         "name": "bool",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "1997:4:1",
+                                        "src": "1562:4:2",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_bool",
                                             "typeString": "bool"
@@ -922,36 +604,36 @@
                                     "visibility": "internal"
                                 }
                             ],
-                            "src": "1996:13:1"
+                            "src": "1561:13:2"
                         },
-                        "scope": 554,
-                        "src": "1935:75:1",
+                        "scope": 548,
+                        "src": "1499:76:2",
                         "stateMutability": "nonpayable",
                         "virtual": false,
                         "visibility": "external"
                     },
                     {
                         "functionSelector": "b85f8027",
-                        "id": 548,
+                        "id": 542,
                         "implemented": false,
                         "kind": "function",
                         "modifiers": [],
                         "name": "equip",
-                        "nameLocation": "2175:5:1",
+                        "nameLocation": "1748:5:2",
                         "nodeType": "FunctionDefinition",
                         "parameters": {
-                            "id": 546,
+                            "id": 540,
                             "nodeType": "ParameterList",
                             "parameters": [
                                 {
                                     "constant": false,
-                                    "id": 545,
+                                    "id": 539,
                                     "mutability": "mutable",
                                     "name": "equipment_id",
-                                    "nameLocation": "2186:12:1",
+                                    "nameLocation": "1762:12:2",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 548,
-                                    "src": "2181:17:1",
+                                    "scope": 542,
+                                    "src": "1754:20:2",
                                     "stateVariable": false,
                                     "storageLocation": "default",
                                     "typeDescriptions": {
@@ -959,10 +641,10 @@
                                         "typeString": "uint256"
                                     },
                                     "typeName": {
-                                        "id": 544,
-                                        "name": "uint",
+                                        "id": 538,
+                                        "name": "uint256",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "2181:4:1",
+                                        "src": "1754:7:2",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_uint256",
                                             "typeString": "uint256"
@@ -971,42 +653,42 @@
                                     "visibility": "internal"
                                 }
                             ],
-                            "src": "2180:19:1"
+                            "src": "1753:22:2"
                         },
                         "returnParameters": {
-                            "id": 547,
+                            "id": 541,
                             "nodeType": "ParameterList",
                             "parameters": [],
-                            "src": "2208:0:1"
+                            "src": "1784:0:2"
                         },
-                        "scope": 554,
-                        "src": "2166:43:1",
+                        "scope": 548,
+                        "src": "1739:46:2",
                         "stateMutability": "nonpayable",
                         "virtual": false,
                         "visibility": "external"
                     },
                     {
                         "functionSelector": "d179e3d0",
-                        "id": 553,
+                        "id": 547,
                         "implemented": false,
                         "kind": "function",
                         "modifiers": [],
                         "name": "unequip",
-                        "nameLocation": "2378:7:1",
+                        "nameLocation": "1962:7:2",
                         "nodeType": "FunctionDefinition",
                         "parameters": {
-                            "id": 551,
+                            "id": 545,
                             "nodeType": "ParameterList",
                             "parameters": [
                                 {
                                     "constant": false,
-                                    "id": 550,
+                                    "id": 544,
                                     "mutability": "mutable",
                                     "name": "equipment_id",
-                                    "nameLocation": "2391:12:1",
+                                    "nameLocation": "1978:12:2",
                                     "nodeType": "VariableDeclaration",
-                                    "scope": 553,
-                                    "src": "2386:17:1",
+                                    "scope": 547,
+                                    "src": "1970:20:2",
                                     "stateVariable": false,
                                     "storageLocation": "default",
                                     "typeDescriptions": {
@@ -1014,10 +696,10 @@
                                         "typeString": "uint256"
                                     },
                                     "typeName": {
-                                        "id": 549,
-                                        "name": "uint",
+                                        "id": 543,
+                                        "name": "uint256",
                                         "nodeType": "ElementaryTypeName",
-                                        "src": "2386:4:1",
+                                        "src": "1970:7:2",
                                         "typeDescriptions": {
                                             "typeIdentifier": "t_uint256",
                                             "typeString": "uint256"
@@ -1026,34 +708,33 @@
                                     "visibility": "internal"
                                 }
                             ],
-                            "src": "2385:19:1"
+                            "src": "1969:22:2"
                         },
                         "returnParameters": {
-                            "id": 552,
+                            "id": 546,
                             "nodeType": "ParameterList",
                             "parameters": [],
-                            "src": "2413:0:1"
+                            "src": "2000:0:2"
                         },
-                        "scope": 554,
-                        "src": "2369:45:1",
+                        "scope": 548,
+                        "src": "1953:48:2",
                         "stateMutability": "nonpayable",
                         "virtual": false,
                         "visibility": "external"
                     }
                 ],
-                "scope": 555,
-                "src": "111:2305:1",
+                "scope": 549,
+                "src": "134:1869:2",
                 "usedErrors": []
             }
         ],
-        "src": "31:2385:1"
+        "src": "31:1973:2"
     },
     "functionHashes": {
         "accept_duel(address)": "e7ac8c61",
         "attack_monster(uint256)": "355b0370",
         "equip(uint256)": "b85f8027",
         "invite_duel(address)": "b4c0e1b1",
-        "reborn()": "528d910a",
         "reject_duel(address)": "7a2444e1",
         "unequip(uint256)": "d179e3d0"
     },

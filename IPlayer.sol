@@ -1,0 +1,16 @@
+//SPDX-License-Identifier: MIT
+pragma solidity >=0.8.0;
+import "./IEquip.sol";
+
+interface IPlayer is IEquip {
+    // player attributes
+    struct Player {
+        uint256 attack;
+        uint256 max_health;
+        uint256 current_health;
+        string player_name;
+        Equipment[] equipment_storage;
+        Equipment equipment;
+        bool is_pending;
+    }
+}
