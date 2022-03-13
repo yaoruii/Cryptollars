@@ -2,7 +2,7 @@
 pragma solidity >=0.8.0;
 import "./IEquip.sol";
 
-interface IPlayer is IEquip {
+interface IPlayer {
     // player attributes
     struct Player {
         uint256 attack;
@@ -12,5 +12,10 @@ interface IPlayer is IEquip {
         Equipment[] equipment_storage;
         Equipment equipment;
         bool is_pending;
+    }
+    struct Equipment {
+        uint256 sword_strength;
+        uint256 id;
+        string equipment_name;
     }
 }
