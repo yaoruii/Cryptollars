@@ -8,10 +8,6 @@ import "./IPlayer.sol";
  */
 
 contract Game is IGame {
-    constructor() {
-        players[msg.sender].is_pending = false;
-    }
-
     // equipment attributes
 
     mapping(address => Player) players;
@@ -155,6 +151,7 @@ contract Game is IGame {
                 players[invitee].is_pending == false
         );
         players[msg.sender].is_pending = true;
+        players[invitee].is_pending = true;
         duel_match[msg.sender] = invitee;
         return true;
     }
