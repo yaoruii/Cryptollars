@@ -22,6 +22,26 @@ contract Game is IGame {
     Equipment new_sword = Equipment(0, 12345, "new_sword");
     Equipment empty = Equipment(0, 12345, "");
 
+    modifier check() {
+        require(
+            players[msg.sender].is_initialized == true,
+            "Haven't initialized the player yet."
+        );
+        _;
+    }
+
+    function initialize() public returns (bool result) {
+        require(players[msg.sender].is_initialized == false);
+        players[msg.sender].attack = 100;
+        players[msg.sender].max_health = 500;
+        players[msg.sender].current_health = 500;
+        players[msg.sender].player_name = "Jack";
+        add_equipment(0, 12345, "new_sword");
+        equip(0);
+        players[msg.sender].is_pending = false;
+        players[msg.sender].is_initialized = true;
+    }
+
     function push_master(
         uint256 attack,
         uint256 monster_current_health,
@@ -59,7 +79,11 @@ contract Game is IGame {
      * @param monster_id the id of a monster.
      * @return result True = kill the monster; False = get killed.
      */
-    function attack_monster(uint256 monster_id) external returns (bool result) {
+    function attack_monster(uint256 monster_id)
+        external
+        check
+        returns (bool result)
+    {
         require(monster_id >= 0 && monster_id < monsters.length);
         uint256 monster_freq = players[msg.sender].current_health /
             monsters[monster_id].attack;
@@ -82,7 +106,7 @@ contract Game is IGame {
      * @notice equipes player with equipment. Depends if equipment is avaliable
      * Modifies: player attack_strength, equipment sale status
      */
-    function equip(uint256 equipment_id) external {
+    function equip(uint256 equipment_id) public {
         bool gear;
         uint256 i;
         require(players[msg.sender].equipment.id == empty.id);
@@ -125,7 +149,7 @@ contract Game is IGame {
 	 * Modifies: duel_match
      * dont use player_address, use inviter 
      */
-    function invite_duel(address invitee) external returns (bool result) {
+    function invite_duel(address invitee) external check returns (bool result) {
         require(
             players[msg.sender].is_pending == false &&
                 players[invitee].is_pending == false
@@ -140,7 +164,7 @@ contract Game is IGame {
      * Modifies: duel_match, current_health, max_health, opponent_life
      * return means if the inviter wins
      */
-    function accept_duel(address inviter) external returns (bool result) {
+    function accept_duel(address inviter) external check returns (bool result) {
         //received the invite
         require(duel_match[inviter] == msg.sender);
         players[msg.sender].is_pending = true;

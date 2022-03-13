@@ -17,7 +17,7 @@ interface IGame is IPlayer {
 
     //mapping(address => Player) players;
     //mapping(address => address) duel_match;
-
+    function initialize() external returns (bool result);
     /*
      * @notice: Player attacks a monster.
      * Depends on the monster's health, attack strength and player's attack strength and health
