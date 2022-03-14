@@ -2,21 +2,19 @@
 pragma solidity >=0.8.0;
 import "./IGame.sol";
 import "./IPlayer.sol";
+import "./GameMaster.sol";
 
 /**
  * @title Bank contract
  */
 
-contract Game is IGame {
+contract Game is IGame, GameMaster {
     // equipment attributes
 
     mapping(address => Player) players;
     mapping(address => address) duel_match;
-    //mapping (uint => Monster) public monsters;
-    Monster[] public monsters;
 
-    Equipment new_sword = Equipment(0, 12345, "new_sword");
-    Equipment empty = Equipment(0, 12345, "");
+    Equipment empty = Equipment(0, 0, "");
 
     modifier check() {
         require(
@@ -32,13 +30,15 @@ contract Game is IGame {
         players[msg.sender].max_health = 500;
         players[msg.sender].current_health = 500;
         players[msg.sender].player_name = "Jack";
-        add_equipment(0, 12345, "new_sword");
-        equip(0);
+        players[msg.sender].equipment_storage.push(
+            mint_new_sward(msg.sender, "")
+        );
+        equip(2);
         players[msg.sender].is_pending = false;
         players[msg.sender].is_initialized = true;
     }
 
-    function push_master(
+    /* function push_master(
         uint256 attack,
         uint256 monster_current_health,
         string calldata monster_name
@@ -46,26 +46,24 @@ contract Game is IGame {
         monsters.push(Monster(attack, monster_current_health, monster_name));
     }
 
-    function add_equipment(
-        uint256 sword_strength,
-        uint256 id,
-        string memory equipment_name
-    ) internal {
-        players[msg.sender].equipment_storage.push(
-            Equipment(sword_strength, id, equipment_name)
-        );
-    }
-
+    
     /*
      * @notice Player is reborned. Depends on the result of attack_monster
      * Modifies: equipment, player health and current health
      */
     function reborn() internal {
         players[msg.sender].current_health = players[msg.sender].max_health;
-        delete players[msg.sender].equipment_storage[0];
+        uint256 index = random() % players[msg.sender].equipment_storage.length;
+        delete players[msg.sender].equipment_storage[index];
         if (players[msg.sender].equipment_storage.length == 0) {
-            players[msg.sender].equipment_storage.push(new_sword);
+            players[msg.sender].equipment_storage.push(
+                mint_new_sward(msg.sender)
+            );
         }
+    }
+
+    function random() private view returns (uint256) {
+        return uint256(keccak256(block.difficulty, now, players));
     }
 
     /*
@@ -90,10 +88,11 @@ contract Game is IGame {
             players[msg.sender].current_health -=
                 (player_freq - 1) *
                 monsters[monster_id].attack;
-            add_equipment(100, 2, "good_sword");
+            players[msg.sender].equipment_storage.push(
+                mint_equipment(msg.sender)
+            );
             return true;
         }
-
         reborn();
         return false;
     }
@@ -162,7 +161,7 @@ contract Game is IGame {
      * return means if the inviter wins
      */
     function accept_duel(address inviter) external check returns (bool result) {
-        //received the invite
+        //received the invitation
         require(duel_match[inviter] == msg.sender);
         players[msg.sender].is_pending = true;
         uint256 opponent_freq = players[msg.sender].current_health /
@@ -176,9 +175,30 @@ contract Game is IGame {
             /*
 			add equipment
 			*/
-
+            uint256 index = random() %
+                players[msg.sender].equipment_storage.length;
+            players[inviter].equipment_storage.push(
+                players[msg.sender].equipment_storage[index]
+            );
+            delete players[msg.sender].equipment_storage[index];
+            if (players[msg.sender].equipment_storage.length == 0) {
+                players[msg.sender].equipment_storage.push(
+                    mint_new_sward(msg.sender)
+                );
+            }
             result = true;
         } else {
+            uint256 index = random() %
+                players[inviter].equipment_storage.length;
+            players[msg.sender].equipment_storage.push(
+                players[inviter].equipment_storage[index]
+            );
+            delete players[inviter].equipment_storage[index];
+            if (players[inviter].equipment_storage.length == 0) {
+                players[inviter].equipment_storage.push(
+                    mint_new_sward(inviter)
+                );
+            }
             result = false;
         }
         players[msg.sender].is_pending = false;
@@ -190,7 +210,7 @@ contract Game is IGame {
      * @notice rejects another player to duel. Depends if you receive an invite
      */
     function reject_duel(address inviter) external returns (bool result) {
-        //received the invite
+        //received the invitation
         require(duel_match[inviter] == msg.sender);
         players[msg.sender].is_pending = false;
         players[inviter].is_pending = false;
