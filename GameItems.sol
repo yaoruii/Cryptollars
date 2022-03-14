@@ -16,7 +16,7 @@ contract GameItems is IGameItems, ERC1155, Random{
 
     uint256 public constant GOLD = 0;
     uint256 public constant SILVER = 1;
-    uint256 public constant NEW_SWARD = 2;//
+    uint256 public constant NEW_SWORD = 2;//
 
 
     uint256 public equipment_counter = 3;
@@ -63,8 +63,8 @@ contract GameItems is IGameItems, ERC1155, Random{
      */
     function mint_new_sward(
         address to) internal returns(Equipment memory){
-            _mint(to,NEW_SWARD , 1, "");
-            Equipment memory new_equipment = Equipment(new_sward_attack, NEW_SWARD , "new_sward");
+            _mint(to,NEW_SWORD , 1, "");
+            Equipment memory new_equipment = Equipment(new_sward_attack, NEW_SWORD , "new_sward");
             return new_equipment;
     }
 
