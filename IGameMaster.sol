@@ -7,12 +7,6 @@ import "./IMonster.sol";
 * @notice ...
 */
 interface IGameMaster is IMonster{
-    struct Monster {
-            uint256 id;
-            uint256 monster_attack;
-            uint256 monster_current_health;
-            string monster_name;
-    }
     function create_monster() external;
  
     function slay_monster(uint256 _index) external;

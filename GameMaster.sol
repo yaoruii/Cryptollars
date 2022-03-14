@@ -27,7 +27,7 @@ contract GameMaster is IGameMaster{
     function create_monster() public override{
         // uint seed = random.get_random(monster_maximum_attack);
         uint attack = random.get_random(monster_maximum_attack);
-        allMonsters.push(Monster(monsterCounter, attack, system_monster_health, string(abi.encodePacked("monster",Strings.toString(monsterCounter)))));
+        allMonsters.push(Monster(attack, system_monster_health, string(abi.encodePacked("monster",Strings.toString(monsterCounter)))));
         monsterCounter++;
 
 
@@ -42,8 +42,6 @@ contract GameMaster is IGameMaster{
         return allMonsters;
     }
 
-
- 
     function slay_monster(uint _index) public override{
       // mint equipment, token 
       delete allMonsters[_index];
