@@ -7,7 +7,7 @@ import "./IMonster.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 contract GameMaster is IGameMaster{
      
-    mapping(uint256 => Monster) public allMonsters;
+    Monster[] public allMonsters;
     uint256 public monsterCounter;
     uint256 public system_monster_health;
     uint256 public monster_maximum_attack;
@@ -22,13 +22,12 @@ contract GameMaster is IGameMaster{
         system_monster_health = _system_monster_health;
         //initialize some monsters firstly? 
         create_monster();
-
     }
 
     function create_monster() public override{
         // uint seed = random.get_random(monster_maximum_attack);
         uint attack = random.get_random(monster_maximum_attack);
-        allMonsters[monsterCounter] = Monster(monsterCounter, attack, system_monster_health, string(abi.encodePacked("monster",Strings.toString(monsterCounter))));
+        allMonsters.push(Monster(monsterCounter, attack, system_monster_health, string(abi.encodePacked("monster",Strings.toString(monsterCounter)))));
         monsterCounter++;
 
 
@@ -40,13 +39,7 @@ contract GameMaster is IGameMaster{
     }
 
     function get_all_monster() public view override returns (Monster[] memory) {
-        uint256 total_num = monsterCounter;
-        Monster[] memory monsters = new Monster[](total_num);
-        for(uint i = 0; i< monsterCounter; i++){
-            Monster memory a_monster = allMonsters[i];
-            monsters.push(a_monster);
-        }
-        return monsters;
+        return allMonsters;
     }
 
 
