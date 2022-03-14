@@ -8,16 +8,10 @@ import "./IPlayer.sol";
  */
 
 interface IGame is IPlayer {
-    // monster attributes
-    struct Monster {
-        uint256 attack;
-        uint256 monster_current_health;
-        string monster_name;
-    }
-
     //mapping(address => Player) players;
     //mapping(address => address) duel_match;
     function initialize() external returns (bool result);
+
     /*
      * @notice: Player attacks a monster.
      * Depends on the monster's health, attack strength and player's attack strength and health
