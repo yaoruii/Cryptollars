@@ -5,7 +5,7 @@ import "./IPlayer.sol";
 import "./GameMaster.sol";
 
 /**
- * @title Bank contract
+ * @title Game contract
  */
 
 contract Game is IGame, GameMaster {
