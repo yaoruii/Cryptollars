@@ -7,6 +7,11 @@ import "./IPlayer.sol";
 import "./Random.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
+
+/**
+* @title GameItems contract
+* @notice manage all tokens
+*/
 contract GameItems is IGameItems, ERC1155, Random{
 
     uint256 public constant GOLD = 0;

@@ -6,6 +6,10 @@ import "./IGameMaster.sol";
 import "./IMonster.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
+/**
+* @title GameMaster contract
+* @notice create, slay monsters and control the game
+*/
 contract GameMaster is IGameMaster, Random{
      
     Monster[] public allMonsters;
