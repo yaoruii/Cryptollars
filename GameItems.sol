@@ -28,7 +28,7 @@ contract GameItems is IGameItems, ERC1155, Random{
 
    
 
-    mapping(uint256 => Equipment) allEquipments;
+    // mapping(uint256 => Equipment) allEquipments;
 
 
     constructor() ERC1155("") Random(minimum_attack){
@@ -74,36 +74,58 @@ contract GameItems is IGameItems, ERC1155, Random{
             _mint(to,equipment_counter , 1, data);
             uint256 attack_value = get_random_attack();
             Equipment memory new_equipment = Equipment(attack_value, equipment_counter , string(abi.encodePacked(prefix_equipment,Strings.toString(equipment_counter))));
-            allEquipments[equipment_counter] = new_equipment;
+            // [equipment_counter] = new_equipallEquipmentsment;
             equipment_counter++;
             return new_equipment;
     }
 
     /**
     to: money owner's address
-    money: gold or silver,0 or 1
+    money: gold :0
     amount: the amount of money
      */
-    function mint_money(
+    function mint_money_gold(
         address to,
-        uint256 money_id,
         uint256 amount,
         bytes memory data
     ) internal{
-        _mint(to, money_id, amount, data);
+        _mint(to, 0, amount, data);
+    }
+
+     /**
+    to: money owner's address
+    money: SILVER:1
+    amount: the amount of money
+     */
+    function mint_money_silver(
+        address to,
+        uint256 amount,
+        bytes memory data
+    ) internal{
+        _mint(to, 1, amount, data);
     }
 
     /*
-    * Destroys `amount` tokens of token type `id` from `from`
+    * Destroys `amount` tokens of gold from `from`
     */
-    function burn_money (
+    function burn_money_gold (
         address from,
-        uint256 id,
         uint256 amount
     ) internal {
-        _burn(from, id, amount);
+        _burn(from, 0, amount);
 
     }
+
+    /*
+    * Destroys `amount` tokens of silver from `from`
+    */
+    function burn_money_gold (
+        address from,
+        uint256 amount
+    ) internal {
+        _burn(from, 1, amount);
+    }
+
      /*
     * Destroys the equipment of token type `id` from `from`
     */
@@ -112,8 +134,7 @@ contract GameItems is IGameItems, ERC1155, Random{
         uint256 id
     ) internal{
         _burn(from, id,1);
-        delete allEquipments[id];
-
+        // delete allEquipments[id];
     }
 
 
