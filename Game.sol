@@ -30,23 +30,12 @@ contract Game is IGame, GameMaster {
         players[msg.sender].max_health = 500;
         players[msg.sender].current_health = 500;
         players[msg.sender].player_name = "Jack";
-        players[msg.sender].equipment_storage.push(
-            mint_new_sward(msg.sender, "")
-        );
+        players[msg.sender].equipment_storage.push(mint_new_sward(msg.sender));
         equip(2);
         players[msg.sender].is_pending = false;
         players[msg.sender].is_initialized = true;
     }
 
-    /* function push_master(
-        uint256 attack,
-        uint256 monster_current_health,
-        string calldata monster_name
-    ) external {
-        monsters.push(Monster(attack, monster_current_health, monster_name));
-    }
-
-    
     /*
      * @notice Player is reborned. Depends on the result of attack_monster
      * Modifies: equipment, player health and current health
