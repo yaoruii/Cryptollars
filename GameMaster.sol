@@ -28,6 +28,10 @@ contract GameMaster is IGameMaster, Random{
         create_monster();
     }
 
+    /*
+     * @notice: create a monster
+     * Modifies: allMonster array
+     */
     function create_monster() public override{
         // uint seed = random.get_random(monster_maximum_attack);
         uint attack = get_random(monster_maximum_attack);
@@ -36,27 +40,44 @@ contract GameMaster is IGameMaster, Random{
         monsterCounter++;
     }
     
+    /*
+     * @notice get a monster's details
+     * @Depends on: _index
+     * @return a monster's details
+     */
     function get_monster(uint _index) public view override returns (Monster memory name) {
         Monster storage monster = allMonsters[_index];
         return monster;
     }
 
+    /*
+     * @notice: get all monsters' details
+     * @return all monsters' details
+     */
     function get_all_monster() public view override returns (Monster[] memory) {
         return allMonsters;
     }
 
 
- 
+    /*
+     * @notice: remove a monster
+     * Modifies: allMonster array
+     */
     function slay_monster(uint _index) public override{
       // mint equipment, token 
       delete allMonsters[_index];
 
     }
- 
+    /*
+     * @notice: pause this game
+     */
     function pause() public override{
         is_pause = true;
     }
- 
+    
+    /*
+     * @notice: unpause this game
+     */
     function unpause() public override{
         is_pause = false;
     }
