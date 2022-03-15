@@ -45,17 +45,14 @@ contract GameItems is IGameItems, ERC1155, Random {
     {
         // mint_money(player, GOLD, 10**18, "");
         // mint_money(player, SILVER, 10**27, "");
-        return mint_new_sward(player, "");
+        return mint_new_sward(player);
     }
 
     /**
     to: equipment owner's address
     randomly mint a new equipment and give it to to address
      */
-    function mint_new_sward(address to, bytes memory data)
-        internal
-        returns (Equipment memory)
-    {
+    function mint_new_sward(address to) internal returns (Equipment memory) {
         _mint(to, NEW_SWARD, 1, data);
         Equipment memory new_equipment = Equipment(
             new_sward_attack,

@@ -16,7 +16,7 @@ contract Game is IGame, GameMaster {
 
     Equipment empty = Equipment(0, 0, "");
 
-    modifier check() {
+    modifier check_isinitialized() {
         require(
             players[msg.sender].is_initialized == true,
             "Haven't initialized the player yet."
@@ -24,12 +24,12 @@ contract Game is IGame, GameMaster {
         _;
     }
 
-    function initialize() public returns (bool result) {
+    function initialize(string memory _name) public {
         require(players[msg.sender].is_initialized == false);
         players[msg.sender].attack = 100;
         players[msg.sender].max_health = 500;
         players[msg.sender].current_health = 500;
-        players[msg.sender].player_name = "Jack";
+        players[msg.sender].player_name = _name;
         players[msg.sender].equipment_storage.push(mint_new_sward(msg.sender));
         equip(2);
         players[msg.sender].is_pending = false;
@@ -40,14 +40,13 @@ contract Game is IGame, GameMaster {
      * @notice Player is reborned. Depends on the result of attack_monster
      * Modifies: equipment, player health and current health
      */
-    function reborn() internal {
-        players[msg.sender].current_health = players[msg.sender].max_health;
-        uint256 index = random() % players[msg.sender].equipment_storage.length;
-        delete players[msg.sender].equipment_storage[index];
-        if (players[msg.sender].equipment_storage.length == 0) {
-            players[msg.sender].equipment_storage.push(
-                mint_new_sward(msg.sender)
-            );
+    function reborn(address player) internal {
+        players[player].current_health = players[player].max_health;
+        uint256 index = random() % players[player].equipment_storage.length;
+        delete players[player].equipment_storage[index];
+        burn_equipment(players[player], equipment_storage[index].id);
+        if (players[player].equipment_storage.length == 0) {
+            players[player].equipment_storage.push(mint_new_sward(player));
         }
     }
 
@@ -64,7 +63,7 @@ contract Game is IGame, GameMaster {
      */
     function attack_monster(uint256 monster_id)
         external
-        check
+        check_isinitialized
         returns (bool result)
     {
         require(monster_id >= 0 && monster_id < monsters.length);
@@ -82,7 +81,7 @@ contract Game is IGame, GameMaster {
             );
             return true;
         }
-        reborn();
+        reborn(msg.sender);
         return false;
     }
 
@@ -98,6 +97,7 @@ contract Game is IGame, GameMaster {
         for (i = 0; i < players[msg.sender].equipment_storage.length; i++) {
             if (players[msg.sender].equipment_storage[i].id == equipment_id) {
                 gear = true;
+                break;
             }
         }
 
@@ -133,7 +133,7 @@ contract Game is IGame, GameMaster {
 	 * Modifies: duel_match
      * dont use player_address, use inviter 
      */
-    function invite_duel(address invitee) external check returns (bool result) {
+    function invite_duel(address invitee) external check_isinitialized {
         require(
             players[msg.sender].is_pending == false &&
                 players[invitee].is_pending == false
@@ -147,12 +147,15 @@ contract Game is IGame, GameMaster {
     /*
      * @notice accepts another player to duel. Depends if you receive an invite
      * Modifies: duel_match, current_health, max_health, opponent_life
-     * return means if the inviter wins
+     * return means if the invitee wins
      */
-    function accept_duel(address inviter) external check returns (bool result) {
+    function accept_duel(address inviter)
+        external
+        check_isinitialized
+        returns (bool result)
+    {
         //received the invitation
         require(duel_match[inviter] == msg.sender);
-        players[msg.sender].is_pending = true;
         uint256 opponent_freq = players[msg.sender].current_health /
             players[inviter].attack;
         uint256 player_freq = players[inviter].current_health /
@@ -161,21 +164,20 @@ contract Game is IGame, GameMaster {
             players[inviter].current_health -=
                 (player_freq - 1) *
                 players[msg.sender].attack;
-            /*
-			add equipment
-			*/
+
             uint256 index = random() %
                 players[msg.sender].equipment_storage.length;
             players[inviter].equipment_storage.push(
                 players[msg.sender].equipment_storage[index]
             );
             delete players[msg.sender].equipment_storage[index];
+            burn_equipment(players[msg.sender], equipment_storage[index].id);
             if (players[msg.sender].equipment_storage.length == 0) {
                 players[msg.sender].equipment_storage.push(
                     mint_new_sward(msg.sender)
                 );
             }
-            result = true;
+            result = false;
         } else {
             uint256 index = random() %
                 players[inviter].equipment_storage.length;
@@ -183,26 +185,29 @@ contract Game is IGame, GameMaster {
                 players[inviter].equipment_storage[index]
             );
             delete players[inviter].equipment_storage[index];
+            burn_equipment(inviter, equipment_storage[index].id);
             if (players[inviter].equipment_storage.length == 0) {
                 players[inviter].equipment_storage.push(
                     mint_new_sward(inviter)
                 );
             }
-            result = false;
+            result = true;
         }
         players[msg.sender].is_pending = false;
         players[inviter].is_pending = false;
+        delete duel_match[inviter][msg.sender];
         return result;
     }
 
     /*
      * @notice rejects another player to duel. Depends if you receive an invite
      */
-    function reject_duel(address inviter) external returns (bool result) {
+    function reject_duel(address inviter) external {
         //received the invitation
         require(duel_match[inviter] == msg.sender);
         players[msg.sender].is_pending = false;
         players[inviter].is_pending = false;
+        delete duel_match[inviter][msg.sender];
         return true;
     }
 }

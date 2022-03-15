@@ -8,9 +8,12 @@ import "./IPlayer.sol";
  */
 
 interface IGame is IPlayer {
-    //mapping(address => Player) players;
-    //mapping(address => address) duel_match;
-    function initialize() external returns (bool result);
+    /*
+     * @notice: Initialize the player's basic attributes.
+     * Depends on if the player has been initialized
+     * Modifies: player's basic attributes
+     */
+    function initialize(string memory _name) external;
 
     /*
      * @notice: Player attacks a monster.
@@ -34,12 +37,12 @@ interface IGame is IPlayer {
      * @notice accepts another player to duel. Depends if you receive an invite
      * Modifies: duel_match, current_health, max_health, opponent_life
      */
-    function accept_duel(address player_address) external returns (bool result);
+    function accept_duel(address player_address) external;
 
     /*
      * @notice rejects another player to duel. Depends if you receive an invite
      */
-    function reject_duel(address player_address) external returns (bool result);
+    function reject_duel(address player_address) external;
 
     /*
      * @notice equipes player with equipment. Depends if equipment is avaliable
