@@ -24,7 +24,7 @@ contract GameItems is IGameItems, ERC1155, Random{
     uint256 public equipment_maximum_attack = 12;
     uint256 public equipment_minimum_attack = 8;
 
-    uint256 public new_sward_attack = 8;
+    uint256 public new_sword_attack = 8;
 
 
     Random public random;
@@ -48,38 +48,42 @@ contract GameItems is IGameItems, ERC1155, Random{
 
 
     /**
-    This function is used to initialzie every player's initial equipment: NEW_SWARD.
+    This function is used to initialzie every player's initial equipment: NEW_SWORD.
     player: the address of this player
     */
-    function mint_initialize(address player) internal returns(Equipment memory){
-        // mint_money(player, GOLD, 10**18, "");
-        // mint_money(player, SILVER, 10**27, "");
-        return mint_new_sward(player);
-    }
+    //!!!!!!!!!!!!!!!! this is deleted !!!!!!!!!!!!!!!!!!!
+    // function mint_initialize(address player) internal returns(Equipment memory){
+    //     // mint_money(player, GOLD, 10**18, "");
+    //     // mint_money(player, SILVER, 10**27, "");
+    //     return mint_new_sword(player);
+    // }
 
     /**
     to: equipment owner's address
     randomly mint a new equipment and give it to to address
      */
-    function mint_new_sward(
+    function mint_new_sword(
+        Player storage player,
         address to) internal returns(Equipment memory){
             _mint(to,NEW_SWORD , 1, "");
-            Equipment memory new_equipment = Equipment(new_sward_attack, NEW_SWORD , "new_sward");
+            Equipment memory new_equipment = Equipment(new_sword_attack, NEW_SWORD , "new_sword");
+            player.equipment_storage.push(new_equipment);
             return new_equipment;
     }
 
     /**
+    player: the player object
     to: equipment owner's address
     randomly mint a new equipment and give it to to address
      */
     function mint_equipment(
-        mapping(address => Player) storage players,
+        Player storage player,
         address to) internal returns(Equipment memory){
             _mint(to,equipment_counter , 1, "");
             uint256 attack_value = get_random(equipment_maximum_attack);
             Equipment memory new_equipment = Equipment(attack_value, equipment_counter , string(abi.encodePacked(prefix_equipment,Strings.toString(equipment_counter))));
             //add this equipment to 'to' address:
-            players[to].equipment_storage.push(new_equipment);
+            player.equipment_storage.push(new_equipment);
             equipment_counter++;
             return new_equipment;
     }
@@ -133,13 +137,13 @@ contract GameItems is IGameItems, ERC1155, Random{
     * Destroys the equipment of token type `id` from `from`
     */
     function burn_equipment(
-        mapping(address => Player) storage players,
+        Player storage player,
         address from,
         uint256 id
     ) internal{
         _burn(from, id,1);
         //delete this equipment from 'from' address:
-        delete players[from].equipment_storage[id];
+        delete player.equipment_storage[id];
     }
 
 
