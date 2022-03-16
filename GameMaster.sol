@@ -31,6 +31,7 @@ contract GameMaster is IGameMaster, Random{
     /*
      * @notice: create a monster
      * Modifies: allMonster array
+     * can not create monster when game is paused
      */
     function create_monster() public override{
         // uint seed = random.get_random(monster_maximum_attack);
@@ -59,24 +60,27 @@ contract GameMaster is IGameMaster, Random{
     }
 
 
-    /*
-     * @notice: remove a monster
-     * Modifies: allMonster array
-     */
-    function slay_monster(uint _index) public override{
-      // mint equipment, token 
-      delete allMonsters[_index];
-
-    }
+    // /*
+    //  * @notice: remove a monster
+    //  * Modifies: allMonster array
+    //  */
+    // function slay_monster(uint _index) public override{
+    //   // mint equipment, token 
+    //   delete allMonsters[_index];
+    // }
     /*
      * @notice: pause this game
+     * require
+     * admin
      */
     function pause() public override{
         is_pause = true;
     }
-    
+
     /*
      * @notice: unpause this game
+     * require
+     * admin
      */
     function unpause() public override{
         is_pause = false;

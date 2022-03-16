@@ -73,12 +73,13 @@ contract GameItems is IGameItems, ERC1155, Random{
     randomly mint a new equipment and give it to to address
      */
     function mint_equipment(
-        address to,
-        bytes memory data) internal returns(Equipment memory){
-            _mint(to,equipment_counter , 1, data);
+        mapping(address => Player) storage players,
+        address to) internal returns(Equipment memory){
+            _mint(to,equipment_counter , 1, "");
             uint256 attack_value = get_random(equipment_maximum_attack);
             Equipment memory new_equipment = Equipment(attack_value, equipment_counter , string(abi.encodePacked(prefix_equipment,Strings.toString(equipment_counter))));
-            // [equipment_counter] = new_equipallEquipmentsment;
+            //add this equipment to 'to' address:
+            players[to].equipment_storage.push(new_equipment);
             equipment_counter++;
             return new_equipment;
     }
@@ -132,11 +133,13 @@ contract GameItems is IGameItems, ERC1155, Random{
     * Destroys the equipment of token type `id` from `from`
     */
     function burn_equipment(
+        mapping(address => Player) storage players,
         address from,
         uint256 id
     ) internal{
         _burn(from, id,1);
-        // delete allEquipments[id];
+        //delete this equipment from 'from' address:
+        delete players[from].equipment_storage[id];
     }
 
 
@@ -144,11 +147,17 @@ contract GameItems is IGameItems, ERC1155, Random{
     Transfers the equipment of token type `id` from `from` to 'to'
     */
     function transferEquipment(
+        mapping(address => Player) storage players,
         address from,
         address to,
         uint256 equipmentId
     ) internal{
         safeTransferFrom(from, to, equipmentId, 1, "");
+        
+        //add this equipment to 'to' address:
+        players[to].equipment_storage.push(players[from].equipment_storage[equipmentId]);
+        //delete this equipment from 'from' address:
+        delete players[from].equipment_storage[equipmentId];
     }
 
 }
