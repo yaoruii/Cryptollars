@@ -8,7 +8,7 @@ import "./GameMaster.sol";
  * @title Game contract
  */
 
-contract Game is IGame, GameMaster {
+contract Game is IGame, GameMaster, GameItems {
     // equipment attributes
 
     mapping(address => Player) players;
@@ -43,8 +43,7 @@ contract Game is IGame, GameMaster {
     function reborn(address player) internal {
         players[player].current_health = players[player].max_health;
         uint256 index = random() % players[player].equipment_storage.length;
-        delete players[player].equipment_storage[index];
-        burn_equipment(players[player], equipment_storage[index].id);
+        burn_equipment(players[player], player, equipment_storage[index].id);
         if (players[player].equipment_storage.length == 0) {
             players[player].equipment_storage.push(mint_new_sward(player));
         }
@@ -76,9 +75,9 @@ contract Game is IGame, GameMaster {
             players[msg.sender].current_health -=
                 (player_freq - 1) *
                 monsters[monster_id].attack;
-            players[msg.sender].equipment_storage.push(
-                mint_equipment(msg.sender)
-            );
+
+            mint_equipment(players[msg.sender], msg.sender);
+
             return true;
         }
         reborn(msg.sender);
@@ -164,17 +163,14 @@ contract Game is IGame, GameMaster {
             players[inviter].current_health -=
                 (player_freq - 1) *
                 players[msg.sender].attack;
-
             uint256 index = random() %
                 players[msg.sender].equipment_storage.length;
-            players[inviter].equipment_storage.push(
-                players[msg.sender].equipment_storage[index]
-            );
-            delete players[msg.sender].equipment_storage[index];
             transferEquipment(
+                players,
                 msg.sender,
                 inviter,
-                players[msg.sender].equipment_storage[index].id
+                players[msg.sender].equipment_storage[index].id,
+                index
             );
 
             if (players[msg.sender].equipment_storage.length == 0) {
@@ -186,14 +182,12 @@ contract Game is IGame, GameMaster {
         } else {
             uint256 index = random() %
                 players[inviter].equipment_storage.length;
-            players[msg.sender].equipment_storage.push(
-                players[inviter].equipment_storage[index]
-            );
-            delete players[inviter].equipment_storage[index];
             transferEquipment(
+                players,
                 inviter,
                 msg.sender,
-                players[inviter].equipment_storage[index].id
+                players[inviter].equipment_storage[index].id,
+                index
             );
             if (players[inviter].equipment_storage.length == 0) {
                 players[inviter].equipment_storage.push(
