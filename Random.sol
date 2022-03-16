@@ -1,8 +1,12 @@
-//SPDX-License-Identifier: MIT
+//SPDX-License-Identifier: MIT;
 pragma solidity >=0.8.0;
 
 import "./IRandom.sol";
 
+/**
+ * @title Random contract
+ * @notice get a random number
+ */
 contract Random is IRandom {
     uint256 initialNumber;
 
