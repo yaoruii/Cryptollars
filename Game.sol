@@ -171,7 +171,12 @@ contract Game is IGame, GameMaster {
                 players[msg.sender].equipment_storage[index]
             );
             delete players[msg.sender].equipment_storage[index];
-            burn_equipment(players[msg.sender], equipment_storage[index].id);
+            transferEquipment(
+                msg.sender,
+                inviter,
+                players[msg.sender].equipment_storage[index].id
+            );
+
             if (players[msg.sender].equipment_storage.length == 0) {
                 players[msg.sender].equipment_storage.push(
                     mint_new_sward(msg.sender)
@@ -185,7 +190,11 @@ contract Game is IGame, GameMaster {
                 players[inviter].equipment_storage[index]
             );
             delete players[inviter].equipment_storage[index];
-            burn_equipment(inviter, equipment_storage[index].id);
+            transferEquipment(
+                inviter,
+                msg.sender,
+                players[inviter].equipment_storage[index].id
+            );
             if (players[inviter].equipment_storage.length == 0) {
                 players[inviter].equipment_storage.push(
                     mint_new_sward(inviter)
