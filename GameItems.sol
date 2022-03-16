@@ -139,11 +139,12 @@ contract GameItems is IGameItems, ERC1155, Random{
     function burn_equipment(
         Player storage player,
         address from,
-        uint256 id
+        uint256 id,
+        uint256 index_in_storage
     ) internal{
         _burn(from, id,1);
         //delete this equipment from 'from' address:
-        delete player.equipment_storage[id];
+        delete player.equipment_storage[index_in_storage];
     }
 
 
@@ -154,14 +155,14 @@ contract GameItems is IGameItems, ERC1155, Random{
         mapping(address => Player) storage players,
         address from,
         address to,
-        uint256 equipmentId
+        uint256 equipmentId,
+        uint256 index_in_storage
     ) internal{
         safeTransferFrom(from, to, equipmentId, 1, "");
-        
         //add this equipment to 'to' address:
-        players[to].equipment_storage.push(players[from].equipment_storage[equipmentId]);
+        players[to].equipment_storage.push(players[from].equipment_storage[index_in_storage]);
         //delete this equipment from 'from' address:
-        delete players[from].equipment_storage[equipmentId];
+        delete players[from].equipment_storage[index_in_storage];
     }
 
 }
