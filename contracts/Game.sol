@@ -9,7 +9,7 @@ import "./GameItems.sol";
  * @title Game contract
  */
 
-contract Game is IGame, GameMaster, GameItems {
+contract Game is IGame, GameMaster {
     // equipment attributes
 
     mapping(address => Player) players;
@@ -66,10 +66,7 @@ contract Game is IGame, GameMaster, GameItems {
      * @param monster_id the id of a monster.
      * @return result True = kill the monster; False = get killed.
      */
-    function attack_monster(uint256 monster_id)
-        external
-        override
-        check_isinitialized
+    function attack_monster(uint256 monster_id)external override check_isinitialized
         returns (bool result)
     {
         require(monster_id >= 0 && monster_id < allMonsters.length);
@@ -82,9 +79,7 @@ contract Game is IGame, GameMaster, GameItems {
             players[msg.sender].current_health -=
                 (player_freq - 1) *
                 allMonsters[monster_id].attack;
-
             mint_equipment(players[msg.sender], msg.sender);
-
             return true;
         }
         reborn(msg.sender);
@@ -95,40 +90,33 @@ contract Game is IGame, GameMaster, GameItems {
      * @notice equipes player with equipment. Depends if equipment is avaliable
      * Modifies: player attack_strength, equipment sale status
      */
-    function equip(uint256 equipment_id) public override {
+    function equip(uint256 equipment_id) public override check_isinitialized {
         bool gear;
         uint256 i;
         require(players[msg.sender].equipment.id == empty.id);
-
         for (i = 0; i < players[msg.sender].equipment_storage.length; i++) {
             if (players[msg.sender].equipment_storage[i].id == equipment_id) {
                 gear = true;
                 break;
             }
         }
-
         require(gear == true);
-
         players[msg.sender].attack =
             players[msg.sender].attack +
             players[msg.sender].equipment_storage[i].sword_strength;
 
-        players[msg.sender].equipment = players[msg.sender].equipment_storage[
-            i
-        ];
+        players[msg.sender].equipment = players[msg.sender].equipment_storage[i];
     }
 
     /*
      * @notice unequipes player with equipment. Depends if the equipment is equiped
      * Modifies: player attack_strength, equipment sale status
      */
-    function unequip(uint256 equipment_id) external override {
+    function unequip() external override check_isinitialized {
         require(players[msg.sender].equipment.id != empty.id);
 
-        players[msg.sender].attack =
-            players[msg.sender].attack -
+        players[msg.sender].attack =players[msg.sender].attack -
             players[msg.sender].equipment.sword_strength;
-
         players[msg.sender].equipment = empty;
     }
 
@@ -139,10 +127,7 @@ contract Game is IGame, GameMaster, GameItems {
 	 * Modifies: duel_match
      * dont use player_address, use inviter 
      */
-    function invite_duel(address invitee)
-        external
-        override
-        check_isinitialized
+    function invite_duel(address invitee)external override check_isinitialized
     {
         require(
             players[msg.sender].is_pending == false &&
@@ -158,59 +143,37 @@ contract Game is IGame, GameMaster, GameItems {
      * Modifies: duel_match, current_health, max_health, opponent_life
      * return means if the invitee wins
      */
-    function accept_duel(address inviter)
-        external
-        override
-        check_isinitialized
+    function accept_duel(address inviter)external override check_isinitialized
         returns (bool result)
     {
-        //received the invitation
         require(duel_match[inviter] == msg.sender);
         uint256 opponent_freq = players[msg.sender].current_health /
             players[inviter].attack;
         uint256 player_freq = players[inviter].current_health /
             players[msg.sender].attack;
+        address winner;
+        address loser;
         if (player_freq <= opponent_freq) {
-            players[inviter].current_health -=
-                (player_freq - 1) *
-                players[msg.sender].attack;
-            uint256 index = get_random(
-                players[msg.sender].equipment_storage.length
-            );
-            transferEquipment(
-                players,
-                msg.sender,
-                inviter,
-                players[msg.sender].equipment_storage[index].id,
-                index
-            );
-
-            if (players[msg.sender].equipment_storage.length == 0) {
-                players[msg.sender].equipment_storage.push(
-                    mint_new_sword(players[msg.sender], msg.sender)
-                );
-            }
+            winner = inviter;
+            loser = msg.sender;
             result = false;
-        } else {
-            uint256 index = get_random(
-                players[inviter].equipment_storage.length
-            );
-            transferEquipment(
-                players,
-                inviter,
-                msg.sender,
-                players[inviter].equipment_storage[index].id,
-                index
-            );
-            if (players[inviter].equipment_storage.length == 0) {
-                players[inviter].equipment_storage.push(
-                    mint_new_sword(players[inviter], inviter)
+            }
+        else{
+            winner = msg.sender;
+            loser = inviter;
+            result  = true;
+        }
+
+            players[winner].current_health -=(player_freq - 1) *
+                players[loser].attack;
+            uint256 index = get_random(players[loser].equipment_storage.length);
+            transferEquipment(players,loser,winner,players[loser].equipment_storage[index].id,index);
+
+            if (players[loser].equipment_storage.length == 0) {
+                players[loser].equipment_storage.push(
+                    mint_new_sword(players[loser], loser)
                 );
             }
-            result = true;
-        }
-        players[msg.sender].is_pending = false;
-        players[inviter].is_pending = false;
         delete duel_match[inviter];
         return result;
     }
@@ -219,7 +182,6 @@ contract Game is IGame, GameMaster, GameItems {
      * @notice rejects another player to duel. Depends if you receive an invite
      */
     function reject_duel(address inviter) external override {
-        //received the invitation
         require(duel_match[inviter] == msg.sender);
         players[msg.sender].is_pending = false;
         players[inviter].is_pending = false;

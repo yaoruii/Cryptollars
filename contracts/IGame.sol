@@ -54,5 +54,5 @@ interface IGame is IPlayer {
      * @notice unequipes player with equipment. Depends if the equipment is equiped
      * Modifies: player attack_strength, equipment sale status
      */
-    function unequip(uint256 equipment_id) external;
+    function unequip() external;
 }

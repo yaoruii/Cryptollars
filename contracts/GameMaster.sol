@@ -4,13 +4,14 @@ pragma solidity >=0.8.0;
 import "./Random.sol";
 import "./IGameMaster.sol";
 import "./IMonster.sol";
+import "./GameItems.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 /**
  * @title GameMaster contract
  * @notice create, slay monsters and control the game
  */
-contract GameMaster is IGameMaster, Random {
+contract GameMaster is IGameMaster, GameItems {
     Monster[] public allMonsters;
     uint256 public monsterCounter;
     uint256 public monster_maximum_health = 20;
@@ -18,7 +19,7 @@ contract GameMaster is IGameMaster, Random {
     uint256 public monster_minimum_attack = 8;
     bool public is_pause = false;
 
-    constructor() Random(monster_minimum_attack) {
+    constructor() GameItems() {
         monsterCounter = 0;
         // system_monster_health = _system_monster_health;
         //initialize some monsters firstly? ?
