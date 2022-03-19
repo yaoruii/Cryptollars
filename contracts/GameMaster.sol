@@ -14,20 +14,30 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 contract GameMaster is IGameMaster, GameItems{
      
     Monster[] public allMonsters;
+    address public admin;
     uint256 public monsterCounter;
     uint256 public monster_maximum_health = 20;
     uint256 public monster_maximum_attack = 12;
     uint256 public monster_minimum_attack = 8;
-    bool public is_pause = false;
+    bool public is_going ;
 
     
 
-    constructor ()GameItems(){
+    constructor () GameItems(){
         monsterCounter = 0;
+        admin = msg.sender;
+        is_going = true;
         // system_monster_health = _system_monster_health;
         //initialize some monsters firstly? ?
         create_monster();
     }
+
+    /**
+     */
+     function get_admin() public view returns(address){
+         return admin;
+
+     }
 
     /*
      * @notice: create a monster
@@ -60,22 +70,18 @@ contract GameMaster is IGameMaster, GameItems{
         return allMonsters;
     }
 
+    
 
-    // /*
-    //  * @notice: remove a monster
-    //  * Modifies: allMonster array
-    //  */
-    // function slay_monster(uint _index) public override{
-    //   // mint equipment, token 
-    //   delete allMonsters[_index];
-    // }
+
     /*
      * @notice: pause this game
      * require
      * admin
      */
-    function pause() public override{
-        is_pause = true;
+    function pause() public override {
+        require(msg.sender == admin, "only admin can do pause operation!");
+        require(is_going, "game is already paused, please do not repeat this");
+        is_going = false;
     }
 
     /*
@@ -84,6 +90,14 @@ contract GameMaster is IGameMaster, GameItems{
      * admin
      */
     function unpause() public override{
-        is_pause = false;
+        require(msg.sender == admin, "only admin can do unpause operation!");
+        require(!is_going, "game is already unpaused, please do not repeat this");
+        is_going = true;
     }
+
+    /**
+     */
+     function get_game_status() public view returns (bool){
+         return is_going;
+     }
 }
