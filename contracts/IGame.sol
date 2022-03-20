@@ -31,18 +31,18 @@ interface IGame is IPlayer {
 	 * Modifies: duel_match
      * dont use player_address, use inviter 
      */
-    // function invite_duel(address invitee) external;
+    function invite_duel(address invitee) external;
 
-    // /*
-    //  * @notice accepts another player to duel. Depends if you receive an invite
-    //  * Modifies: duel_match, current_health, max_health, opponent_life
-    //  */
-    // function accept_duel(address player_address) external returns (bool result);
+    /*
+     * @notice accepts another player to duel. Depends if you receive an invite
+     * Modifies: duel_match, current_health, max_health, opponent_life
+     */
+    function accept_duel(address player_address) external returns (bool result);
 
-    // /*
-    //  * @notice rejects another player to duel. Depends if you receive an invite
-    //  */
-    // function reject_duel(address player_address) external;
+    /*
+     * @notice rejects another player to duel. Depends if you receive an invite
+     */
+    function reject_duel(address player_address) external;
 
     /*
      * @notice equipes player with equipment. Depends if equipment is avaliable

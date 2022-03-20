@@ -151,6 +151,7 @@ contract GameItems is IGameItems, ERC1155, Random {
         uint256 equipmentId,
         uint256 index_in_storage
     ) internal {
+        
         safeTransferFrom(from, to, equipmentId, 1, "");
         //add this equipment to 'to' address:
         players[to].equipment_storage.push(

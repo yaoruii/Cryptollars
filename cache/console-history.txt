@@ -1,3 +1,47 @@
+await gameTest.connect(admin).get_storage_len(player2.address);
+await gameTest.connect(admin).get_storage_len(player1.address);
+await gameTest.connect(player1).invite_duel(player2.address);
+await gameTest.connect(admin).set_health(player2,100);
+ await gameTest.connect(player2).initialize("Rose");
+await gameTest.connect(admin).get_storage_len(player1.address);
+await gameTest.connect(player1).attack_monster(0);
+await gameTest.connect(player1).attack_monster(yes_monster);
+await gameTest.connect(admin).get_storage_len(player1.address);
+gameTest.connect(admin).get_storage_len(player1.address);
+await gameTest.connect(player1).initialize("Jack");
+    const gameTest = await game.connect(admin).deploy();
+    const [admin, player1, player2] = await ethers.getSigners();
+const game = await ethers.getContractFactory("Game");
+await gameTest.connect(admin).get_storage_len(player1.address);
+    await gameTest.connect(player1).invite_duel(admin.address);
+    // //invite
+    await gameTest.connect(admin).set_health(admin.address,100);
+    //mock inviter win, so decrease the invitee's life
+    await gameTest.connect(admin).initialize("Rose");
+    await gameTest.connect(player1).initialize("Jack");
+     // init p1
+     const gameTest = await game.connect(admin).deploy();
+     const [admin, player1, player2] = await ethers.getSigners();
+const game = await ethers.getContractFactory("Game");
+await gameTest.connect(admin).get_storage_len(admin.address);
+await gameTest.connect(admin).get_storage_len(player1.address);
+ await gameTest.connect(admin).accept_duel(player1.address);
+    await gameTest.connect(player1).invite_duel(admin.address);
+    // //invite
+    await gameTest.connect(admin).set_health(admin.address,100);
+    //mock inviter win, so decrease the invitee's life
+    await gameTest.connect(admin).initialize("Rose");
+    await gameTest.connect(player1).initialize("Jack");
+     // init p1
+     const gameTest = await game.connect(admin).deploy();
+     const [admin, player1, player2] = await ethers.getSigners();
+const game = await ethers.getContractFactory("Game");
+gameTest.connect(admin).get_equip_id(player1.address);
+     await gameTest.connect(player1).initialize("Jack");
+     // init p1
+    const gameTest = await game.connect(admin).deploy();
+    const [admin, player1, player2] = await ethers.getSigners();
+const game = await ethers.getContractFactory("Game");
 await gameTest.connect(admin).call.get_current_health(player1.address);
 await gameTest.connect(admin).get_current_health(player1.address).call();
 await gameTest.connect(admin).get_current_health(player1.address);

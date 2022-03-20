@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/contracts/Game.sol": {
-      "lastModificationDate": 1647662353747,
-      "contentHash": "57223e957746b8818f2c93cfa95950a6",
+      "lastModificationDate": 1647738685526,
+      "contentHash": "e68a881375a877dedcd17fafd4a95943",
       "sourceName": "contracts/Game.sol",
       "solcConfig": {
         "version": "0.8.1",
@@ -41,8 +41,8 @@
       ]
     },
     "/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/contracts/IGame.sol": {
-      "lastModificationDate": 1647655165995,
-      "contentHash": "844b7d3006422af047014c9b3b6a5d97",
+      "lastModificationDate": 1647725291641,
+      "contentHash": "72c85d47fcc928f2dbebb3f8f9fe19e5",
       "sourceName": "contracts/IGame.sol",
       "solcConfig": {
         "version": "0.8.1",
@@ -113,8 +113,8 @@
       ]
     },
     "/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/contracts/GameMaster.sol": {
-      "lastModificationDate": 1647405123273,
-      "contentHash": "a553d381b109b69131b3de26987ed331",
+      "lastModificationDate": 1647734657848,
+      "contentHash": "071f97ca5457a790e59d09e47075eb08",
       "sourceName": "contracts/GameMaster.sol",
       "solcConfig": {
         "version": "0.8.1",
@@ -154,8 +154,8 @@
       ]
     },
     "/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/contracts/GameItems.sol": {
-      "lastModificationDate": 1647405002522,
-      "contentHash": "ba8813de91c13b49455d69bf784e264e",
+      "lastModificationDate": 1647732575772,
+      "contentHash": "519ccf6908f7316c1031df40ecd76d77",
       "sourceName": "contracts/GameItems.sol",
       "solcConfig": {
         "version": "0.8.1",
@@ -703,46 +703,6 @@
       ],
       "artifacts": [
         "IERC165"
-      ]
-    },
-    "/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/contracts/Duel.sol": {
-      "lastModificationDate": 1647658145367,
-      "contentHash": "e5f5cf7ef7f54c3d09195f78d6395db8",
-      "sourceName": "contracts/Duel.sol",
-      "solcConfig": {
-        "version": "0.8.1",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IGame.sol",
-        "./IPlayer.sol",
-        "./GameMaster.sol",
-        "./GameItems.sol"
-      ],
-      "versionPragmas": [
-        ">=0.8.0"
-      ],
-      "artifacts": [
-        "Duel"
       ]
     }
   }

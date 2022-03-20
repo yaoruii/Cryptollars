@@ -14,7 +14,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 contract GameMaster is IGameMaster, GameItems {
     Monster[] public allMonsters;
     uint256 public monsterCounter;
-    uint256 public monster_maximum_health = 20;
+    uint256 public monster_maximum_health = 200;
     uint256 public monster_maximum_attack = 12;
     uint256 public monster_minimum_attack = 8;
     bool public is_pause = false;
