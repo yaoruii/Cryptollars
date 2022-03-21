@@ -8,22 +8,19 @@ import "./GameItems.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 /**
-* @title GameMaster contract
-* @notice create, slay monsters and control the game
-*/
-contract GameMaster is IGameMaster, GameItems{
-     
+ * @title GameMaster contract
+ * @notice create, slay monsters and control the game
+ */
+contract GameMaster is IGameMaster, GameItems {
     Monster[] public allMonsters;
     address public admin;
     uint256 public monsterCounter;
-    uint256 public monster_maximum_health = 20;
+    uint256 public monster_maximum_health = 200;
     uint256 public monster_maximum_attack = 12;
     uint256 public monster_minimum_attack = 8;
     bool public is_going ;
 
-    
-
-    constructor () GameItems(){
+    constructor() GameItems() {
         monsterCounter = 0;
         admin = msg.sender;
         is_going = true;
@@ -44,20 +41,36 @@ contract GameMaster is IGameMaster, GameItems{
      * Modifies: allMonster array
      * can not create monster when game is paused
      */
-    function create_monster() public override{
+    function create_monster() public override {
         // uint seed = random.get_random(monster_maximum_attack);
-        uint attack = get_random(monster_maximum_attack);
-        uint monster_health = get_random(monster_maximum_health);
-        allMonsters.push(Monster(attack, monster_health, string(abi.encodePacked("monster",Strings.toString(monsterCounter)))));
+        uint256 attack = get_random(monster_maximum_attack);
+        uint256 monster_health = get_random(monster_maximum_health);
+        allMonsters.push(
+            Monster(
+                attack,
+                monster_health,
+                string(
+                    abi.encodePacked(
+                        "monster",
+                        Strings.toString(monsterCounter)
+                    )
+                )
+            )
+        );
         monsterCounter++;
     }
-    
+
     /*
      * @notice get a monster's details
      * @Depends on: _index
      * @return a monster's details
      */
-    function get_monster(uint _index) public view override returns (Monster memory name) {
+    function get_monster(uint256 _index)
+        public
+        view
+        override
+        returns (Monster memory name)
+    {
         Monster storage monster = allMonsters[_index];
         return monster;
     }
