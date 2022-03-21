@@ -1,0 +1,154 @@
+{
+    "contractName": "IEquip",
+    "abi": [],
+    "metadata": "{\"compiler\":{\"version\":\"0.8.12+commit.f00d7308\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IEquip.sol\":\"IEquip\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IEquip.sol\":{\"keccak256\":\"0x5baea6613099ec2c211e521404de7de75676352f16118f7d4c4110f841c0ab84\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://6e8f3b0c8d7cd1f6252ca6b8419bae26c16e365d6a004a984a9b1089a6ebd875\",\"dweb:/ipfs/QmUEVUUyh7zJ8Ms33cy1sZZRVmnEasGa5onLEAj9M7Lvt7\"]}},\"version\":1}",
+    "bytecode": "",
+    "deployedBytecode": "",
+    "sourceMap": "",
+    "deployedSourceMap": "",
+    "sourcePath": "/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IEquip.sol",
+    "compiler": {
+        "name": "solc",
+        "version": "0.8.12+commit.f00d7308"
+    },
+    "ast": {
+        "absolutePath": "/Users/mayuqing/Documents/Courses/EECE571G/Cryptollars/IEquip.sol",
+        "exportedSymbols": {
+            "IEquip": [
+                497
+            ]
+        },
+        "id": 498,
+        "license": "MIT",
+        "nodeType": "SourceUnit",
+        "nodes": [
+            {
+                "id": 489,
+                "literals": [
+                    "solidity",
+                    ">=",
+                    "0.8",
+                    ".0"
+                ],
+                "nodeType": "PragmaDirective",
+                "src": "31:24:1"
+            },
+            {
+                "abstract": false,
+                "baseContracts": [],
+                "canonicalName": "IEquip",
+                "contractDependencies": [],
+                "contractKind": "interface",
+                "fullyImplemented": true,
+                "id": 497,
+                "linearizedBaseContracts": [
+                    497
+                ],
+                "name": "IEquip",
+                "nameLocation": "67:6:1",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "canonicalName": "IEquip.Equipment",
+                        "id": 496,
+                        "members": [
+                            {
+                                "constant": false,
+                                "id": 491,
+                                "mutability": "mutable",
+                                "name": "sword_strength",
+                                "nameLocation": "143:14:1",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 496,
+                                "src": "135:22:1",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                },
+                                "typeName": {
+                                    "id": 490,
+                                    "name": "uint256",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "135:7:1",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    }
+                                },
+                                "visibility": "internal"
+                            },
+                            {
+                                "constant": false,
+                                "id": 493,
+                                "mutability": "mutable",
+                                "name": "id",
+                                "nameLocation": "175:2:1",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 496,
+                                "src": "167:10:1",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                },
+                                "typeName": {
+                                    "id": 492,
+                                    "name": "uint256",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "167:7:1",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    }
+                                },
+                                "visibility": "internal"
+                            },
+                            {
+                                "constant": false,
+                                "id": 495,
+                                "mutability": "mutable",
+                                "name": "equipment_name",
+                                "nameLocation": "194:14:1",
+                                "nodeType": "VariableDeclaration",
+                                "scope": 496,
+                                "src": "187:21:1",
+                                "stateVariable": false,
+                                "storageLocation": "default",
+                                "typeDescriptions": {
+                                    "typeIdentifier": "t_string_storage_ptr",
+                                    "typeString": "string"
+                                },
+                                "typeName": {
+                                    "id": 494,
+                                    "name": "string",
+                                    "nodeType": "ElementaryTypeName",
+                                    "src": "187:6:1",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_string_storage_ptr",
+                                        "typeString": "string"
+                                    }
+                                },
+                                "visibility": "internal"
+                            }
+                        ],
+                        "name": "Equipment",
+                        "nameLocation": "115:9:1",
+                        "nodeType": "StructDefinition",
+                        "scope": 497,
+                        "src": "108:107:1",
+                        "visibility": "public"
+                    }
+                ],
+                "scope": 498,
+                "src": "57:160:1",
+                "usedErrors": []
+            }
+        ],
+        "src": "31:187:1"
+    },
+    "functionHashes": {},
+    "gasEstimates": null
+}
