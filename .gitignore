@@ -1,7 +1,9 @@
 # ignore all logs
  *.log
  **/node_modules
- **/artifacts
  **/cache     
 node_modules
 artifacts
+bin
+cache
+**/artifacts
