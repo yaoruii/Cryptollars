@@ -18,3 +18,5 @@ We use the hardhat to test and the commands are "npx hardhat compile" and "npx h
 2.Test results for Game.sol
 ![image](https://user-images.githubusercontent.com/77866293/159195750-99643a86-44ed-4a11-948e-3010299dc157.png)
 
+3. Test results for GameMaster.sol
+<img width="466" alt="image" src="https://user-images.githubusercontent.com/91431648/159196116-7e5ed1e7-08f5-4fa3-b1b4-f38bc37a5d51.png">
