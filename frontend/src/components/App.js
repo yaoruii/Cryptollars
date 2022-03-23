@@ -1,10 +1,11 @@
 import HelloWorld from './HelloWorld'
-import './App.css';
-
+import '../css/App.css';
+import Game from './Game'
 function App() {
   return (
     <div className="App">
-    <HelloWorld></HelloWorld>
+    {/* <HelloWorld></HelloWorld> */}
+    <Game></Game>
     </div>
   );
 }

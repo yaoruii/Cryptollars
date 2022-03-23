@@ -6,9 +6,9 @@ import {
   updateMessage,
   loadCurrentMessage,
   getCurrentWalletConnected,
-} from "./util/interact.js";
+} from "../util/interact.js";
 
-import alchemylogo from "./alchemylogo.svg";
+import alchemylogo from "../alchemylogo.svg";
 
 const HelloWorld = () => {
   //state variables
