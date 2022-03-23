@@ -103,15 +103,15 @@ const Game = () => {
           <span>Hunt Monsters</span>
       </button>
 
-      <button id="function_module" onClick={connectWalletPressed}>
+      <button id="function_module" onClick={hhh}>
         
           <span>Duel</span>
       </button>
 
-       <button id="function_module" onClick={connectWalletPressed}>
+       <button id="function_module" onClick={hhh}>
           <span>Trade</span>
       </button>
-      <button id="function_module" onClick={connectWalletPressed}>
+      <button id="function_module" onClick={hhh}>
           <span>Bank</span>
       </button>
       </div>
