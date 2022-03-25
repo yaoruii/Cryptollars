@@ -1,4 +1,5 @@
 import React from "react";
+import 'antd/dist/antd.css';
 import { useEffect, useState } from "react";
 import {
   helloWorldContract,
@@ -85,8 +86,8 @@ const Game = () => {
 
   //the UI of our component
   return (
-    <div id="container">
-      <img id="logo" src={alchemylogo}></img>
+    <div >
+      <img  src={alchemylogo}></img>
       
       <button id="walletButton" onClick={connectWalletPressed}>
         {walletAddress.length > 0 ? (

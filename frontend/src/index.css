@@ -5,11 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
+  display: block;
     justify-content: center;
     align-items: center;
-    height:90vh;  
-    font-size: 16px;
+    height:100%;  
+    font-size: 16px;  
 }
 
 code {
@@ -21,7 +21,7 @@ code {
   width: 80vh;
  border: 4px dashed rgba(4, 4, 5, 0.1);
     min-height: 140px;
-    padding: 32px;
+    padding: 40px;
     position: relative;
     border-radius: 16px;
     -webkit-box-align: right;
@@ -33,14 +33,14 @@ code {
     word-break: break-word;
 }
 #container_functions {
-  width: 30vh;
+  width: 40vh;
  border: 2px dashed rgba(4, 4, 5, 0.1);
     min-height: 140px;
-    padding: 60px;
+    padding: 30px;
     position: relative;
     border-radius: 16px;
     -webkit-box-align: center;
-    align-items: right;
+    align-items: center;
     -webkit-box-pack: center;
     justify-content: center;
     flex-direction: column;
@@ -97,10 +97,10 @@ button {
 #walletButton {
   padding: 7px 16px;
   background-color: white;
-  float:right;
+  float:center;
   border: 2px solid #254cdd ;
   color:#254cdd;
-  margin-top: 0px;
+  
 
 }
 #function_module {
@@ -120,4 +120,26 @@ h2{
 
 a {
   color:#254cdd
+}
+
+#components-layout-demo-fixed .logo {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.2);
+}
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+#content {
+  /* width: 100% ;
+  c */
+  margin: '0px 0px';
+   padding: 0;
+   background: '#fff';
+   height: 1000 ;
+  
+
 }
