@@ -10,7 +10,6 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    {/* <HuntMonsters /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
