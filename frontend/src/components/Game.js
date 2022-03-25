@@ -86,8 +86,8 @@ const Game = () => {
 
   //the UI of our component
   return (
-    <div >
-      <img  src={alchemylogo}></img>
+    <div id="container">
+      <img id="logo" src={alchemylogo}></img>
       
       <button id="walletButton" onClick={connectWalletPressed}>
         {walletAddress.length > 0 ? (

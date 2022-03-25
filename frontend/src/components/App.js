@@ -2,6 +2,7 @@
 import '../css/App.css';
 import Game from './Game'
 import HuntMonsters from './HuntMonster'
+import Duel from './Duel'
 import { Layout, Menu } from 'antd';
 import { useEffect, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
@@ -23,7 +24,7 @@ function App() {
       case '2':
         return (<HuntMonsters/>);
       case '3':
-        return (<h3>item3</h3>);
+        return (<Duel/>);
       default:
         break;
      }
