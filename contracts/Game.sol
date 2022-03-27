@@ -3,15 +3,16 @@ pragma solidity >=0.8.0;
 import "./IGame.sol";
 import "./IPlayer.sol";
 import "./GameMaster.sol";
+import "./Trade.sol";
 
 
 /**
  * @title Game contract
  */
 
-contract Game is IGame, GameMaster {
+contract Game is IGame, GameMaster, Trade{
     // equipment attributes
-    mapping(address => Player) public players;
+    //mapping(address => Player) public players;
     mapping(address => address) public duel_match;
     Equipment empty = Equipment(0, 0, "");
 
@@ -113,7 +114,7 @@ contract Game is IGame, GameMaster {
     function equip(uint256 equipment_id) public override check_isinitialized {
         bool gear;
         uint256 i;
-        require(players[msg.sender].equipment.id == empty.id);
+        require(players[msg.sender].equipment.id == empty.id, "already has a equipped equipment");
         for (i = 0; i < players[msg.sender].equipment_storage.length; i++) {
             if (players[msg.sender].equipment_storage[i].id == equipment_id) {
                 gear = true;

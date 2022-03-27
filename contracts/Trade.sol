@@ -110,9 +110,11 @@ contract Trade is ITrade, GameItems {
      * @notice Return the id of the first equipment given an address.
      * @param player_address: the address of the player.
      */
-     function test_first_equip_id(address player_address) external view returns(uint256 id) {
-          return players[player_address].equipment_storage[0].id;
+     function get_specific_equip_id(address player_address, uint256 index) external view returns(uint256 id) {
+          return players[player_address].equipment_storage[index].id;
+          
      }
+
 
      /**
      * @notice Return whether the player's trade is valid.

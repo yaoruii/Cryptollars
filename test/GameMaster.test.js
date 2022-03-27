@@ -1,7 +1,6 @@
 // We import Chai to use its asserting functions here.
 const { expect } = require("chai");
 
-
 describe("GameMater contract", function () {
   // Mocha has four functions that let you hook into the the test runner's
   // lifecyle. These are: `before`, `beforeEach`, `after`, `afterEach`.
@@ -47,12 +46,12 @@ describe("GameMater contract", function () {
     it("Should create monsters successfully", async function () {
       //create a monster firstly:
       await GameMaster.create_monster();
-      allMonsters  = await GameMaster.get_all_monster();
+      allMonsters = await GameMaster.get_all_monster();
       expect(allMonsters.length).to.equal(2);
 
       //create the second monster :
       await GameMaster.create_monster();
-      allMonsters  = await GameMaster.get_all_monster();
+      allMonsters = await GameMaster.get_all_monster();
       expect(allMonsters.length).to.equal(3);
     });
   });
@@ -65,28 +64,27 @@ describe("GameMater contract", function () {
     });
 
     it("Only admin can unpause the game", async function () {
-        await expect(await GameMaster.get_game_status()).to.equal(true);
-        await GameMaster.pause();
-        await expect(await GameMaster.get_game_status()).to.equal(false);
-        await expect(GameMaster.connect(addr1).unpause()).to.be.reverted;
-        await expect(GameMaster.connect(owner).unpause()).not.to.be.reverted;
-      });
+      await expect(await GameMaster.get_game_status()).to.equal(true);
+      await GameMaster.pause();
+      await expect(await GameMaster.get_game_status()).to.equal(false);
+      await expect(GameMaster.connect(addr1).unpause()).to.be.reverted;
+      await expect(GameMaster.connect(owner).unpause()).not.to.be.reverted;
+    });
 
     it("Only paused game can be unpaused", async function () {
-        await expect(await GameMaster.get_game_status()).to.equal(true);
-        await expect(GameMaster.unpause()).to.be.reverted;
-        await GameMaster.pause();
-        await expect(GameMaster.unpause()).not.to.be.reverted;
-      });
+      await expect(await GameMaster.get_game_status()).to.equal(true);
+      await expect(GameMaster.unpause()).to.be.reverted;
+      await GameMaster.pause();
+      await expect(GameMaster.unpause()).not.to.be.reverted;
+    });
 
-      it("Only unpaused game can be paused", async function () {
-        await expect(await GameMaster.get_game_status()).to.equal(true);
-        await GameMaster.pause();
-        await expect(GameMaster.pause()).to.be.reverted;
-        await GameMaster.unpause();
-        await expect(await GameMaster.get_game_status()).to.equal(true);
-        await expect(GameMaster.pause()).not.to.be.reverted;
-        
-      });
+    it("Only unpaused game can be paused", async function () {
+      await expect(await GameMaster.get_game_status()).to.equal(true);
+      await GameMaster.pause();
+      await expect(GameMaster.pause()).to.be.reverted;
+      await GameMaster.unpause();
+      await expect(await GameMaster.get_game_status()).to.equal(true);
+      await expect(GameMaster.pause()).not.to.be.reverted;
+    });
   });
 });

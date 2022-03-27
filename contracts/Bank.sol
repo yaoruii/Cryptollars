@@ -101,5 +101,4 @@ contract Bank is IBank, GameItems{
           super.mint_money_gold(_to, 130000000);
      }
 
-
 }
