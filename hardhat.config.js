@@ -7,14 +7,14 @@ module.exports = {
   solidity: "0.8.1",
   networks: {
     hardhat: {
-      allowUnlimitedContractSize: true
-    }
+      allowUnlimitedContractSize: true,
+    },
   },
-  
-settings: {
-  optimizer: {
-  enabled: true,
-  runs: 200
-  }
-  }
+
+  settings: {
+    optimizer: {
+      enabled: true,
+      runs: 200,
+    },
+  },
 };

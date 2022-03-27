@@ -14,7 +14,7 @@ describe("Trade contract", function () {
 
     const equipment_id = await tradeTest
       .connect(player1)
-      .test_first_equip_id(player1.address);
+      .get_specific_equip_id(player1.address, 0);
 
     // player1 cannot send more than one invitations if there's a pending one
     await tradeTest
@@ -41,9 +41,9 @@ describe("Trade contract", function () {
 
     const player2_equipment_id = await tradeTest
       .connect(player2)
-      .test_first_equip_id(player2.address);
+      .get_specific_equip_id(player2.address, 0);
 
-    // console.log(await tradeTest.connect(player1).test_first_equip_id(player1.address));
+    // console.log(await tradeTest.connect(player1).get_specific_equip_id(player1.address));
     // console.log(player2_equipment_id);
 
     await expect(
@@ -64,7 +64,7 @@ describe("Trade contract", function () {
     // const equipment_id = await tradeTest.connect(player1).players(player1.address).equipment_storage[0].id;
     const equipment_id = await tradeTest
       .connect(player1)
-      .test_first_equip_id(player1.address);
+      .get_specific_equip_id(player1.address, 0);
 
     await expect(
       tradeTest
@@ -84,7 +84,7 @@ describe("Trade contract", function () {
 
     const equipment_id = await tradeTest
       .connect(player1)
-      .test_first_equip_id(player1.address);
+      .get_specific_equip_id(player1.address, 0);
 
     await tradeTest
       .connect(player1)
@@ -106,7 +106,7 @@ describe("Trade contract", function () {
 
     const equipment_id = await tradeTest
       .connect(player1)
-      .test_first_equip_id(player1.address);
+      .get_specific_equip_id(player1.address, 0);
 
     await tradeTest
       .connect(player1)
@@ -134,7 +134,7 @@ describe("Trade contract", function () {
 
     const equipment_id = await tradeTest
       .connect(player1)
-      .test_first_equip_id(player1.address);
+      .get_specific_equip_id(player1.address, 0);
 
     // player2 has no silver coins
     await tradeTest
@@ -156,7 +156,7 @@ describe("Trade contract", function () {
 
     const equipment_id = await tradeTest
       .connect(player1)
-      .test_first_equip_id(player1.address);
+      .get_specific_equip_id(player1.address, 0);
 
     await tradeTest
       .connect(player1)
@@ -193,14 +193,14 @@ describe("Trade contract", function () {
 
     let player1Equipped = await tradeTest
       .connect(player1)
-      .test_first_equip_id(player1.address);
+      .get_specific_equip_id(player1.address, 0);
     let player2Equipped = await tradeTest
       .connect(player1)
-      .test_first_equip_id(player2.address);
+      .get_specific_equip_id(player2.address, 0);
 
     // console.log(player2Equipped);
     // console.log(equipment_id);
-    // console.log(await tradeTest.connect(player1).test_first_equip_id(player2.address));
+    // console.log(await tradeTest.connect(player1).get_specific_equip_id(player2.address));
 
     // now player2 has one piece of equipment, and its id is equipment_id. player1 has only one piece of equipment, and it's a different one.
     expect(numPlayer2Equip).to.equal(1);
@@ -222,7 +222,7 @@ describe("Trade contract", function () {
 
     const equipment_id = await tradeTest
       .connect(player1)
-      .test_first_equip_id(player1.address);
+      .get_specific_equip_id(player1.address, 0);
 
     await tradeTest
       .connect(player1)
@@ -245,7 +245,7 @@ describe("Trade contract", function () {
 
     const equipment_id = await tradeTest
       .connect(player1)
-      .test_first_equip_id(player1.address);
+      .get_specific_equip_id(player1.address, 0);
 
     await tradeTest
       .connect(player1)
