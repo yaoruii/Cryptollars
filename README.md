@@ -20,3 +20,7 @@ We use the hardhat to test and the commands are "npx hardhat compile" and "npx h
 
 3. Test results for GameMaster.sol
 <img width="466" alt="image" src="https://user-images.githubusercontent.com/91431648/159196116-7e5ed1e7-08f5-4fa3-b1b4-f38bc37a5d51.png">
+
+4. Test for integration between Game and Trade for testing interaction:
+![image](https://user-images.githubusercontent.com/91431648/160261588-b8fd3673-029a-4a11-9a5d-eb6dd53876e7.png)
+
