@@ -22,5 +22,10 @@ We use the hardhat to test and the commands are "npx hardhat compile" and "npx h
 <img width="466" alt="image" src="https://user-images.githubusercontent.com/91431648/159196116-7e5ed1e7-08f5-4fa3-b1b4-f38bc37a5d51.png">
 
 4. Test for integration between Game and Trade for testing interaction:
-![image](https://user-images.githubusercontent.com/91431648/160261588-b8fd3673-029a-4a11-9a5d-eb6dd53876e7.png)
+<img width="1131" alt="image" src="https://user-images.githubusercontent.com/91431648/160261628-7429f177-8676-4922-8131-8db801a50a5a.png">
+
+The total test cases' number is 41:
+<img width="153" alt="image" src="https://user-images.githubusercontent.com/91431648/160261622-5a6be9c3-6469-453c-a4cd-24567a0b00ca.png">
+
+
 
