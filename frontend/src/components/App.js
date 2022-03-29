@@ -2,6 +2,8 @@ import "../css/App.css";
 import Game from "./Game";
 import HuntMonsters from "./HuntMonster";
 import Duel from "./Duel";
+import Equipment from "./Equipment";
+import Bank from "./Bank";
 import { Layout, Menu } from "antd";
 import { useEffect, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
@@ -23,6 +25,10 @@ function App() {
         return <HuntMonsters />;
       case "3":
         return <Duel />;
+      case "4":
+        return <Equipment />;
+      case "5":
+        return <Bank />;
       default:
         break;
     }
@@ -41,7 +47,7 @@ function App() {
           <Menu.Item key="1">Home</Menu.Item>
           <Menu.Item key="2">Hunt Monsters </Menu.Item>
           <Menu.Item key="3">Duel </Menu.Item>
-          <Menu.Item key="4">Trade </Menu.Item>
+          <Menu.Item key="4">Equipment </Menu.Item>
           <Menu.Item key="5">Bank </Menu.Item>
         </Menu>
       </Header>
@@ -76,7 +82,7 @@ function App() {
       {/* </Routes>    
         </Content> */}
       <Footer style={{ textAlign: "center" }}>
-        Cryptollsrs ©2022 Created by Group8
+        Cryptollars ©2022 Created by Group 8
       </Footer>
     </Layout>
   );
