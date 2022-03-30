@@ -5,9 +5,20 @@ import { Modal, Button, Form, Input } from "antd";
 // import styles from "../../css/App.css";
 
 export default function SaleModal(props) {
+  const [form] = Form.useForm();
+  // const onFinish = (values) => {
+  //   console.log(values);
+  // };
+
   return (
     <>
-      <Modal visible={props.isModalVisible} closeIcon={null} footer={null}>
+      <Modal
+        visible={props.isModalVisible}
+        footer={null}
+        onCancel={() => {
+          props.setIsModalVisible(false);
+        }}
+      >
         <p>Please input the player's id and expected price</p>
         <p>Equipment Name: {props.name}</p>
 
@@ -16,10 +27,12 @@ export default function SaleModal(props) {
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
           initialValues={{ remember: true }}
-          onFinish={() => {
-            console.log("finished");
-            console.log(this.name);
-            console.log(this.password);
+          form={form}
+          onFinish={(james) => {
+            // #####  important  axios to call be.
+            console.log(james);
+            console.log(james.username);
+            console.log(james.password);
           }}
           onFinishFailed={() => {
             console.log("finished failed");

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styles from "../css/App.css";
-import { Link, Route, Switch } from "react-router-dom";
 import { List, Card, Image, Space, Divider, Layout } from "antd";
-import SaleModal from "./Equipments/SaleModal";
+import SaleModal from "./SaleModal";
 
 // import Card from "react-bootstrap/Card";
 
@@ -42,14 +40,9 @@ const data = [
   },
 ];
 
-const aa = () => {
-  console.log("james");
-};
-
 export default function Equipment() {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [name, setName] = useState("james");
-  const [harm, setHarm] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const [name, setName] = useState("sword1");
 
   return (
     <>
@@ -80,7 +73,6 @@ export default function Equipment() {
                           shape="round"
                           className="redButton"
                           type="default"
-                          onClick={aa}
                         >
                           Equip
                         </Button>,
@@ -89,11 +81,9 @@ export default function Equipment() {
                           className="whiteButton"
                           type="primary"
                           onClick={() => {
-                            setIsModalVisible(true);
+                            setVisible(true);
                             console.log("james");
-                            console.log(item.name);
                             setName(item.name);
-                            setHarm(item.harm);
                           }}
                         >
                           Sale
@@ -117,10 +107,9 @@ export default function Equipment() {
         </Content>
       </Layout>
       <SaleModal
-        setIsModalVisible={setIsModalVisible}
-        isModalVisible={isModalVisible}
+        setIsModalVisible={setVisible}
+        isModalVisible={visible}
         name={name}
-        harm={harm}
       />
     </>
   );

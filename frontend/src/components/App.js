@@ -2,7 +2,7 @@ import "../css/App.css";
 import Game from "./Game";
 import HuntMonsters from "./HuntMonster";
 import Duel from "./Duel";
-import Equipment from "./Equipment";
+import Equipment from "./Equipments/Equipment";
 import Bank from "./Bank";
 import { Layout, Menu } from "antd";
 import { useEffect, useState } from "react";
