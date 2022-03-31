@@ -417,4 +417,21 @@ describe("Game Contract Test", function () {
 
     await expect(Number(equip_id)).to.equal(0);
   });
+  it("4. get all players successfully.", async function () {
+    // deploy
+    const game = await ethers.getContractFactory("Game");
+    const [admin, player1, player2] = await ethers.getSigners();
+    const gameTest = await game.connect(admin).deploy();
+
+    // init p1
+    await gameTest.connect(player1).initialize("Jack");
+    await gameTest.connect(player2).initialize("Rose");
+    //unequip new sword
+    await gameTest.connect(player1).unequip();
+    const num_of_players = await gameTest
+      .connect(admin)
+      .get_all_players();
+
+    await expect(num_of_players.length).to.equal(2);
+  });
 });

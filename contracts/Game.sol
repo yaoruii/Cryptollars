@@ -14,6 +14,7 @@ contract Game is IGame, GameMaster, Trade{
     // equipment attributes
     //mapping(address => Player) public players;
     mapping(address => address) public duel_match;
+    Player[] public all_players;
     Equipment empty = Equipment(0, 0, "");
 
    // mapping(address => Equipment[]) public equipments;
@@ -68,6 +69,11 @@ contract Game is IGame, GameMaster, Trade{
         mint_new_sword(players[msg.sender], msg.sender);
         equip(2);
         players[msg.sender].is_pending = false;
+        players[msg.sender].walletAddress = msg.sender;
+
+        //store this player:
+        all_players.push(players[msg.sender]);
+        
     }
 
    
@@ -231,6 +237,14 @@ contract Game is IGame, GameMaster, Trade{
         players[msg.sender].is_pending = false;
         players[inviter].is_pending = false;
         delete duel_match[inviter];
+    }
+
+    /*
+     * @notice return all players stored in the player mapping
+     */
+     function get_all_players() external view returns (Player[] memory){
+        
+        return all_players;
     }
  
 }
