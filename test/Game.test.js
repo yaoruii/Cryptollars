@@ -431,7 +431,10 @@ describe("Game Contract Test", function () {
     const num_of_players = await gameTest
       .connect(admin)
       .get_all_players();
+    
+      const addr_of_player1 = await gameTest.connect(player1).get_address(player1.address);
 
     await expect(num_of_players.length).to.equal(2);
+    await expect(addr_of_player1).to.equal(player1.address);
   });
 });

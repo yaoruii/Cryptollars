@@ -56,6 +56,9 @@ contract Game is IGame, GameMaster, Trade{
     function get_is_pending(address addr)public view returns(bool ){
         return players[addr].is_pending;
     }
+    function get_address(address addr)public view returns(address){
+        return players[addr].walletAddress;
+    }
     function set_health(address addr,uint256 ch)public {
         players[addr].current_health = ch;
     }
@@ -243,7 +246,6 @@ contract Game is IGame, GameMaster, Trade{
      * @notice return all players stored in the player mapping
      */
      function get_all_players() external view returns (Player[] memory){
-        
         return all_players;
     }
  
