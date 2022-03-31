@@ -15,17 +15,19 @@ export default function SaleModal(props) {
       <Modal
         visible={props.isModalVisible}
         footer={null}
-        onCancel={() => {
-          props.setIsModalVisible(false);
-        }}
+        closable={false}
+        // onCancel={() => {
+        //   props.setIsModalVisible(false);
+        // }}
       >
-        <p>Please input the player's id and expected price</p>
-        <p>Equipment Name: {props.name}</p>
+        <h2 className="App"> Trade setting for your equipment!</h2>
+        <p className="App">Please input the player's id and expected price</p>
+        <p className="App">Equipment Name: {props.name}</p>
 
         <Form
           name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 14 }}
           initialValues={{ remember: true }}
           form={form}
           onFinish={(james) => {

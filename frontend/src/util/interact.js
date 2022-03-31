@@ -10,7 +10,12 @@ export const helloWorldContract = new web3.eth.Contract(
   contractABI,
   contractAddress
 );
-
+//here are the async functions for equipment:
+// export const loadCurrentMessage = async () => {
+//   const message = await helloWorldContract.methods.message().call();
+//   return message;
+// };
+//
 export const loadCurrentMessage = async () => {
   const message = await helloWorldContract.methods.message().call();
   return message;
