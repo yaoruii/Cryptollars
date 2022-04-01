@@ -13,45 +13,31 @@ import alchemylogo from "../alchemylogo.svg";
 
 const Game = () => {
   //state variables
-  const [walletAddress, setWallet] = useState("");
+  const [walletAddress, setWalletAddress] = useState("");
   const [status, setStatus] = useState("");
-  const [message, setMessage] = useState("No connection to the network."); //default message
-  const [newMessage, setNewMessage] = useState("");
 
   //called only once
-//   useEffect(async () => {
-//     const message = await loadCurrentMessage();
-//     setMessage(message);
-//     addSmartContractListener();
+  useEffect(() => {
 
-//     const { address, status } = await getCurrentWalletConnected();
+    async function fetchWallet() {
+      const {walletAddress, status} = await getCurrentWalletConnected();
+      setWalletAddress(walletAddress);
+      setStatus(status); 
+    }
+    fetchWallet();
+    addWalletListener();
+  }, []);
 
-//     setWallet(address);
-//     setStatus(status);
 
-//     addWalletListener();
-//   }, []);
-
-  function addSmartContractListener() {
-    helloWorldContract.events.UpdatedMessages({}, (error, data) => {
-      if (error) {
-        setStatus("😥 " + error.message);
-      } else {
-        setMessage(data.returnValues[1]);
-        setNewMessage("");
-        setStatus("🎉 Your message has been updated!");
-      }
-    });
-  }
 
   function addWalletListener() {
     if (window.ethereum) {
       window.ethereum.on("accountsChanged", (accounts) => {
         if (accounts.length > 0) {
-          setWallet(accounts[0]);
+          setWalletAddress(accounts[0]);
           setStatus("👆🏽 Write a message in the text-field above.");
         } else {
-          setWallet("");
+          setWalletAddress("");
           setStatus("🦊 Connect to Metamask using the top right button.");
         }
       });
@@ -72,13 +58,13 @@ const Game = () => {
   const connectWalletPressed = async () => {
     const walletResponse = await connectWallet();
     setStatus(walletResponse.status);
-    setWallet(walletResponse.address);
+    setWalletAddress(walletResponse.address);
   };
 
-  const onUpdatePressed = async () => {
-    const { status } = await updateMessage(walletAddress, newMessage);
-    setStatus(status);
-  };
+  // const onUpdatePressed = async () => {
+  //   const { status } = await updateMessage(walletAddress, newMessage);
+  //   setStatus(status);
+  // };
 
   const hhh = () =>{
     alert("Hello! I am an alert box!");
