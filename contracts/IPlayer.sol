@@ -12,6 +12,7 @@ interface IPlayer {
         Equipment equipment;
         bool is_pending;
         bool is_initialized;
+        address walletAddress;
     }
     struct Equipment {
         uint256 sword_strength;
