@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "npx hardhat --network ropsten run scripts/deploy.ts"
-  },
+    "deploy": "npx hardhat --network ropsten run scripts/deploy.js"  },
   "repository": {
     "type": "git",
     "url": "git+https://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@github.com/yaoruii/Cryptollars.git"
@@ -21,11 +20,11 @@
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@nomiclabs/hardhat-waffle": "^2.0.3",
-    "@openzeppelin/contracts": "4.5.0",
     "chai": "^4.3.6",
-    "ethereum-waffle": "^4.0.0",
-    "ethers": "^5.6.2",
-    "hardhat": "^2.9.1"
+    "ethereum-waffle": "^4.0.0-alpha.0",
+    "ethers": "^5.6.0",
+    "hardhat": "^2.9.1",
+    "@openzeppelin/contracts": "4.5.0"
   },
   "dependencies": {
     "big-number": "^2.0.0"

@@ -149,18 +149,16 @@ function Duel(props){
   //a string that stores a helpful message that guides the user on how to interact with the dApp
   const [status, setStatus] = useState(props.status);
   const [allPlayers, setAllPlayers] = useState([]);
-  const [currentPlayer, setCurrentPlayer] = useState({
-
-  });
+  const [currentPlayer, setCurrentPlayer] = useState(0);
 
   //is called after your component is rendered.
   useEffect(() => { //TODO: implement
     async function fetchData() {
       
-			if (walletAddress !== "") {
-				const allPlayers = await loadCurrentAllAccounts();
-				setAllPlayers(allPlayers);
-			}
+			// if (walletAddress !== "") {
+			// 	const allPlayers = await loadCurrentAllAccounts();
+			// 	setAllPlayers(allPlayers);
+			// }
 			const currentPlayer = await loadCurrentPlayer(walletAddress);
 			setCurrentPlayer(currentPlayer);
 
@@ -196,6 +194,7 @@ function Duel(props){
       <>
       <h1>{player_address}</h1>
       <h1>{status}</h1>
+      <h1>{currentPlayer}</h1>
       <Divider orientation="left">ACCOUNT TABLES</Divider>
       <Table columns={columns} dataSource={data} />
       <Divider orientation="left">RECEIVED INVITATION</Divider>

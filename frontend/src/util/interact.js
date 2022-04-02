@@ -7,7 +7,7 @@ const web3 = createAlchemyWeb3(alchemyKey);
 
 //export our contracts:(replace the values when we deploy them)
 const contractGame = require("../contract-abi.json");
-const contractGameAddress = "0xd9145CCE52D386f254917e481eB44e9943F39138";
+const contractGameAddress = "0x2BC730C746A56B5BcF1BBeF2bD7f7B60b228B576";
 
 export const game = new web3.eth.Contract(
   contractGame,
@@ -15,13 +15,13 @@ export const game = new web3.eth.Contract(
 );
 
 
-const contractBank = require("../contract-abi.json");
-const contractBankAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A";
+// const contractBank = require("../contract-abi.json");
+// const contractBankAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A";
 
-export const bank = new web3.eth.Contract(
-  contractBank,
-  contractBankAddress
-);
+// export const bank = new web3.eth.Contract(
+//   contractBank,
+//   contractBankAddress
+// );
 //Now that we have our contract loaded
 
 //A function to call to your smart contract function
@@ -36,7 +36,8 @@ export const loadCurrentAllAccounts = async () => {
 
 export const loadCurrentPlayer = async (account) => {
   console.log("beforeeeeee single!");
-  const currentPlayer = await game.methods.get_player(account).call();
+  console.log(game);
+  const currentPlayer = game.methods.get_equip_id(account).call().then(console.log);
   return currentPlayer;
 }
 
@@ -124,7 +125,7 @@ export const getCurrentWalletConnected = async () => {
 };
 //this function will update the message stored in the smart contract. 
 //It will make a write call to the Hello World smart contract, so the user's Metamask wallet will have to sign an Ethereum transaction to update the message.
-export const inviteAPlayer = async (address) => {
+export const inviteAPlayer = async (fromaddress, address) => {
   //input error handling
   if (!window.ethereum || address === null) {
     return {
@@ -137,7 +138,7 @@ export const inviteAPlayer = async (address) => {
   //set up transaction parameters
   const transactionParameters = {
     to: contractGameAddress, // Required except during contract publications.
-    from: address, // must match user's active address.
+    from: fromaddress, // must match user's active address.
     data: game.methods.invite_duel(address).encodeABI(),
   };
 
