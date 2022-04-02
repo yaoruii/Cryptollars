@@ -2,6 +2,8 @@ import '../css/App.css';
 import Game from './Game'
 import HuntMonsters from './HuntMonster'
 import Duel from './Duel'
+import Equipment from "./Equipments/Equipment";
+import Bank from "./Bank";
 import { Layout, Menu, Row, Col } from 'antd';
 import { useEffect, useState } from "react";
 import {
@@ -66,7 +68,7 @@ function App() {
       );
     }
   }
-  function componentsSwtich(key){
+  function componentsSwitch(key){
     switch (key) {
       case '1':
         return (<Game/>);
@@ -75,6 +77,10 @@ function App() {
         return (<HuntMonsters/>);
       case '3':
         return (<Duel accountAddress={walletAddress} status={status}/>);
+      case "4":
+        return <Equipment />;
+      case "5":
+        return <Bank />;
       default:
         break;
      }
@@ -115,7 +121,7 @@ function App() {
       </button>
 
       </Col>
-      <Col span={12}>{componentsSwtich(selectedMenuItem)}</Col>
+      <Col span={12}>{componentsSwitch(selectedMenuItem)}</Col>
     </Row>
    </div>
     </Content>
