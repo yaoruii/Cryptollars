@@ -3,6 +3,9 @@ pragma solidity >=0.8.0;
 
 import "./GameMaster.sol";
 contract Duel is GameMaster{
+    
+        mapping(address => address) public duel_match;
+    Equipment empty = Equipment(0, 0, "");
     modifier check_isinitialized() {
         require(
             players[msg.sender].is_initialized == true,

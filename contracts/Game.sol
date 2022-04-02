@@ -11,9 +11,7 @@ import "./IGame.sol";
  */
 
 contract Game is IGame, GameMaster, Trade{
-    // equipment attributes
-    //mapping(address => Player) public players;
-    mapping(address => address) public duel_match;
+    
     Equipment empty = Equipment(0, 0, "");
 
    // mapping(address => Equipment[]) public equipments;
