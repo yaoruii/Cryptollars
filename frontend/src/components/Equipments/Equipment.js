@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { List, Card, Image, Space, Divider, Layout } from "antd";
+import React, { useEffect, useState, useCallback } from "react";
+import { List, Card, Image, Space, Divider, Layout, Modal, Button } from "antd";
 import SaleModal from "./SaleModal";
 
-// import Card from "react-bootstrap/Card";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { getEquipment, createTrade } from "../../util/interact.js";
+const { confirm } = Modal;
 
-import { Button, Radio } from "antd";
+// import Card from "react-bootstrap/Card";
 
 const { Content } = Layout;
 const data = [
@@ -44,6 +46,21 @@ export default function Equipment() {
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState("sword1");
 
+  function showConfirm(input) {
+    confirm({
+      title: "Do you want to equip this equipment?",
+      icon: <ExclamationCircleOutlined />,
+      content: "Some descriptions",
+      onOk() {
+        console.log("OK");
+        console.log(input);
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  }
+
   return (
     <>
       <Layout>
@@ -51,7 +68,9 @@ export default function Equipment() {
           <div className="content">
             <div></div>
             <div>
-              <h1 id="storage">Storage</h1>
+              <h1 className="headerPretty" id="storage">
+                Storage
+              </h1>
             </div>
             <div>
               <List
@@ -73,6 +92,10 @@ export default function Equipment() {
                           shape="round"
                           className="redButton"
                           type="default"
+                          onClick={() => {
+                            setName(item.name);
+                            showConfirm(item.name);
+                          }}
                         >
                           Equip
                         </Button>,

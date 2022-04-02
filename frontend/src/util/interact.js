@@ -11,10 +11,33 @@ export const helloWorldContract = new web3.eth.Contract(
   contractAddress
 );
 //here are the async functions for equipment:
-// export const loadCurrentMessage = async () => {
-//   const message = await helloWorldContract.methods.message().call();
-//   return message;
-// };
+//For equipment
+//need to get the current total equipment of player and show them on the interface
+export const getEquipment = async (address) => {
+  //address is the address of the player
+  //const address = [];
+  const allEquipment = await helloWorldContract.methods
+    .get_storage(address)
+    .call();
+  return allEquipment;
+};
+
+//for trade
+export const createTrade = async (address, equipment_id, silver_number) => {
+  //const address = [];
+  await helloWorldContract.methods
+    .invite_trade(address, equipment_id, silver_number)
+    .call();
+};
+export const acceptTrade = async (address) => {
+  //const address = [];
+  await helloWorldContract.methods.accept_trade(address).call();
+};
+export const declineTrade = async (address) => {
+  //const address = [];
+  await helloWorldContract.methods.decline_trade(address).call();
+};
+
 //
 export const loadCurrentMessage = async () => {
   const message = await helloWorldContract.methods.message().call();

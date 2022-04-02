@@ -20,7 +20,7 @@ export default function SaleModal(props) {
         //   props.setIsModalVisible(false);
         // }}
       >
-        <h2 className="App"> Trade setting for your equipment!</h2>
+        <h2 className="headerPretty"> Trade setting for your equipment!</h2>
         <p className="App">Please input the player's id and expected price</p>
         <p className="App">Equipment Name: {props.name}</p>
 
@@ -77,6 +77,7 @@ export default function SaleModal(props) {
               >
                 Confirm
               </Button>
+              <div id="addSpace"> </div>
               <Button
                 shape="round"
                 type="Default"
