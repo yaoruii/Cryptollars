@@ -120,9 +120,8 @@ function App() {
         )}
       </button>
 
-      {/* </Col> */}
      {componentsSwitch(selectedMenuItem)}
-    {/* </Row> */}
+   
    </div>
     </Content>
       <Footer style={{ textAlign: 'center' }}>Cryptollars ©2022 Created by Group 8</Footer>
