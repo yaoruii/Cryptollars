@@ -2,7 +2,9 @@ import '../css/App.css';
 import Game from './Game'
 import HuntMonsters from './HuntMonster'
 import Duel from './Duel'
-import { Layout, Menu, Row, Col } from 'antd';
+import Equipment from "./Equipments/Equipment";
+import Bank from "./Bank";
+import { Layout, Menu } from 'antd';
 import { useEffect, useState } from "react";
 import {
   connectWallet,
@@ -66,7 +68,7 @@ function App() {
       );
     }
   }
-  function componentsSwtich(key){
+  function componentsSwitch(key){
     switch (key) {
       case '1':
         return (<Game/>);
@@ -75,6 +77,10 @@ function App() {
         return (<HuntMonsters/>);
       case '3':
         return (<Duel accountAddress={walletAddress} status={status}/>);
+      case "4":
+        return <Equipment />;
+      case "5":
+        return <Bank />;
       default:
         break;
      }
@@ -115,11 +121,11 @@ function App() {
       </button>
 
       {/* </Col> */}
-     {componentsSwtich(selectedMenuItem)}
+     {componentsSwitch(selectedMenuItem)}
     {/* </Row> */}
    </div>
     </Content>
-      <Footer style={{ textAlign: 'center' }}>Cryptollsrs ©2022 Created by Group8</Footer>
+      <Footer style={{ textAlign: 'center' }}>Cryptollars ©2022 Created by Group 8</Footer>
       </Layout>
   );
 }
