@@ -124,7 +124,7 @@ function App() {
     </Row>
    </div>
     </Content>
-      <Footer style={{ textAlign: 'center' }}>Cryptollsrs ©2022 Created by Group8</Footer>
+      <Footer style={{ textAlign: 'center' }}>Cryptollars ©2022 Created by Group 8</Footer>
       </Layout>
   );
 }
