@@ -7,12 +7,13 @@ const web3 = createAlchemyWeb3(alchemyKey);
 
 //export our contracts:(replace the values when we deploy them)
 const contractGame = require("../contract-abi.json");
-const contractGameAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A";
+const contractGameAddress = "0xd9145CCE52D386f254917e481eB44e9943F39138";
 
 export const game = new web3.eth.Contract(
   contractGame,
   contractGameAddress
 );
+
 
 const contractBank = require("../contract-abi.json");
 const contractBankAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A";
@@ -26,12 +27,16 @@ export const bank = new web3.eth.Contract(
 //A function to call to your smart contract function
 //a simple async web3 call to read from our contracts
 export const loadCurrentAllAccounts = async () => {
+  console.log("beforeeeeee allllll!");
+  console.log(game);
   const allPlayers = await game.methods.get_all_players().call();
+  console.log("fuckkkk!");
   return allPlayers;
 };
 
 export const loadCurrentPlayer = async (account) => {
-  const currentPlayer = await game.method.get_player(account).call();
+  console.log("beforeeeeee single!");
+  const currentPlayer = await game.methods.get_player(account).call();
   return currentPlayer;
 }
 

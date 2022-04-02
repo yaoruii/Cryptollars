@@ -35,7 +35,7 @@ contract Game is IGame, GameMaster, Trade{
             )
         );
     }
-    function get_player(address addr) public view returns (Player){
+    function get_player(address addr) public view returns (Player memory){
         return players[addr];
     }
     function get_storage(address addr)public view returns(Equipment[] memory ){

@@ -20,36 +20,36 @@ const { Header, Content, Footer } = Layout;
 function App() {
   const [selectedMenuItem, setSelectedMenuItem]= useState('1');
   //state variables
-  const [walletAddress, setWalletAddress] = useState("");
+  // const [walletAddress, setWalletAddress] = useState("dd");
+  const [walletAddress, setWallet] = useState("");
   const [status, setStatus] = useState("");
 
   //called only once
   useEffect(() => {
-
     async function fetchWallet() {
-      const {walletAddress, status} = await getCurrentWalletConnected();
-      setWalletAddress(walletAddress);
+      const {address, status} = await getCurrentWalletConnected();
+      setWallet(address);
       setStatus(status); 
     }
     fetchWallet();
     addWalletListener();
-    // setSelectedMenuItem('1')
-  }, [walletAddress]);
+  }, []);
 
   const connectWalletPressed = async () => {
     const walletResponse = await connectWallet();
     setStatus(walletResponse.status);
-    setWalletAddress(walletResponse.address);
+    setWallet(walletResponse.address);//successfully
   };
+
   //implementing the wallet listener so our UI updates when our wallet's state changes, such as when the user disconnects or switches accounts.
   function addWalletListener() {
     if (window.ethereum) {
       window.ethereum.on("accountsChanged", (accounts) => {
         if (accounts.length > 0) {
-          setWalletAddress(accounts[0]);
+          setWallet(accounts[0]);
           setStatus("👆🏽 Write a message in the text-field above.");
         } else {
-          setWalletAddress("");
+          setWallet("");
           setStatus("🦊 Connect to Metamask using the top right button.");
         }
       });
@@ -101,8 +101,8 @@ function App() {
   }}>
     <div>
     
-      <Row>
-      <Col span={12}>
+      {/* <Row>
+      <Col span={12}> */}
       <button id="walletButton" onClick={connectWalletPressed}>
         {walletAddress.length > 0 ? (
           "Connected: " +
@@ -114,9 +114,9 @@ function App() {
         )}
       </button>
 
-      </Col>
-      <Col span={12}>{componentsSwtich(selectedMenuItem)}</Col>
-    </Row>
+      {/* </Col> */}
+     {componentsSwtich(selectedMenuItem)}
+    {/* </Row> */}
    </div>
     </Content>
       <Footer style={{ textAlign: 'center' }}>Cryptollsrs ©2022 Created by Group8</Footer>

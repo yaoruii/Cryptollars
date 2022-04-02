@@ -194,6 +194,8 @@ function Duel(props){
   return (
     
       <>
+      <h1>{player_address}</h1>
+      <h1>{status}</h1>
       <Divider orientation="left">ACCOUNT TABLES</Divider>
       <Table columns={columns} dataSource={data} />
       <Divider orientation="left">RECEIVED INVITATION</Divider>
