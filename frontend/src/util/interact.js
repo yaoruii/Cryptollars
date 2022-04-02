@@ -37,7 +37,8 @@ export const loadCurrentAllAccounts = async () => {
 export const loadCurrentPlayer = async (account) => {
   console.log("beforeeeeee single!");
   console.log(game);
-  const currentPlayer = game.methods.get_equip_id(account).call().then(console.log);
+  console.log(account);
+  const currentPlayer = await game.methods.get_equip_id('0x0a2b728d69e77bfe5e3730bbd6516f2ada7c9ad4').call();
   return currentPlayer;
 }
 
