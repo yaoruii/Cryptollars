@@ -1,6 +1,6 @@
 import "../css/App.css";
 import Game from "./Game";
-import HuntMonsters from "./HuntMonster";
+import HuntMonsters from "./HuntMonster/HuntMonster.js";
 import Duel from "./Duel";
 import { Layout, Menu } from "antd";
 import { useEffect, useState } from "react";
