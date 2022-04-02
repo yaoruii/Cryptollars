@@ -52,6 +52,7 @@ export const connectWallet = async () => {
   }
 };
 
+
 export const getCurrentWalletConnected = async () => {
   if (window.ethereum) {
     try {
@@ -140,3 +141,14 @@ export const updateMessage = async (address, message) => {
     };
   }
 };
+//For huntMonsters.js
+export const getMonsters = async()=>{
+  const allMonsters = await helloWorldContract.methods.
+  getMonsters().call();
+  return allMonsters;
+}
+export const attack = async(monster_id)=>{
+  const result = await helloWorldContract.methods.
+  attack_monster(monster_id).call();
+  return result;
+}
