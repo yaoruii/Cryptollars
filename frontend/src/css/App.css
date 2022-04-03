@@ -1,5 +1,13 @@
+body, html { height: 100%; }
 .App {
   text-align: center;
+}
+
+.notshow{
+  display: none;
+}
+.site-layout-background {
+  background: #fff;
 }
 
 .App-logo {
@@ -46,4 +54,38 @@
 }
 .site-layout .site-layout-background {
   background: #fff;
+}
+
+.outer-wrap{
+
+  height: 100%;    
+  position: relative;
+  background-color: #fff;
+}
+.login-panel{
+  width: 400px;
+  height: 300px;
+  background-color: darkgray;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  margin-top: 120px;
+  margin-left: -200px;
+}
+
+.realinput{
+  top: 50%;
+  left: 50%;
+  margin-top: 100px;
+  margin-left: 0px;
+  /* height:50%;
+  width: 50%; */
+  /* width: 100px;
+  height: 200px; */
+
+}
+.inputname{
+
+  height:50%;
+  width: 60%;
 }

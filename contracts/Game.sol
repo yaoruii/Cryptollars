@@ -251,5 +251,16 @@ contract Game is IGame, GameMaster, Trade{
      function get_all_players() external view returns (Player[] memory){
         return all_players;
     }
+
+    // /*
+    // * @notice return the inviter of one user's received invitation
+    // */
+    // function get_inviter(){
+
+    // }
+        
+
+
+    
  
 }

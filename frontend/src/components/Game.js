@@ -1,40 +1,77 @@
 import React from "react";
 import 'antd/dist/antd.css';
+import {  useState } from "react";
+import { Input,Form ,Button} from 'antd';
 
+import "../css/App.css";
 
-import alchemylogo from "../alchemylogo.svg";
+import{
+  initialize
+} from "../util/interact.js";
 
-const Game = () => {
-  const hhh = () =>{
-    alert("Hello! I am an alert box!");
-  }
+const Game = (props) => {
+  // const callback = props.connect;
+  // const walletAddress = props.walletAddress;
+  const [status, setStatus] = useState("");
 
-  //the UI of our component
+  const onFinish = async (value) => {
+    console.log(value['username']);
+    const {status} = await initialize(value['username'], props.accountAddress);
+    setStatus(status);
+  };
+  
   return (
-    <div id="container">
-      <img id="logo" src={alchemylogo}></img>
-      
-      
-      <div id="container_functions">
-      <button id="function_module" onClick={hhh}>
-          <span>Hunt Monsters</span>
-      </button>
+    <div className="outer-wrap">
+      <div  className="login-panel">
+      <Form className="realinput"
+      name="basic"
+      labelCol={{
+        span: 8,
+      }}
+      wrapperCol={{
+        span: 16,
+      }}
+      layout="horizontal"
+      initialValues={{
+        size: "small",
+      }}
+     
+      onFinish={onFinish}
+      // onFinishFailed={onFinishFailed}
+      autoComplete="off"
+    >
+      <Form.Item
+        label="Username"
+        name="username"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your username!',
+          },
+        ]}
+      >
+        <Input className="inputname"/>
+      </Form.Item>
 
-      <button id="function_module" onClick={hhh}>
-        
-          <span>Duel</span>
-      </button>
+     
 
-       <button id="function_module" onClick={hhh}>
-          <span>Trade</span>
-      </button>
-      <button id="function_module" onClick={hhh}>
-          <span>Bank</span>
-      </button>
+   
+
+      <Form.Item
+        wrapperCol={{
+          offset: 8,
+          span: 16,
+        }}
+      >
+        <Button type="primary" htmlType="submit">
+          initialize the game!
+        </Button>
+      </Form.Item>
+    </Form>
       </div>
-
-      
     </div>
+    
+    
   );
 };
 
