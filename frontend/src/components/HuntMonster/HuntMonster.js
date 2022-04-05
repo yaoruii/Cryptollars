@@ -6,6 +6,7 @@ import { DownloadOutlined } from "@ant-design/icons";
 import PopUp from "./PopUp";
 import { Layout, Menu, Breadcrumb } from 'antd';
 import "../../css/HuntMonster.css";
+import { getMonsters,attack } from "../../util/interact";
 const { Header, Content, Footer } = Layout;
 const gridStyle = {
   width: '50%',
@@ -58,6 +59,16 @@ const data = [
 
 export default function Equipment() {
   const [visible, setVisible] = useState(false);
+  const [result,setResult] = useState("");
+
+
+
+  //functions
+  const attack_monster = async (monster_id) => {
+    const {result} = await attack(monster_id);
+    setResult(result);
+  }
+  
   return (
     <>
       <Layout>
