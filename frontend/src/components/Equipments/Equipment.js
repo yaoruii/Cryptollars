@@ -3,7 +3,14 @@ import { List, Card, Image, Space, Divider, Layout, Modal, Button } from "antd";
 import SaleModal from "./SaleModal";
 
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { getEquipment, createTrade } from "../../util/interact.js";
+import {
+  getEquipment,
+  unEquip,
+  Equip,
+  createTrade,
+  acceptTrade,
+  declineTrade,
+} from "../../util/interact.js";
 const { confirm } = Modal;
 
 // import Card from "react-bootstrap/Card";
@@ -45,6 +52,45 @@ const data = [
 export default function Equipment() {
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState("sword1");
+  const [allEquipment, setEquipment] = useState("");
+  const [walletAddress, setwalletAddress] = useState(player_address);
+
+  // this function is for getting present equipments for this player
+  // the return variable will be used in allEquipment
+  const onUpdateEquipment = async () => {
+    const { presentEquipment } = await getEquipment(walletAddress);
+    setEquipment(presentEquipment);
+  };
+
+  // this function is for Equip
+  const equipThisEquipment = async (equipment_id) => {
+    await Equip(walletAddress, equipment_id);
+  };
+
+  // this function is for unequip
+  const unequipPresentEquipment = async () => {
+    await unEquip(walletAddress);
+  };
+
+  // this function is for making a trade
+  const makeTrade = async (inviteeAddress, equipment_id, silver_number) => {
+    await createTrade(
+      walletAddress,
+      inviteeAddress,
+      equipment_id,
+      silver_number
+    );
+  };
+
+  // this function is for accepting a trade
+  const acceptATrade = async (inviterAddress) => {
+    await acceptTrade(walletAddress, inviterAddress);
+  };
+
+  // this function is for declining a trade
+  const declineATrade = async (inviterAddress) => {
+    await declineTrade(walletAddress, inviterAddress);
+  };
 
   function showConfirm(input) {
     confirm({
