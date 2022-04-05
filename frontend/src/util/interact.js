@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 //imported the Alchemy key from our .env file 
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
@@ -7,20 +8,13 @@ const web3 = createAlchemyWeb3(alchemyKey);
 
 //export our contracts:(replace the values when we deploy them)
 const contractGame = require("../contract-abi.json");
-const contractGameAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A";
+const contractGameAddress = "0x2BC730C746A56B5BcF1BBeF2bD7f7B60b228B576";
 
 export const game = new web3.eth.Contract(
   contractGame,
   contractGameAddress
 );
 
-const contractBank = require("../contract-abi.json");
-const contractBankAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A";
-
-export const bank = new web3.eth.Contract(
-  contractBank,
-  contractBankAddress
-);
 //Now that we have our contract loaded
 
 //A function to call to your smart contract function
@@ -163,12 +157,40 @@ export const inviteAPlayer = async (address) => {
 };
 //For huntMonsters.js
 export const getMonsters = async()=>{
-  const allMonsters = await helloWorldContract.methods.
+  const allMonsters = await contractGame.methods.
   getMonsters().call();
   return allMonsters;
 }
-export const attack = async(monster_id)=>{
-  const result = await helloWorldContract.methods.
-  attack_monster(monster_id).call();
-  return result;
+export const attack = async(address,monster_id)=>{
+  const attackParameters = {
+    to: contractGameAddress, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data: game.methods.attack_monster(monster_id).encodeABI(),
+  };
+  //sign the transaction
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [attackParameters],
+    });
+    return {
+      status: (
+        <span>
+          ✅{" "}
+          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+            View the status of your transaction on Etherscan!
+          </a>
+          <br />
+          ℹ️ Once the transaction is verified by the network, the message will
+          be updated automatically.
+        </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+  
 }
+
