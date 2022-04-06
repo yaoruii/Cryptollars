@@ -1,37 +1,18 @@
-#storage {
-  text-align: center;
-  font-size: 30px;
+body,
+html {
+  height: 100%;
 }
 .App {
   text-align: center;
 }
-.headerPretty {
-  text-align: center;
-  font-family: fantasy;
-  font-weight: bold;
-  color: #1f618d;
+
+.notshow {
+  display: none;
 }
-.redButton {
-  background-color: #ff5733;
-  color: #fff;
-}
-.whiteButton {
-  background-color: #fff;
-  color: black;
-}
-#addSpace {
-  margin-top: 10px;
-}
-.titleName {
-  text-align: center;
-  font-size: 20px;
-}
-.content {
-  margin: 56px;
-  min-height: 280px;
-  padding: 24px;
+.site-layout-background {
   background: #fff;
 }
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -80,3 +61,63 @@
 .site-layout .site-layout-background {
   background: #fff;
 }
+
+.outer-wrap {
+  height: 100%;
+  position: relative;
+  background-color: #fff;
+}
+.login-panel {
+  width: 400px;
+  height: 300px;
+  background-color: darkgray;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  margin-top: 120px;
+  margin-left: -200px;
+}
+
+.realinput {
+  top: 50%;
+  left: 50%;
+  margin-top: 100px;
+  margin-left: 0px;
+  /* height:50%;
+  width: 50%; */
+  /* width: 100px;
+  height: 200px; */
+}
+.inputname {
+  height: 50%;
+  width: 60%;
+}
+
+/* These are css styles for equipment and can combine with others in the future*/
+#storage {
+  text-align: center;
+  font-size: 30px;
+}
+
+.headerPretty {
+  text-align: center;
+  font-family: fantasy;
+  font-weight: bold;
+  color: #1f618d;
+}
+.redButton {
+  background-color: #ff5733;
+  color: #fff;
+}
+.whiteButton {
+  background-color: #fff;
+  color: black;
+}
+#addSpace {
+  margin-top: 10px;
+}
+.titleName {
+  text-align: center;
+  font-size: 20px;
+}
+/* These are css styles for equipment and can combine with others in the future*/

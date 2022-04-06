@@ -167,7 +167,7 @@ function App() {
               padding: 0,
               background: "#fff",
               minHeight: 600,
-              maxHeight: 900,
+              maxHeight: 1300,
             }}
           >
             <div>

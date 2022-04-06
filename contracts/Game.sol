@@ -14,6 +14,7 @@ contract Game is IGame, GameMaster, Trade{
     // equipment attributes
     //mapping(address => Player) public players;
     mapping(address => address) public duel_match;
+    Player[] public all_players;
     Equipment empty = Equipment(0, 0, "");
 
    // mapping(address => Equipment[]) public equipments;
@@ -33,6 +34,9 @@ contract Game is IGame, GameMaster, Trade{
                 name
             )
         );
+    }
+    function get_player(address addr) public view returns (Player memory){
+        return players[addr];
     }
     function get_storage(address addr)public view returns(Equipment[] memory ){
         return players[addr].equipment_storage;
@@ -55,6 +59,9 @@ contract Game is IGame, GameMaster, Trade{
     function get_is_pending(address addr)public view returns(bool ){
         return players[addr].is_pending;
     }
+    function get_address(address addr)public view returns(address){
+        return players[addr].walletAddress;
+    }
     function set_health(address addr,uint256 ch)public {
         players[addr].current_health = ch;
     }
@@ -68,6 +75,11 @@ contract Game is IGame, GameMaster, Trade{
         mint_new_sword(players[msg.sender], msg.sender);
         equip(2);
         players[msg.sender].is_pending = false;
+        players[msg.sender].walletAddress = msg.sender;
+
+        //store this player:
+        all_players.push(players[msg.sender]);
+        
     }
 
    
@@ -232,5 +244,23 @@ contract Game is IGame, GameMaster, Trade{
         players[inviter].is_pending = false;
         delete duel_match[inviter];
     }
+
+    /*
+     * @notice return all players stored in the player mapping
+     */
+     function get_all_players() external view returns (Player[] memory){
+        return all_players;
+    }
+
+    // /*
+    // * @notice return the inviter of one user's received invitation
+    // */
+    // function get_inviter(){
+
+    // }
+        
+
+
+    
  
 }
