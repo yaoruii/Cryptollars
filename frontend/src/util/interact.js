@@ -23,10 +23,8 @@ export const game = new web3.eth.Contract(contractGame, contractGameAddress);
 //A function to call to your smart contract function
 //a simple async web3 call to read from our contracts
 export const loadCurrentAllAccounts = async () => {
-  console.log("beforeeeeee allllll!");
-  console.log(game);
   const allPlayers = await game.methods.get_all_players().call();
-  console.log("fuckkkk!");
+
   return allPlayers;
 };
 
@@ -34,9 +32,9 @@ export const loadCurrentPlayer = async (account) => {
   console.log("beforeeeeee single!");
   console.log(game);
   console.log(account);
-  const currentPlayer = await game.methods
-    .get_equip_id("0x0a2b728d69e77bfe5e3730bbd6516f2ada7c9ad4")
-    .call();
+  const currentPlayer = await game.methods.get_player(account).call();
+  console.log(currentPlayer);
+  console.log(typeof currentPlayer);
   return currentPlayer;
 };
 
@@ -73,6 +71,49 @@ export const connectWallet = async () => {
           </p>
         </span>
       ),
+    };
+  }
+};
+
+export const initialize = async (name, address) => {
+  console.log("interact : " + address);
+  //input error handling
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+        "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+
+  //set up transaction parameters
+  const transactionParameters = {
+    to: contractGameAddress, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data: game.methods.initialize(name).encodeABI(),
+  };
+
+  //sign the transaction
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+        <span>
+          ✅{" "}
+          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+            View the status of your transaction on Etherscan!
+          </a>
+          <br />
+          ℹ️ Once the transaction is verified by the network, the message will
+          be updated automatically.
+        </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
     };
   }
 };
@@ -122,6 +163,7 @@ export const getCurrentWalletConnected = async () => {
 //this function will update the message stored in the smart contract.
 //It will make a write call to the Hello World smart contract, so the user's Metamask wallet will have to sign an Ethereum transaction to update the message.
 export const inviteAPlayer = async (fromaddress, address) => {
+  console.log("interact : " + address);
   //input error handling
   if (!window.ethereum || address === null) {
     return {
@@ -396,3 +438,4 @@ export const declineTrade = async (address, inviterAddress) => {
     };
   }
 };
+//above are functions for equipments :)

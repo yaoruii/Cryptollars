@@ -49,7 +49,10 @@ const data = [
   },
 ];
 
-export default function Equipment() {
+export default function Equipment(props) {
+  //State variables
+  const player_address = props.accountAddress;
+
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState("sword1");
   const [allEquipment, setEquipment] = useState("");
