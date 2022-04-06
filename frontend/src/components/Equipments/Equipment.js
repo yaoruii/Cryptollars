@@ -42,7 +42,7 @@ const data = [
   },
 ];
 
-export default function Equipment() {
+export default function Equipment(prop) {
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState("sword1");
 
