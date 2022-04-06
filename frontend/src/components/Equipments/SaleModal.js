@@ -22,7 +22,7 @@ export default function SaleModal(props) {
       >
         <h2 className="headerPretty"> Trade setting for your equipment!</h2>
         <p className="App">Please input the player's id and expected price</p>
-        <p className="App">Equipment Name: {props.name}</p>
+        <p className="App">Equipment id: {props.id}</p>
 
         <Form
           name="basic"
