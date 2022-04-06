@@ -1,46 +1,276 @@
 require("dotenv").config();
-//imported the Alchemy key from our .env file
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
-//passed our alchemyKey to createAlchemyWeb3 to establish our Alchemy Web3 endpoint.
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(alchemyKey);
 
-//export our contracts:(replace the values when we deploy them)
-const contractGame = require("../contract-abi.json");
-const contractGameAddress = "0x2BC730C746A56B5BcF1BBeF2bD7f7B60b228B576";
+const contractABI = require("../contract-abi.json");
+const contractAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A";
 
-export const game = new web3.eth.Contract(contractGame, contractGameAddress);
-
-// const contractBank = require("../contract-abi.json");
-// const contractBankAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A";
-
-// export const bank = new web3.eth.Contract(
-//   contractBank,
-//   contractBankAddress
-// );
-//Now that we have our contract loaded
-
-//A function to call to your smart contract function
-//a simple async web3 call to read from our contracts
-export const loadCurrentAllAccounts = async () => {
-  console.log("beforeeeeee allllll!");
-  console.log(game);
-  const allPlayers = await game.methods.get_all_players().call();
-  console.log("fuckkkk!");
-  return allPlayers;
-};
-
-export const loadCurrentPlayer = async (account) => {
-  console.log("beforeeeeee single!");
-  console.log(game);
-  console.log(account);
-  const currentPlayer = await game.methods
-    .get_equip_id("0x0a2b728d69e77bfe5e3730bbd6516f2ada7c9ad4")
+export const helloWorldContract = new web3.eth.Contract(
+  contractABI,
+  contractAddress
+);
+//here are the async functions for equipment:
+//For equipment
+//need to get the current total equipment of player and show them on the interface
+export const getEquipment = async (address) => {
+  //address is the address of the player
+  //const address = [];
+  const allEquipment = await helloWorldContract.methods
+    .get_storage(address)
     .call();
-  return currentPlayer;
+  return allEquipment;
 };
 
-//this function will connect the user's Metamask to our dApp.
+// export const unEquip = async () => {
+//   //address is the address of the player
+//   //const address = [];
+//   await helloWorldContract.methods.unequip().call();
+// };
+
+export const unEquip = async (address) => {
+  //input error handling
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+        "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+
+  //set up transaction parameters
+  const transactionParameters = {
+    to: contractAddress, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data: helloWorldContract.methods.unquip().encodeABI(),
+  };
+
+  //sign the transaction
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+        <span>
+          ✅{" "}
+          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+            View the status of your transaction on Etherscan!
+          </a>
+          <br />
+          ℹ️ Once the transaction is verified by the network, the message will
+          be updated automatically.
+        </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+};
+
+export const Equip = async (address, equipment_id) => {
+  //input error handling
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+        "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+
+  //set up transaction parameters
+  const transactionParameters = {
+    to: contractAddress, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data: helloWorldContract.methods.enquip(equipment_id).encodeABI(),
+  };
+
+  //sign the transaction
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+        <span>
+          ✅{" "}
+          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+            View the status of your transaction on Etherscan!
+          </a>
+          <br />
+          ℹ️ Once the transaction is verified by the network, the message will
+          be updated automatically.
+        </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+};
+
+//for trade
+// export const createTrade1 = async (address, equipment_id, silver_number) => {
+//   //const address = [];
+//   await helloWorldContract.methods
+//     .invite_trade(address, equipment_id, silver_number)
+//     .call();
+// };
+
+export const createTrade = async (
+  address,
+  inviteeAddress,
+  equipment_id,
+  silver_number
+) => {
+  //input error handling
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+        "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+
+  //set up transaction parameters
+  const transactionParameters = {
+    to: contractAddress, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data: helloWorldContract.methods
+      .invite_trade(inviteeAddress, equipment_id, silver_number)
+      .encodeABI(),
+  };
+
+  //sign the transaction
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+        <span>
+          ✅{" "}
+          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+            View the status of your transaction on Etherscan!
+          </a>
+          <br />
+          ℹ️ Once the transaction is verified by the network, the message will
+          be updated automatically.
+        </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+};
+
+//accept_trade
+// export const acceptTrade = async (address) => {
+//   //const address = [];
+//   await helloWorldContract.methods.accept_trade(address).call();
+// };
+export const acceptTrade = async (address, inviterAddress) => {
+  //input error handling
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+        "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+
+  //set up transaction parameters
+  const transactionParameters = {
+    to: contractAddress, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data: helloWorldContract.methods.accept_trade(inviterAddress).encodeABI(),
+  };
+
+  //sign the transaction
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+        <span>
+          ✅{" "}
+          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+            View the status of your transaction on Etherscan!
+          </a>
+          <br />
+          ℹ️ Once the transaction is verified by the network, the message will
+          be updated automatically.
+        </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+};
+
+//decline_trade
+
+// export const declineTrade = async (address) => {
+//   //const address = [];
+//   await helloWorldContract.methods.decline_trade(address).call();
+// };
+
+export const declineTrade = async (address, inviterAddress) => {
+  //input error handling
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+        "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+
+  //set up transaction parameters
+  const transactionParameters = {
+    to: contractAddress, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data: helloWorldContract.methods.decline_trade(inviterAddress).encodeABI(),
+  };
+
+  //sign the transaction
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+        <span>
+          ✅{" "}
+          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+            View the status of your transaction on Etherscan!
+          </a>
+          <br />
+          ℹ️ Once the transaction is verified by the network, the message will
+          be updated automatically.
+        </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+};
+
+//
+export const loadCurrentMessage = async () => {
+  const message = await helloWorldContract.methods.message().call();
+  return message;
+};
+
 export const connectWallet = async () => {
   if (window.ethereum) {
     try {
@@ -77,7 +307,6 @@ export const connectWallet = async () => {
   }
 };
 
-// this function will check if an Ethereum account is already connected to our dApp on page load and update our UI accordingly.
 export const getCurrentWalletConnected = async () => {
   if (window.ethereum) {
     try {
@@ -119,9 +348,8 @@ export const getCurrentWalletConnected = async () => {
     };
   }
 };
-//this function will update the message stored in the smart contract.
-//It will make a write call to the Hello World smart contract, so the user's Metamask wallet will have to sign an Ethereum transaction to update the message.
-export const inviteAPlayer = async (fromaddress, address) => {
+
+export const updateMessage = async (address, message) => {
   //input error handling
   if (!window.ethereum || address === null) {
     return {
@@ -130,245 +358,16 @@ export const inviteAPlayer = async (fromaddress, address) => {
     };
   }
 
+  if (message.trim() === "") {
+    return {
+      status: "❌ Your message cannot be an empty string.",
+    };
+  }
   //set up transaction parameters
   const transactionParameters = {
-    to: contractGameAddress, // Required except during contract publications.
-    from: fromaddress, // must match user's active address.
-    data: game.methods.invite_duel(address).encodeABI(),
-  };
-
-  //sign the transaction
-  try {
-    const txHash = await window.ethereum.request({
-      method: "eth_sendTransaction",
-      params: [transactionParameters],
-    });
-    return {
-      status: (
-        <span>
-          ✅{" "}
-          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
-            View the status of your transaction on Etherscan!
-          </a>
-          <br />
-          ℹ️ Once the transaction is verified by the network, the message will
-          be updated automatically.
-        </span>
-      ),
-    };
-  } catch (error) {
-    return {
-      status: "😥 " + error.message,
-    };
-  }
-};
-
-//here are the async functions for equipment:
-//For equipment
-//need to get the current total equipment of player and show them on the interface
-export const getEquipment = async (address) => {
-  //address is the address of the player
-  //const address = [];
-  const allEquipment = await game.methods.get_storage(address).call();
-  return allEquipment;
-};
-
-// export const unEquip
-// enquip function
-export const unEquip = async (address) => {
-  //input error handling
-  if (!window.ethereum || address === null) {
-    return {
-      status:
-        "💡 Connect your Metamask wallet to update the message on the blockchain.",
-    };
-  }
-
-  //set up transaction parameters
-  const transactionParameters = {
-    to: contractGameAddress, // Required except during contract publications.
+    to: contractAddress, // Required except during contract publications.
     from: address, // must match user's active address.
-    data: game.methods.unquip().encodeABI(),
-  };
-
-  //sign the transaction
-  try {
-    const txHash = await window.ethereum.request({
-      method: "eth_sendTransaction",
-      params: [transactionParameters],
-    });
-    return {
-      status: (
-        <span>
-          ✅{" "}
-          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
-            View the status of your transaction on Etherscan!
-          </a>
-          <br />
-          ℹ️ Once the transaction is verified by the network, the message will
-          be updated automatically.
-        </span>
-      ),
-    };
-  } catch (error) {
-    return {
-      status: "😥 " + error.message,
-    };
-  }
-};
-
-// for equip function
-export const Equip = async (address, equipment_id) => {
-  // input error handling
-  if (!window.ethereum || address === null) {
-    return {
-      status:
-        "💡 Connect your Metamask wallet to update the message on the blockchain.",
-    };
-  }
-
-  // set up transaction parameters
-  const transactionParameters = {
-    to: contractGameAddress, // Required except during contract publications.
-    from: address, // must match user's active address.
-    data: game.methods.enquip(equipment_id).encodeABI(),
-  };
-
-  // sign the transaction
-  try {
-    const txHash = await window.ethereum.request({
-      method: "eth_sendTransaction",
-      params: [transactionParameters],
-    });
-    return {
-      status: (
-        <span>
-          ✅{" "}
-          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
-            View the status of your transaction on Etherscan!
-          </a>
-          <br />
-          ℹ️ Once the transaction is verified by the network, the message will
-          be updated automatically.
-        </span>
-      ),
-    };
-  } catch (error) {
-    return {
-      status: "😥 " + error.message,
-    };
-  }
-};
-
-// for trade
-// create trade function
-export const createTrade = async (
-  address,
-  inviteeAddress,
-  equipment_id,
-  silver_number
-) => {
-  // input error handling
-  if (!window.ethereum || address === null) {
-    return {
-      status:
-        "💡 Connect your Metamask wallet to update the message on the blockchain.",
-    };
-  }
-
-  //set up transaction parameters
-  const transactionParameters = {
-    to: contractGameAddress, // Required except during contract publications.
-    from: address, // must match user's active address.
-    data: game.methods
-      .invite_trade(inviteeAddress, equipment_id, silver_number)
-      .encodeABI(),
-  };
-
-  //sign the transaction
-  try {
-    const txHash = await window.ethereum.request({
-      method: "eth_sendTransaction",
-      params: [transactionParameters],
-    });
-    return {
-      status: (
-        <span>
-          ✅{" "}
-          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
-            View the status of your transaction on Etherscan!
-          </a>
-          <br />
-          ℹ️ Once the transaction is verified by the network, the message will
-          be updated automatically.
-        </span>
-      ),
-    };
-  } catch (error) {
-    return {
-      status: "😥 " + error.message,
-    };
-  }
-};
-
-//accept_trade
-export const acceptTrade = async (address, inviterAddress) => {
-  //input error handling
-  if (!window.ethereum || address === null) {
-    return {
-      status:
-        "💡 Connect your Metamask wallet to update the message on the blockchain.",
-    };
-  }
-
-  //set up transaction parameters
-  const transactionParameters = {
-    to: contractGameAddress, // Required except during contract publications.
-    from: address, // must match user's active address.
-    data: game.methods.accept_trade(inviterAddress).encodeABI(),
-  };
-
-  //sign the transaction
-  try {
-    const txHash = await window.ethereum.request({
-      method: "eth_sendTransaction",
-      params: [transactionParameters],
-    });
-    return {
-      status: (
-        <span>
-          ✅{" "}
-          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
-            View the status of your transaction on Etherscan!
-          </a>
-          <br />
-          ℹ️ Once the transaction is verified by the network, the message will
-          be updated automatically.
-        </span>
-      ),
-    };
-  } catch (error) {
-    return {
-      status: "😥 " + error.message,
-    };
-  }
-};
-
-//decline_trade
-export const declineTrade = async (address, inviterAddress) => {
-  //input error handling
-  if (!window.ethereum || address === null) {
-    return {
-      status:
-        "💡 Connect your Metamask wallet to update the message on the blockchain.",
-    };
-  }
-
-  //set up transaction parameters
-  const transactionParameters = {
-    to: contractGameAddress, // Required except during contract publications.
-    from: address, // must match user's active address.
-    data: game.methods.decline_trade(inviterAddress).encodeABI(),
+    data: helloWorldContract.methods.update(message).encodeABI(),
   };
 
   //sign the transaction
