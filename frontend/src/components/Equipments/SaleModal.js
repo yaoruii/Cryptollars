@@ -21,8 +21,10 @@ export default function SaleModal(props) {
         // }}
       >
         <h2 className="headerPretty"> Trade setting for your equipment!</h2>
-        <p className="App">Please input the player's id and expected price</p>
-        <p className="App">Equipment Name: {props.name}</p>
+        <p className="App">
+          Please input another player's address and expected price
+        </p>
+        <p className="App">This equipment id: {props.id}</p>
 
         <Form
           name="basic"
@@ -42,12 +44,12 @@ export default function SaleModal(props) {
           autoComplete="off"
         >
           <Form.Item
-            label="id"
+            label="address"
             name="username"
             rules={[
               {
                 required: true,
-                message: "Please input the equipment id that for trading",
+                message: "Please input another player's address for trading",
               },
             ]}
           >

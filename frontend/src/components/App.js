@@ -129,7 +129,7 @@ function App() {
           <Menu.Item key="1">Home</Menu.Item>
           <Menu.Item key="2">Hunt Monsters </Menu.Item>
           <Menu.Item key="3">Duel </Menu.Item>
-          <Menu.Item key="4">Trade </Menu.Item>
+          <Menu.Item key="4">Equipment </Menu.Item>
           <Menu.Item key="5">Bank </Menu.Item>
         </Menu>
       </Header>

@@ -53,7 +53,7 @@ function Duel(props) {
       title: "Walletaddress",
       dataIndex: "walletAddress",
       key: "walletAddress",
-      className: "notshow",
+      //className: "notshow",
     },
 
     {
