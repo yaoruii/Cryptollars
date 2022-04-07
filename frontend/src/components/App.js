@@ -2,11 +2,6 @@ import "../css/App.css";
 import Game from "./Game";
 import HuntMonsters from "./HuntMonster/HuntMonster.js";
 import Duel from "./Duel";
-
-import '../css/App.css';
-import Game from './Game'
-import HuntMonsters from './HuntMonster'
-import Duel from './Duel'
 import Equipment from "./Equipments/Equipment";
 import Bank from "./Bank";
 import Guide from "./Guide";
@@ -104,7 +99,7 @@ function App() {
         return currentPlayer['is_initialized']? (<Guide />): (<Game accountAddress={walletAddress}/>);
       // eslint-disable-next-line no-duplicate-case
       case '2':
-        return (<HuntMonsters/>);
+        return (<HuntMonsters accountAddress={walletAddress} status={status} currentPlayer={currentPlayer}/>);
       case '3':
         return (<Duel accountAddress={walletAddress} status={status} currentPlayer={currentPlayer}/>);
       case "4":

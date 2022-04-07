@@ -41,10 +41,10 @@
     font-family: inherit;
   }
   .bttn-md {
-    font-size: 14px;
+    font-size: 10px;
     font-family: inherit;
     padding: 5px 2px;
-    width: 20px;
+    width: 10px;
   }
   .bttn-sm {
     padding: 4px 10px;
@@ -92,10 +92,10 @@
     font-family: inherit;
   }
   .bttn-simple.bttn-md {
-    font-size: 14px;
+    font-size: 10px;
     font-family: inherit;
     padding: 5px 1px;
-    width:10px;
+    width:5px;
   }
   .bttn-simple.bttn-lg {
     padding: 8px 8px;
@@ -131,7 +131,15 @@
       width: 40%;
       display: inline;
       margin: 10px 10px;
+      padding :10px 10px 10px 10px;
+      text-align:left;
   }
+  .div-bottom{
+    text-align:center;
+    padding: 20px 30px 10px 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
   .content {
     margin: 56px;
     min-height: 280px;

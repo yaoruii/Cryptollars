@@ -26,7 +26,9 @@ contract GameMaster is IGameMaster, GameItems {
         is_going = true;
         // system_monster_health = _system_monster_health;
         //initialize some monsters firstly? ?
-        create_monster();
+        for(int i=0;i<6;i++){
+            create_monster();
+        }
     }
 
     /**

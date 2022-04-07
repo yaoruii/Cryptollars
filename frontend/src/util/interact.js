@@ -12,17 +12,17 @@ const contractGameAddress = "0x2BC730C746A56B5BcF1BBeF2bD7f7B60b228B576";
 
 export const game = new web3.eth.Contract(contractGame, contractGameAddress);
 
-// const contractBank = require("../contract-abi.json");
-// const contractBankAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A";
+ const contractBank = require("../contract-abi.json");
+const contractBankAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A";
 
-// export const bank = new web3.eth.Contract(
-//   contractBank,
-//   contractBankAddress
-// );
-//Now that we havxse our contract loaded
+ export const bank = new web3.eth.Contract(
+  contractBank,
+  contractBankAddress
+);
+// Now that we havxse our contract loaded
 
-//A function to call to your smart contract function
-//a simple async web3 call to read from our contracts
+// A function to call to your smart contract function
+// a simple async web3 call to read from our contracts
 export const loadCurrentAllAccounts = async () => {
   const allPlayers = await game.methods.get_all_players().call();
 
@@ -30,12 +30,12 @@ export const loadCurrentAllAccounts = async () => {
 };
 
 export const loadCurrentPlayer = async (account) => {
-  console.log("beforeeeeee single!");
-  console.log(game);
-  console.log(account);
+  // console.log("beforeeeeee single!");
+  // console.log(game);
+  // console.log(account);
   const currentPlayer = await game.methods.get_player(account).call();
-  console.log(currentPlayer);
-  console.log(typeof currentPlayer);
+  // console.log(currentPlayer);
+  // console.log(typeof currentPlayer);
   return currentPlayer;
 };
 
@@ -207,17 +207,43 @@ export const inviteAPlayer = async (fromaddress, address) => {
 };
 //For huntMonsters.js
 export const getMonsters = async()=>{
-  const allMonsters = await contractGame.methods.
-  getMonsters().call();
-  return allMonsters;
+  const all_Monsters = await game.methods.get_all_monster().call();
+  return all_Monsters;
 }
 export const attack = async(address,monster_id)=>{
+  //const result = await game.methods.attack_monster(monster_id).call({from:address});
   const attackParameters = {
     to: contractGameAddress, // Required except during contract publications.
     from: address, // must match user's active address.
     data: game.methods.attack_monster(monster_id).encodeABI(),
   };
-
+  //sign the transaction
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [attackParameters],
+    });
+    return {
+      status: (
+        <span>
+          ✅{" "}
+          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+            View the status of your transaction on Etherscan!
+          </a>
+          <br />
+          ℹ️ Once the transaction is verified by the network, the message will
+          be updated automatically.
+        </span>
+      ),
+      
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+  
+};
 //here are the async functions for equipment:
 //For equipment
 //need to get the current total equipment of player and show them on the interface
@@ -452,3 +478,140 @@ export const declineTrade = async (address, inviterAddress) => {
   }
 };
 //above are functions for equipments :)
+const FACTOR = 10e6;
+
+export const currentSilverBalance = async () => {
+  const silverBalance = await bank.methods.view_silver_number().call();
+  return silverBalance / FACTOR;
+}
+
+export const currentGoldBalance = async () => {
+  const goldBalance = await bank.methods.view_gold_number().call();
+  return goldBalance / FACTOR;
+}
+
+export const getIndex = async () => {
+  const idx = await bank.methods.view_index().call();
+  return idx;
+}
+
+export const estimatedGold = async (silverCoins) => {
+  const goldCoins = await bank.methods.estimate_buy_gold(silverCoins).call();
+  return goldCoins;
+}
+
+export const estimatedSilver = async (goldCoins) => {
+  const silverCoins = await bank.methods.estimate_exchange_silver(goldCoins).call();
+  return silverCoins;
+}
+
+export const updatedIndex = async (address, idx) => {
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+          "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+  const transactionParameters = {
+    to: contractBankAddress, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data: bank.methods.update_index_admin(idx).encodeABI(),
+  };
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+          <span>
+            ✅{" "}
+            <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+              View the status of your transaction on Etherscan!
+            </a>
+            <br />
+            ℹ️ Once the transaction is verified by the network, the message will
+            be updated automatically.
+          </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+}
+
+export const buyGold = async (address, silverCoins) => {
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+          "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+  const transactionParameters = {
+    to: contractBankAddress, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data: bank.methods.buy_gold(silverCoins).encodeABI(),
+  };
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+          <span>
+            ✅{" "}
+            <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+              View the status of your transaction on Etherscan!
+            </a>
+            <br />
+            ℹ️ Once the transaction is verified by the network, the message will
+            be updated automatically.
+          </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+}
+
+export const exchangeSilver = async (address, goldCoins) => {
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+          "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+  const transactionParameters = {
+    to: contractBankAddress, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data: bank.methods.exchange_silver(goldCoins).encodeABI(),
+  };
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+          <span>
+            ✅{" "}
+            <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+              View the status of your transaction on Etherscan!
+            </a>
+            <br />
+            ℹ️ Once the transaction is verified by the network, the message will
+            be updated automatically.
+          </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+}

@@ -1,4 +1,4 @@
-import React,{ useState }  from "react";
+import React,{ useState ,useEffect}  from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import { List, Card, Image } from "antd";
 import {Modal } from "antd";
@@ -6,8 +6,10 @@ import { DownloadOutlined } from "@ant-design/icons";
 import PopUp from "./PopUp";
 import { Layout, Menu, Breadcrumb } from 'antd';
 import "../../css/HuntMonster.css";
-import { getMonsters,attack } from "../../util/interact";
+import { getMonsters,attack } from "../../util/interact.js";
+
 const { Header, Content, Footer } = Layout;
+
 const gridStyle = {
   width: '50%',
   textAlign:'center',
@@ -17,58 +19,67 @@ const gridStyle = {
 
 
  
-  //monsters
-const data = [
-  {
-    name:"monster1",
-    attack:"800",
-    health:"2000"
-  },
-  {
-    name:"monster1",
-    attack:"800",
-    health:"2000"
-  },
-  {
-    name:"monster1",
-    attack:"800",
-    health:"2000"
-  },
-  {
-    name:"monster1",
-    attack:"800",
-    health:"2000"
-  },
-  {
-    name:"monster1",
-    attack:"800",
-    health:"2000"
-  },
-  {
-    name:"monster1",
-    attack:"800",
-    health:"2000"
-  }
   
-];
+    
 // state = {
 //   size: "large",
 // };
 
 // const { size } = this.state;
 
-export default function Equipment() {
+export default function HuntMonster(props) {
+  //State variables
+  const player_address = props.accountAddress; 
+  //a string that stores the user's wallet address
+  const [walletAddress, setwalletAddress] = useState(player_address);
   const [visible, setVisible] = useState(false);
-  const [result,setResult] = useState("");
+  const [result,setResult] = useState(1);
+  const [allMonsters,setAllMonsters] = useState([]);
+  const [currentItem,setCurrentItem] = useState([]);
+  const [att_or_confirm, set_aoc] = useState("confirm");
+  //is called after your component is rendered.
+  useEffect(() => { //TODO: implement
+    async function fetchData() {
+      
+			if (walletAddress !== "") {
+				const allmonsters = await getMonsters();
+				setAllMonsters(allmonsters);
+        // const currentPlayer = await loadCurrentPlayer(walletAddress);
+			  // setCurrentPlayer(currentPlayer);
+        console.log("11111111111");
+        console.log(allmonsters);
+        console.log("11111111111");
+			}
+			
+			addSmartContractListener();			
+		}
+		fetchData();
+  }, []);
+  function addSmartContractListener() { //TODO: implement
 
-
-
+  }
   //functions
-  const attack_monster = async (monster_id) => {
-    const {result} = await attack(monster_id);
-    setResult(result);
+  const attack_monster = async (address,monster_id) => {
+    const result = await attack(address,monster_id);
+    console.log("HuntMonster");
+    console.log(result);
+    console.log("HuntMonster");
+    set_aoc("attack");
+    
+    setResult(result?1:0);
+    setVisible(true);
   }
   
+  const onOk = () => {
+    if(att_or_confirm == "confirm"){
+    
+    attack_monster(player_address,currentItem.monster_name?currentItem.monster_name.slice(-1):0);
+    
+    }else{
+      set_aoc("confirm");
+    }
+    setVisible(false);
+}
   return (
     <>
       <Layout>
@@ -82,7 +93,7 @@ export default function Equipment() {
       <div>
         <List
           grid={{
-            gutter: 80,
+            gutter: 60,
             xs: 1,
             sm: 2,
             md: 3,
@@ -90,7 +101,7 @@ export default function Equipment() {
             xl: 3,
             xxl: 3,
           }}
-          dataSource={data}
+          dataSource={allMonsters}
           renderItem={(item) => (
             <List.Item>
               <Card className="cardsize" hoverable="true">
@@ -98,19 +109,24 @@ export default function Equipment() {
               width = "160px"></img>
                </div>
               
+              
               <div className="div-right">
-              <p>Name:{item.name}</p>
+              <p>Name:{item.monster_name}</p>
               <p>Attack:{item.attack}</p>
-              <p>Health:{item.health}</p>
-              <button className="bttn-simple bttn-md bttn-danger" 
-              on onClick={()=>{
-                setVisible(true);
-              }}>Hunt</button>
+              <p>Health:{item.monster_current_health}</p>
+              
                 
                 </div>
-                
-                
-                
+                <div className="div-bottom"> 
+                <button className="bttn-simple bttn-md bttn-danger" 
+               onClick={()=>{
+                setVisible(true);
+                setCurrentItem(item);
+                console.log("ITTTTTTTTTWEEEEEMMMM");
+                console.log(item);
+                console.log("ITTTTTTTTTWEEEEEMMMM");
+              }}>Hunt</button>
+                </div>
               </Card>
             </List.Item>
           )}
@@ -123,8 +139,11 @@ export default function Equipment() {
       <PopUp
         setIsModalVisible={setVisible}
         isModalVisible={visible}
-        
+        result = {result}
+        att_or_confirm = {att_or_confirm}
+        onOk = {onOk}
       />
+      
     </>
   );
 }

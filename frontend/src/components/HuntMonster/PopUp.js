@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 import { Modal, Button, Form, Input } from "antd";
 import { closeOutlined } from '@ant-design/icons';
+
 export default function PopUp(props) {
     
+    useEffect(() => {
+        console.log("RRREEESSUUULLLTTTT");
+        console.log(props.result);
+        console.log("RRREEESSUUULLLTTTT");
+    },[props])
     
-     
     return(
         <>
              <Modal 
@@ -17,11 +22,11 @@ export default function PopUp(props) {
              onCancel={() => {
                 props.setIsModalVisible(false);
                 }} 
-             onOk={() => {
-                props.setIsModalVisible(false);
-                }} >
+             onOk={props.onOk} >
                 <closeOutlined style={{ fontSize: '16px', color: '#08c' }} />
-                <span>Are you sure to begin the hunt?</span>
+                
+                <span>{props.att_or_confirm ==="confirm"? "Are you sure to begin the hunt?" 
+                :props.result? "Win":"Lose"}</span>
                 
             </Modal>
 
