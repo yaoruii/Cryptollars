@@ -24,7 +24,7 @@ const Guide = () => {
         </button>
 
         <button id="function_module" onClick={hhh}>
-          <span>Trade</span>
+          <span>Equipment</span>
         </button>
         <button id="function_module" onClick={hhh}>
           <span>Bank</span>

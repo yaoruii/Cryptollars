@@ -152,7 +152,7 @@ function App() {
               <p>{"..."}</p>
               <p>{walletAddress.substring(38)}</p>
             </Card>
-            <Card title="Player Propertyies" style={{ width: 200 }}>
+            <Card title="Player Properties" style={{ width: 200 }}>
               <p> {"Name: " + currentPlayer["player_name"]}</p>
               <p>{"Attack: " + currentPlayer["attack"]}</p>
               <p>{"Current Health: " + currentPlayer["current_health"]}</p>

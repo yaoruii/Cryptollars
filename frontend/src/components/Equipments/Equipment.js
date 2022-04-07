@@ -43,6 +43,14 @@ export default function Equipment(props) {
     await unEquip(walletAddress);
   };
 
+  // this function is for unequip and equip
+  // the two functions cannot been put in one function since the system's problem
+  // so the following
+  const equipCombine = async (equipment_id) => {
+    await unEquip(walletAddress);
+    await Equip(walletAddress, equipment_id);
+  };
+
   // this function is for making a trade
   const makeTrade = async (inviteeAddress, equipment_id, silver_number) => {
     await createTrade(
@@ -76,15 +84,15 @@ export default function Equipment(props) {
     fetchData();
   }, [walletAddress]);
 
+  // This is for equip new equipment and it has been verified
   function showConfirm(input) {
     confirm({
       title: "Do you want to equip this equipment?",
       icon: <ExclamationCircleOutlined />,
       content: "",
       onOk() {
-        unequipPresentEquipment();
-        // equipThisEquipment(input);
-        console.log("OK");
+        equipThisEquipment(input);
+        console.log("equip");
         console.log(input);
       },
       onCancel() {
@@ -103,6 +111,19 @@ export default function Equipment(props) {
               <h1 className="headerPretty" id="storage">
                 Storage
               </h1>
+            </div>
+            <div>
+              <Button
+                shape="round"
+                className="redButton"
+                type="default"
+                onClick={() => {
+                  unequipPresentEquipment();
+                  console.log("unequip");
+                }}
+              >
+                Unequip the present equipment
+              </Button>
             </div>
             <div>
               <List
