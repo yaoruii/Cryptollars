@@ -92,6 +92,7 @@ html {
 
 /* These are css styles for equipment and can combine with others in the future*/
 #storage {
+  margin-top: 15px;
   text-align: center;
   font-size: 30px;
 }
@@ -115,7 +116,9 @@ html {
 }
 .titleName {
   text-align: center;
+  font-family: fantasy;
   font-size: 20px;
+  font-weight: bold;
 }
 /* These are css styles for equipment and can combine with others in the future*/
 #Bank {
