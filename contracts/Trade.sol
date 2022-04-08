@@ -11,6 +11,7 @@ import "./GameItems.sol";
 contract Trade is ITrade, GameItems {
      
      mapping(address => Trade) trades;
+     mapping(address => address[]) knowInviterAddress;
      mapping(address => Player) players;
 
      constructor(){
@@ -40,7 +41,12 @@ contract Trade is ITrade, GameItems {
           
           // seller gives authorization to buyer and thus equipment can be transferred
           super.setApprovalForAll(invitee_address, true);
+          knowInviterAddress[invitee_address].push(msg.sender);
           
+     }
+
+     function get_inviter() external view returns (address[] memory inviterAddress){ 
+          inviterAddress = knowInviterAddress[msg.sender];
      }
 
      /**
@@ -69,7 +75,15 @@ contract Trade is ITrade, GameItems {
           super.mint_money_silver(inviter_address, trades[inviter_address].silver_coin);
      
           trades[inviter_address].is_valid_trade = false;
-
+          for (uint256 i = 0; i < knowInviterAddress[msg.sender].length; i++) {
+               uint length = knowInviterAddress[msg.sender].length - 1;
+               if (knowInviterAddress[msg.sender][i] == inviter_address) {
+                    knowInviterAddress[msg.sender][i] = knowInviterAddress[msg.sender][length];
+                    knowInviterAddress[msg.sender].pop();
+                    break;
+               }
+          }
+          
      }
 
      /**
@@ -80,6 +94,14 @@ contract Trade is ITrade, GameItems {
      function decline_trade(address inviter_address) external override {
           require(trades[inviter_address].is_valid_trade, "The trade is not valid");
           trades[inviter_address].is_valid_trade = false;
+          for (uint256 i = 0; i < knowInviterAddress[msg.sender].length; i++) {
+               uint length = knowInviterAddress[msg.sender].length - 1;
+               if (knowInviterAddress[msg.sender][i] == inviter_address) {
+                    knowInviterAddress[msg.sender][i] = knowInviterAddress[msg.sender][length];
+                    knowInviterAddress[msg.sender].pop();
+                    break;
+               }
+          }
      }
 
      /**

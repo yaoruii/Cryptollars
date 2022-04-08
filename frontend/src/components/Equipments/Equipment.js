@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { List, Card, Image, Space, Divider, Layout, Modal, Button } from "antd";
+import {
+  List,
+  Card,
+  Image,
+  Space,
+  Divider,
+  Layout,
+  Modal,
+  Button,
+  Table,
+} from "antd";
 import SaleModal from "./SaleModal";
 
 import { ExclamationCircleOutlined } from "@ant-design/icons";
@@ -8,11 +18,12 @@ import {
   unEquip,
   Equip,
   createTrade,
+  getInviter,
   acceptTrade,
   declineTrade,
+  giveMoreEquip,
 } from "../../util/interact.js";
 const { confirm } = Modal;
-
 // import Card from "react-bootstrap/Card";
 
 const { Content } = Layout;
@@ -24,8 +35,10 @@ export default function Equipment(props) {
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState("sword1");
   const [presentEquipment, setEquipment] = useState("");
+  const [allInviter, setInviter] = useState("");
   const [walletAddress, setwalletAddress] = useState(player_address);
 
+  let data1 = [];
   // this function is for Equip
   const equipThisEquipment = async (equipment_id) => {
     await Equip(walletAddress, equipment_id);
@@ -36,7 +49,6 @@ export default function Equipment(props) {
     await unEquip(walletAddress);
   };
 
-  // this function is for accepting a trade
   const acceptATrade = async (inviterAddress) => {
     await acceptTrade(walletAddress, inviterAddress);
   };
@@ -46,6 +58,58 @@ export default function Equipment(props) {
     await declineTrade(walletAddress, inviterAddress);
   };
 
+  // for trading table
+  const columns1 = [
+    {
+      title: "All Inviter Address",
+      dataIndex: "name",
+      key: "3",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (text, record) => (
+        <Space size="middle">
+          <Button
+            type="primary"
+            style={{
+              // margin: "4px 8px",
+              // padding: "2px 15px",
+              // fontSize: "13px",
+              color: "#fff",
+              border: "black",
+              backgroundColor: "#FF5733",
+              borderRadius: "5px",
+            }}
+            onClick={() => {
+              console.log(text.name);
+              acceptATrade(text);
+            }}
+          >
+            Accept{" "}
+          </Button>
+          <Button
+            type="primary"
+            style={{
+              margin: "4px 8px",
+              padding: "2px 15px",
+              fontSize: "13px",
+              color: "black",
+              borderColor: "black",
+              backgroundColor: "#fff",
+              bordeRradius: "5px",
+            }}
+            onClick={() => declineATrade()}
+          >
+            Decline{" "}
+          </Button>
+        </Space>
+      ),
+    },
+  ];
+  //trade table end
+
   useEffect(() => {
     //TODO: implement
     async function fetchData() {
@@ -54,6 +118,20 @@ export default function Equipment(props) {
         setEquipment(presentEquipment);
         console.log(presentEquipment);
         console.log(presentEquipment[0]);
+        const allInviter = await getInviter();
+        setInviter(allInviter);
+
+        // here is for changing [] into the special structure
+        for (let i = 0; i < allInviter.length - 1; i++) {
+          data1.append({ name: allInviter[i] });
+        }
+        console.log("test inviter1");
+        console.log(data1);
+        console.log("test inviter");
+        console.log(allInviter);
+        console.log("test inviter");
+        //await giveMoreEquip(walletAddress);
+        console.log("more equipments have given");
       }
     }
     fetchData();
@@ -160,6 +238,8 @@ export default function Equipment(props) {
                 )}
               />
             </div>
+            <Divider orientation="left">RECEIVED TRADE INVITATION</Divider>
+            <Table columns={columns1} dataSource={data1} />
           </div>
         </Content>
       </Layout>
