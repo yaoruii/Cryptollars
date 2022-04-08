@@ -7,7 +7,7 @@ const web3 = createAlchemyWeb3(alchemyKey);
 
 //export our contracts:(replace the values when we deploy them)
 const contractGame = require("../contract-abi.json");
-const contractGameAddress = "0x2BC730C746A56B5BcF1BBeF2bD7f7B60b228B576";
+const contractGameAddress = "0x2E24624266E311e997aBC4c8FE53a9421D5359bc";
 
 // for trade testing
 const contractTrade = require("../contract-abitrade.json");
@@ -326,7 +326,7 @@ export const createTrade = async (
   const transactionParameters = {
     to: contractGameAddress, // Required except during contract publications.
     from: address, // must match user's active address.
-    data: trade.methods
+    data: game.methods
       .invite_trade(inviteeAddress, equipment_id, silver_number)
       .encodeABI(),
   };
@@ -361,7 +361,7 @@ export const createTrade = async (
 export const getInviter = async () => {
   //address is the address of the player
   //const address = [];
-  const allInviter = await trade.methods.get_inviter().call();
+  const allInviter = await game.methods.get_inviter().call();
   return allInviter;
 };
 
