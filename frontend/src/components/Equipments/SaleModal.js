@@ -2,13 +2,31 @@ import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 import { Modal, Button, Form, Input } from "antd";
+import {
+  getEquipment,
+  unEquip,
+  Equip,
+  createTrade,
+  acceptTrade,
+  declineTrade,
+} from "../../util/interact.js";
 // import styles from "../../css/App.css";
 
 export default function SaleModal(props) {
   const [form] = Form.useForm();
+
   // const onFinish = (values) => {
   //   console.log(values);
   // };
+  // this function is for making a trade
+  const makeTrade = async (inviteeAddress, equipment_id, silver_number) => {
+    await createTrade(
+      props.walletAddress,
+      inviteeAddress,
+      equipment_id,
+      silver_number
+    );
+  };
 
   return (
     <>
@@ -21,8 +39,10 @@ export default function SaleModal(props) {
         // }}
       >
         <h2 className="headerPretty"> Trade setting for your equipment!</h2>
-        <p className="App">Please input the player's id and expected price</p>
-        <p className="App">Equipment id: {props.id}</p>
+        <p className="App">
+          Please input another player's address and expected price
+        </p>
+        <p className="App">This equipment id: {props.id}</p>
 
         <Form
           name="basic"
@@ -33,6 +53,8 @@ export default function SaleModal(props) {
           onFinish={(james) => {
             // #####  important  axios to call be.
             console.log(james);
+            console.log(props.walletAddress);
+            makeTrade(james.username, props.id, james.password);
             console.log(james.username);
             console.log(james.password);
           }}
@@ -42,12 +64,12 @@ export default function SaleModal(props) {
           autoComplete="off"
         >
           <Form.Item
-            label="id"
+            label="address"
             name="username"
             rules={[
               {
                 required: true,
-                message: "Please input the equipment id that for trading",
+                message: "Please input another player's address for trading",
               },
             ]}
           >

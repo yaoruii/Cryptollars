@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { List, Card, Image, Space, Divider, Layout, Modal, Button } from "antd";
 import SaleModal from "./SaleModal";
 
@@ -26,13 +26,6 @@ export default function Equipment(props) {
   const [presentEquipment, setEquipment] = useState("");
   const [walletAddress, setwalletAddress] = useState(player_address);
 
-  // this function is for getting present equipments for this player
-  // the return variable will be used in allEquipment
-  // const onUpdateEquipment = async () => {
-  //   const { presentEquipment } = await getEquipment(walletAddress);
-  //   setEquipment(presentEquipment);
-  // };
-
   // this function is for Equip
   const equipThisEquipment = async (equipment_id) => {
     await Equip(walletAddress, equipment_id);
@@ -41,16 +34,6 @@ export default function Equipment(props) {
   // this function is for unequip
   const unequipPresentEquipment = async () => {
     await unEquip(walletAddress);
-  };
-
-  // this function is for making a trade
-  const makeTrade = async (inviteeAddress, equipment_id, silver_number) => {
-    await createTrade(
-      walletAddress,
-      inviteeAddress,
-      equipment_id,
-      silver_number
-    );
   };
 
   // this function is for accepting a trade
@@ -76,15 +59,15 @@ export default function Equipment(props) {
     fetchData();
   }, [walletAddress]);
 
+  // This is for equip new equipment and it has been verified
   function showConfirm(input) {
     confirm({
       title: "Do you want to equip this equipment?",
       icon: <ExclamationCircleOutlined />,
-      content: "Some descriptions",
+      content: "",
       onOk() {
-        // unequipPresentEquipment();
-        // equipThisEquipment(input);
-        console.log("OK");
+        equipThisEquipment(input);
+        console.log("equip");
         console.log(input);
       },
       onCancel() {
@@ -103,6 +86,19 @@ export default function Equipment(props) {
               <h1 className="headerPretty" id="storage">
                 Storage
               </h1>
+            </div>
+            <div className="App">
+              <Button
+                shape="round"
+                className="equipmentButton"
+                type="default"
+                onClick={() => {
+                  unequipPresentEquipment();
+                  console.log("unequip");
+                }}
+              >
+                Unequip the present equipment
+              </Button>
             </div>
             <div>
               <List
@@ -170,6 +166,7 @@ export default function Equipment(props) {
       <SaleModal
         setIsModalVisible={setVisible}
         isModalVisible={visible}
+        walletAddress={walletAddress}
         id={name}
       />
     </>

@@ -273,7 +273,7 @@ export const Equip = async (address, equipment_id) => {
   const transactionParameters = {
     to: contractGameAddress, // Required except during contract publications.
     from: address, // must match user's active address.
-    data: game.methods.enquip(equipment_id).encodeABI(),
+    data: game.methods.equip(equipment_id).encodeABI(),
   };
 
   // sign the transaction
