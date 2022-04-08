@@ -49,26 +49,6 @@ export default function Equipment(props) {
     await unEquip(walletAddress);
   };
 
-  // this function is for unequip and equip
-  // the two functions cannot been put in one function since the system's problem
-  // so the following
-  const equipCombine = async (equipment_id) => {
-    await unEquip(walletAddress);
-    await Equip(walletAddress, equipment_id);
-  };
-
-  // this function is for testing a trade
-  // testing !!!!!!!!
-  // const makeTrade = async () => {
-  //   await createTrade(
-  //     walletAddress,
-  //     "0xc7ad6d9b5653a01e8ea84c419155c538074e085e",
-  //     "2",
-  //     "100"
-  //   );
-  // };
-  // this function is for accepting a trade
-
   const acceptATrade = async (inviterAddress) => {
     await acceptTrade(walletAddress, inviterAddress);
   };
@@ -104,7 +84,7 @@ export default function Equipment(props) {
             }}
             onClick={() => {
               console.log(text.name);
-              //acceptATrade(text);
+              acceptATrade(text);
             }}
           >
             Accept{" "}
@@ -140,6 +120,8 @@ export default function Equipment(props) {
         console.log(presentEquipment[0]);
         const allInviter = await getInviter();
         setInviter(allInviter);
+
+        // here is for changing [] into the special structure
         for (let i = 0; i < allInviter.length - 1; i++) {
           data1.append({ name: allInviter[i] });
         }
@@ -148,7 +130,7 @@ export default function Equipment(props) {
         console.log("test inviter");
         console.log(allInviter);
         console.log("test inviter");
-        await giveMoreEquip(walletAddress);
+        //await giveMoreEquip(walletAddress);
         console.log("more equipments have given");
       }
     }
