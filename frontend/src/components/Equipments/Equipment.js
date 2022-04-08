@@ -21,13 +21,9 @@ import {
   getInviter,
   acceptTrade,
   declineTrade,
+  giveMoreEquip,
 } from "../../util/interact.js";
 const { confirm } = Modal;
-const data1 = [
-  {
-    name: "0xC7Ad6d9B5653A01E8ea84C419155c538074e085e",
-  },
-];
 // import Card from "react-bootstrap/Card";
 
 const { Content } = Layout;
@@ -42,6 +38,7 @@ export default function Equipment(props) {
   const [allInviter, setInviter] = useState("");
   const [walletAddress, setwalletAddress] = useState(player_address);
 
+  let data1 = [];
   // this function is for Equip
   const equipThisEquipment = async (equipment_id) => {
     await Equip(walletAddress, equipment_id);
@@ -105,7 +102,10 @@ export default function Equipment(props) {
               backgroundColor: "#FF5733",
               borderRadius: "5px",
             }}
-            onClick={() => acceptATrade()}
+            onClick={() => {
+              console.log(text.name);
+              //acceptATrade(text);
+            }}
           >
             Accept{" "}
           </Button>
@@ -140,9 +140,16 @@ export default function Equipment(props) {
         console.log(presentEquipment[0]);
         const allInviter = await getInviter();
         setInviter(allInviter);
+        for (let i = 0; i < allInviter.length - 1; i++) {
+          data1.append({ name: allInviter[i] });
+        }
+        console.log("test inviter1");
+        console.log(data1);
         console.log("test inviter");
         console.log(allInviter);
         console.log("test inviter");
+        await giveMoreEquip(walletAddress);
+        console.log("more equipments have given");
       }
     }
     fetchData();

@@ -365,6 +365,50 @@ export const getInviter = async () => {
   return allInviter;
 };
 
+// only testing purposes!
+// for testing and giving the player more equipments
+export const giveMoreEquip = async (address) => {
+  //input error handling
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+        "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+
+  //set up transaction parameters
+  const transactionParameters = {
+    to: contractGameAddress, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data: game.methods.test_mint_equipment(address).encodeABI(),
+  };
+
+  //sign the transaction
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+        <span>
+          ✅{" "}
+          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+            View the status of your transaction on Etherscan!
+          </a>
+          <br />
+          ℹ️ Once the transaction is verified by the network, the message will
+          be updated automatically.
+        </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+};
+
 //
 //accept_trade
 export const acceptTrade = async (address, inviterAddress) => {
