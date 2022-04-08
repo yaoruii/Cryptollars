@@ -121,7 +121,7 @@ export default function Equipment(props) {
         const allInviter = await getInviter();
         setInviter(allInviter);
 
-        // here is for changing [] into the special structure
+        //here is for changing [] into the special structure
         for (let i = 0; i < allInviter.length - 1; i++) {
           data1.append({ name: allInviter[i] });
         }
