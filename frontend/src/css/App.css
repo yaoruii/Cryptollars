@@ -123,4 +123,9 @@ html {
   font-size: 20px;
   font-weight: bold;
 }
+.equipmentButton {
+  margin-bottom: 30px;
+  background-color: #ff5733;
+  color: #fff;
+}
 /* These are css styles for equipment and can combine with others in the future*/

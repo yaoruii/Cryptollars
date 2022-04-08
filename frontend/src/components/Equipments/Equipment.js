@@ -1,5 +1,15 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { List, Card, Image, Space, Divider, Layout, Modal, Button } from "antd";
+import React, { useEffect, useState } from "react";
+import {
+  List,
+  Card,
+  Image,
+  Space,
+  Divider,
+  Layout,
+  Modal,
+  Button,
+  Table,
+} from "antd";
 import SaleModal from "./SaleModal";
 
 import { ExclamationCircleOutlined } from "@ant-design/icons";
@@ -8,11 +18,16 @@ import {
   unEquip,
   Equip,
   createTrade,
+  getInviter,
   acceptTrade,
   declineTrade,
 } from "../../util/interact.js";
 const { confirm } = Modal;
-
+const data1 = [
+  {
+    name: "0xC7Ad6d9B5653A01E8ea84C419155c538074e085e",
+  },
+];
 // import Card from "react-bootstrap/Card";
 
 const { Content } = Layout;
@@ -24,14 +39,8 @@ export default function Equipment(props) {
   const [visible, setVisible] = useState(false);
   const [name, setName] = useState("sword1");
   const [presentEquipment, setEquipment] = useState("");
+  const [allInviter, setInviter] = useState("");
   const [walletAddress, setwalletAddress] = useState(player_address);
-
-  // this function is for getting present equipments for this player
-  // the return variable will be used in allEquipment
-  // const onUpdateEquipment = async () => {
-  //   const { presentEquipment } = await getEquipment(walletAddress);
-  //   setEquipment(presentEquipment);
-  // };
 
   // this function is for Equip
   const equipThisEquipment = async (equipment_id) => {
@@ -51,17 +60,18 @@ export default function Equipment(props) {
     await Equip(walletAddress, equipment_id);
   };
 
-  // this function is for making a trade
-  const makeTrade = async (inviteeAddress, equipment_id, silver_number) => {
-    await createTrade(
-      walletAddress,
-      inviteeAddress,
-      equipment_id,
-      silver_number
-    );
-  };
-
+  // this function is for testing a trade
+  // testing !!!!!!!!
+  // const makeTrade = async () => {
+  //   await createTrade(
+  //     walletAddress,
+  //     "0xc7ad6d9b5653a01e8ea84c419155c538074e085e",
+  //     "2",
+  //     "100"
+  //   );
+  // };
   // this function is for accepting a trade
+
   const acceptATrade = async (inviterAddress) => {
     await acceptTrade(walletAddress, inviterAddress);
   };
@@ -71,6 +81,55 @@ export default function Equipment(props) {
     await declineTrade(walletAddress, inviterAddress);
   };
 
+  // for trading table
+  const columns1 = [
+    {
+      title: "All Inviter Address",
+      dataIndex: "name",
+      key: "3",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (text, record) => (
+        <Space size="middle">
+          <Button
+            type="primary"
+            style={{
+              // margin: "4px 8px",
+              // padding: "2px 15px",
+              // fontSize: "13px",
+              color: "#fff",
+              border: "black",
+              backgroundColor: "#FF5733",
+              borderRadius: "5px",
+            }}
+            onClick={() => acceptATrade()}
+          >
+            Accept{" "}
+          </Button>
+          <Button
+            type="primary"
+            style={{
+              margin: "4px 8px",
+              padding: "2px 15px",
+              fontSize: "13px",
+              color: "black",
+              borderColor: "black",
+              backgroundColor: "#fff",
+              bordeRradius: "5px",
+            }}
+            onClick={() => declineATrade()}
+          >
+            Decline{" "}
+          </Button>
+        </Space>
+      ),
+    },
+  ];
+  //trade table end
+
   useEffect(() => {
     //TODO: implement
     async function fetchData() {
@@ -79,6 +138,11 @@ export default function Equipment(props) {
         setEquipment(presentEquipment);
         console.log(presentEquipment);
         console.log(presentEquipment[0]);
+        const allInviter = await getInviter();
+        setInviter(allInviter);
+        console.log("test inviter");
+        console.log(allInviter);
+        console.log("test inviter");
       }
     }
     fetchData();
@@ -112,10 +176,10 @@ export default function Equipment(props) {
                 Storage
               </h1>
             </div>
-            <div>
+            <div className="App">
               <Button
                 shape="round"
-                className="redButton"
+                className="equipmentButton"
                 type="default"
                 onClick={() => {
                   unequipPresentEquipment();
@@ -185,12 +249,15 @@ export default function Equipment(props) {
                 )}
               />
             </div>
+            <Divider orientation="left">RECEIVED TRADE INVITATION</Divider>
+            <Table columns={columns1} dataSource={data1} />
           </div>
         </Content>
       </Layout>
       <SaleModal
         setIsModalVisible={setVisible}
         isModalVisible={visible}
+        walletAddress={walletAddress}
         id={name}
       />
     </>

@@ -9,8 +9,12 @@ const web3 = createAlchemyWeb3(alchemyKey);
 const contractGame = require("../contract-abi.json");
 const contractGameAddress = "0x2BC730C746A56B5BcF1BBeF2bD7f7B60b228B576";
 
-export const game = new web3.eth.Contract(contractGame, contractGameAddress);
+// for trade testing
+const contractTrade = require("../contract-abitrade.json");
+const contractTradeAddress = "0x55653ee9849557A66cD10eCe83285d1Cea49bAa6";
 
+export const game = new web3.eth.Contract(contractGame, contractGameAddress);
+export const trade = new web3.eth.Contract(contractTrade, contractTradeAddress);
 // const contractBank = require("../contract-abi.json");
 // const contractBankAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A";
 
@@ -322,7 +326,7 @@ export const createTrade = async (
   const transactionParameters = {
     to: contractGameAddress, // Required except during contract publications.
     from: address, // must match user's active address.
-    data: game.methods
+    data: trade.methods
       .invite_trade(inviteeAddress, equipment_id, silver_number)
       .encodeABI(),
   };
@@ -353,6 +357,15 @@ export const createTrade = async (
   }
 };
 
+// for trade inviter show
+export const getInviter = async () => {
+  //address is the address of the player
+  //const address = [];
+  const allInviter = await trade.methods.get_inviter().call();
+  return allInviter;
+};
+
+//
 //accept_trade
 export const acceptTrade = async (address, inviterAddress) => {
   //input error handling

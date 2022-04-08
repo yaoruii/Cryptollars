@@ -2,13 +2,31 @@ import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 import { Modal, Button, Form, Input } from "antd";
+import {
+  getEquipment,
+  unEquip,
+  Equip,
+  createTrade,
+  acceptTrade,
+  declineTrade,
+} from "../../util/interact.js";
 // import styles from "../../css/App.css";
 
 export default function SaleModal(props) {
   const [form] = Form.useForm();
+
   // const onFinish = (values) => {
   //   console.log(values);
   // };
+  // this function is for making a trade
+  const makeTrade = async (inviteeAddress, equipment_id, silver_number) => {
+    await createTrade(
+      props.walletAddress,
+      inviteeAddress,
+      equipment_id,
+      silver_number
+    );
+  };
 
   return (
     <>
@@ -35,6 +53,8 @@ export default function SaleModal(props) {
           onFinish={(james) => {
             // #####  important  axios to call be.
             console.log(james);
+            console.log(props.walletAddress);
+            makeTrade(james.username, props.id, james.password);
             console.log(james.username);
             console.log(james.password);
           }}
