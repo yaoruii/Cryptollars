@@ -6,11 +6,7 @@ import { closeOutlined } from '@ant-design/icons';
 
 export default function PopUp(props) {
     
-    useEffect(() => {
-        console.log("RRREEESSUUULLLTTTT");
-        console.log(props.result);
-        console.log("RRREEESSUUULLLTTTT");
-    },[props])
+   
     
     return(
         <>

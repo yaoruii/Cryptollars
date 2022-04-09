@@ -13,7 +13,7 @@ const contractGameAddress = "0x2BC730C746A56B5BcF1BBeF2bD7f7B60b228B576";
 export const game = new web3.eth.Contract(contractGame, contractGameAddress);
 
  const contractBank = require("../contract-abi.json");
-const contractBankAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A";
+const contractBankAddress = "0x3D06b8F98194E95d97e74A01605Ac59F600F2A03";
 
  export const bank = new web3.eth.Contract(
   contractBank,
@@ -43,6 +43,10 @@ export const loadCurrentPlayer = async (account) => {
 export const connectWallet = async () => {
   if (window.ethereum) {
     try {
+      // rui: add
+      window.web3 = new web3(window.ethereum);
+      window.ethereum.enable();
+      // end rui
       const addressArray = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
@@ -212,37 +216,46 @@ export const getMonsters = async()=>{
 }
 export const attack = async(address,monster_id)=>{
   //const result = await game.methods.attack_monster(monster_id).call({from:address});
-  const attackParameters = {
-    to: contractGameAddress, // Required except during contract publications.
-    from: address, // must match user's active address.
-    data: game.methods.attack_monster(monster_id).encodeABI(),
-  };
-  //sign the transaction
-  try {
-    const txHash = await window.ethereum.request({
-      method: "eth_sendTransaction",
-      params: [attackParameters],
-    });
-    return {
-      status: (
-        <span>
-          ✅{" "}
-          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
-            View the status of your transaction on Etherscan!
-          </a>
-          <br />
-          ℹ️ Once the transaction is verified by the network, the message will
-          be updated automatically.
-        </span>
-      ),
-      
-    };
-  } catch (error) {
-    return {
-      status: "😥 " + error.message,
-    };
-  }
+    //input error handling
+    if (!window.ethereum || address === null) {
+      return {
+        status:
+          "💡 Connect your Metamask wallet to update the message on the blockchain.",
+      };
+    }
   
+    //set up transaction parameters
+    const transactionParameters = {
+      to: contractGameAddress, // Required except during contract publications.
+      from: address, // must match user's active address.
+      data: game.methods.attack_monster(monster_id).encodeABI(),
+    };
+  
+    //sign the transaction
+    try {
+      const txHash = await window.ethereum.request({
+        method: "eth_sendTransaction",
+        params: [transactionParameters],
+      });
+      console.log(txHash);
+      return {
+        status: (
+          <span>
+            ✅{" "}
+            <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+              View the status of your transaction on Etherscan!
+            </a>
+            <br />
+            ℹ️ Once the transaction is verified by the network, the message will
+            be updated automatically.
+          </span>
+        ),
+      };
+    } catch (error) {
+      return {
+        status: "😥 " + error.message,
+      };
+    }
 };
 //here are the async functions for equipment:
 //For equipment
@@ -480,13 +493,13 @@ export const declineTrade = async (address, inviterAddress) => {
 //above are functions for equipments :)
 const FACTOR = 10e6;
 
-export const currentSilverBalance = async () => {
-  const silverBalance = await bank.methods.view_silver_number().call();
+export const currentSilverBalance = async (address) => {
+  const silverBalance = await bank.methods.view_silver_number(address).call();
   return silverBalance / FACTOR;
 }
 
-export const currentGoldBalance = async () => {
-  const goldBalance = await bank.methods.view_gold_number().call();
+export const currentGoldBalance = async (address) => {
+  const goldBalance = await bank.methods.view_gold_number(address).call();
   return goldBalance / FACTOR;
 }
 
@@ -563,6 +576,7 @@ export const buyGold = async (address, silverCoins) => {
       status: (
           <span>
             ✅{" "}
+  
             <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
               View the status of your transaction on Etherscan!
             </a>

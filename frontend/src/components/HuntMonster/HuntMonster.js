@@ -43,12 +43,11 @@ export default function HuntMonster(props) {
       
 			if (walletAddress !== "") {
 				const allmonsters = await getMonsters();
-				setAllMonsters(allmonsters);
+        setAllMonsters(allmonsters);
+        console.log(allMonsters);
         // const currentPlayer = await loadCurrentPlayer(walletAddress);
 			  // setCurrentPlayer(currentPlayer);
-        console.log("11111111111");
-        console.log(allmonsters);
-        console.log("11111111111");
+       
 			}
 			
 			addSmartContractListener();			
@@ -66,7 +65,7 @@ export default function HuntMonster(props) {
     console.log("HuntMonster");
     set_aoc("attack");
     
-    setResult(result?1:0);
+    
     setVisible(true);
   }
   

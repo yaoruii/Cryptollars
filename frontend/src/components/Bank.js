@@ -35,14 +35,46 @@ export default function Bank(props) {
 
     const [silverBalance, setSilverBalance] = useState(100);
     const [goldBalance, setGoldBalance] = useState(0);
-    const [index, setIndex] = useState(1);
+    const [index, setIndex] = useState(2);
+    const [estimatedGold, setEstimatedGold] = useState("0");
+    const [estimatedSilver, setEstimatedSilver] = useState("0");
 
+    useEffect(() => { //TODO: implement
+        async function fetchData() {
+          
+                if (walletAddress !== "") {
+                    //const silver = await currentSilverBalance(player_address);
+                   // setSilverBalance(silver);
+                    const gold = await currentGoldBalance(player_address);
+                    setGoldBalance(gold);
+            // const currentPlayer = await loadCurrentPlayer(walletAddress);
+                  // setCurrentPlayer(currentPlayer);
+           
+                }
+                
+                addSmartContractListener();			
+            }
+            fetchData();
+      }, []);
+      function addSmartContractListener() { //TODO: implement
+    
+      }
+    const handleInput = event => {
+        setEstimatedGold(event.target.value);
+      };
+    const handleInput2 = event => {
+        setEstimatedSilver(event.target.value);
+    };
+    const changeIndexPressed = async (newIndex) => {
+        const currentIndex = await updatedIndex(walletAddress, newIndex);
+        setIndex(currentIndex);
+    }
     const purchaseGoldPressed = async (silvercoins) => {
-        const { goldResponse } = await buyGold(walletAddress, silvercoins);
+        await buyGold(walletAddress, silvercoins);
     }
 
     const exchangeSilverPressed = async (goldcoins) => {
-        const { silverResponse } = await exchangeSilver(walletAddress, goldcoins);
+        await exchangeSilver(walletAddress, goldcoins);
     }
 
     const onFormLayoutChange = ({ layout }) => {
@@ -112,6 +144,26 @@ export default function Bank(props) {
                         </Space>
                     </Card>
                 </div>
+                <div id="indexCard">
+                    <Card style={{ width: 300 }}>
+                        <p>Edit Index</p>
+                        <Space>
+                            <div id="ninth">
+                                <Alert message="New Index:" type="error" />
+                            </div>
+                            <div id="tenth">
+                                <Input placeholder="" />
+                            </div>
+                        </Space>
+                        <div class="button">
+                            <Form.Item {...buttonItemLayout}>
+                                <Button type="primary"
+                        //     onClick={changeIndexPressed(walletAddress,5)}
+                                >Change</Button>
+                            </Form.Item>   
+                        </div>
+                    </Card>
+                </div>
 
                 <div class="Form">
                     <Form
@@ -148,7 +200,7 @@ export default function Bank(props) {
                                             <Alert message="Silver" type="info" />
                                         </div>
                                         <div id="second">
-                                            <Input placeholder="The number of silver coins" />
+                                            <Input placeholder="The number of silver coins" onChange={handleInput} />
                                         </div>
                                     </Space>
                                 </div>
@@ -158,20 +210,26 @@ export default function Bank(props) {
                                             <Alert message="Estimated gold" type="warning" />
                                         </div>
                                         <div id="fourth">
-                                            <Input placeholder="input placeholder" />
+                                            <Input placeholder={estimatedGold / index} />
                                         </div>
                                     </Space>
                                 </div>
                             </div>
-
+                            
                             <div class="button">
+                            
                                 <Form.Item {...buttonItemLayout}>
+                                
+                                    
+                
                                     <Button type="primary"
-                                            onClick={purchaseGoldPressed()}
+                                       //     onClick={purchaseGoldPressed(walletAddress,5)}
                                             >Purchase</Button>
+                                           
                                 </Form.Item>
+                                
                             </div>
-
+                            
                             <div>
                                 Input the amount of gold for exchanging silver
                             </div>
@@ -182,7 +240,7 @@ export default function Bank(props) {
                                             <Alert message="Gold" type="info" />
                                         </div>
                                         <div id="sixth">
-                                            <Input placeholder="The number of gold coins" />
+                                            <Input placeholder="The number of gold coins" onChange={handleInput2}/>
                                         </div>
                                     </Space>
                                 </div>
@@ -192,18 +250,23 @@ export default function Bank(props) {
                                             <Alert message="Estimated silver" type="warning" />
                                         </div>
                                         <div id="eighth">
-                                            <Input placeholder="input placeholder" />
+                                            <Input placeholder={estimatedSilver * index} />
                                         </div>
                                     </Space>
                                 </div>
                             </div>
 
                             <div class="button">
+                            
                                 <Form.Item {...buttonItemLayout}>
+                                
+                
                                     <Button type="primary"
-                                            onClick={() => exchangeSilverPressed()}
-                                    >Exchange</Button>
+                                       //     onClick={purchaseGoldPressed(walletAddress,5)}
+                                            >Exchange</Button>
+                                            
                                 </Form.Item>
+                                
                             </div>
 
                         </div>

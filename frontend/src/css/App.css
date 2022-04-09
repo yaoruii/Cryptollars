@@ -211,6 +211,23 @@ html {
   height: 40px;
 }
 
+#ninth {
+  width: 105px;
+  margin: 2px 2px;
+}
+
+#ninth Alert{
+  width: 200px;
+}
+
+#tenth {
+  width: 130px;
+}
+
+#tenth Input{
+  height: 40px;
+}
+
 .amount Input{
   height: 40px;
   width: 230px;

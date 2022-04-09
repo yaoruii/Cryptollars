@@ -1,10 +1,6 @@
 import "../css/App.css";
 import Game from "./Game";
-<<<<<<< HEAD
 import HuntMonsters from "./HuntMonster/HuntMonster.js";
-=======
-import HuntMonsters from "./HuntMonster";
->>>>>>> 1f53a19f0f4cc5ac0aa4efdf25425ee4c7f5c6c0
 import Duel from "./Duel";
 import Equipment from "./Equipments/Equipment";
 import Bank from "./Bank";
@@ -108,7 +104,9 @@ function App() {
           />
         );
       case "5":
-        return <Bank />;
+        return <Bank accountAddress={walletAddress}
+        status={status}
+        currentPlayer={currentPlayer}/>;
       default:
         break;
     }
