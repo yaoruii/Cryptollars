@@ -38,7 +38,6 @@ export default function Equipment(props) {
   const [allInviter, setInviter] = useState("");
   const [walletAddress, setwalletAddress] = useState(player_address);
 
-  
   // this function is for Equip
   const equipThisEquipment = async (equipment_id) => {
     await Equip(walletAddress, equipment_id);
@@ -83,8 +82,9 @@ export default function Equipment(props) {
               borderRadius: "5px",
             }}
             onClick={() => {
-              console.log(record.name);
-              acceptATrade(record.name);
+              console.log("click for accept trade");
+              console.log(text.name);
+              acceptATrade(text.name);
             }}
           >
             Accept{" "}
@@ -100,7 +100,11 @@ export default function Equipment(props) {
               backgroundColor: "#fff",
               bordeRradius: "5px",
             }}
-            onClick={() => declineATrade()}
+            onClick={() => {
+              console.log("click decline trade");
+              console.log(text.name);
+              declineATrade(text.name);
+            }}
           >
             Decline{" "}
           </Button>
@@ -123,8 +127,6 @@ export default function Equipment(props) {
         console.log("test inviter allInviter");
         console.log(allInviter);
 
-        
-        
         console.log("test inviter");
         //await giveMoreEquip(walletAddress);
         console.log("more equipments have given");
@@ -149,18 +151,16 @@ export default function Equipment(props) {
       },
     });
   }
-  
+
   let data1 = [];
-    // here is for changing [] into the special structure
-    for (let i = 0; i < allInviter.length; i++) {
-      data1.push({ name: allInviter[i] });
-    }
-    console.log("test inviter1 data1");
-    console.log(data1);
+  // here is for changing [] into the special structure
+  for (let i = 0; i < allInviter.length; i++) {
+    data1.push({ name: allInviter[i] });
+  }
+  console.log("test inviter1 data1");
+  console.log(data1);
 
   return (
-    
-
     <>
       <Layout>
         <Content>
