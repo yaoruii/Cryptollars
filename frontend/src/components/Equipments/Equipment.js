@@ -38,9 +38,7 @@ export default function Equipment(props) {
   const [allInviter, setInviter] = useState("");
   const [walletAddress, setwalletAddress] = useState(player_address);
 
-  let data1 = [
- 
-  ];
+  let data1 = [];
   // this function is for Equip
   const equipThisEquipment = async (equipment_id) => {
     await Equip(walletAddress, equipment_id);

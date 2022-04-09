@@ -7,10 +7,10 @@ const web3 = createAlchemyWeb3(alchemyKey);
 
 //export our contracts:(replace the values when we deploy them)
 const contractGame = require("../contract-abi.json");
+//const contractGameAddress = "0x2BC730C746A56B5BcF1BBeF2bD7f7B60b228B576";
 const contractGameAddress = "0xd173BfEF425304F1cf24f7fa487504ca40684662";
 
 export const game = new web3.eth.Contract(contractGame, contractGameAddress);
-
 // const contractBank = require("../contract-abi.json");
 // const contractBankAddress = "0x6f3f635A9762B47954229Ea479b4541eAF402A6A";
 
@@ -413,6 +413,59 @@ export const createTrade = async (
   }
 };
 
+// for trade inviter show
+export const getInviter = async () => {
+  //address is the address of the player
+  //const address = [];
+  const allInviter = await game.methods.get_inviter().call();
+  return allInviter;
+};
+
+// only testing purposes!
+// for testing and giving the player more equipments
+export const giveMoreEquip = async (address) => {
+  //input error handling
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+        "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+
+  //set up transaction parameters
+  const transactionParameters = {
+    to: contractGameAddress, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data: game.methods.test_mint_equipment(address).encodeABI(),
+  };
+
+  //sign the transaction
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+        <span>
+          ✅{" "}
+          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+            View the status of your transaction on Etherscan!
+          </a>
+          <br />
+          ℹ️ Once the transaction is verified by the network, the message will
+          be updated automatically.
+        </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+};
+
+//
 //accept_trade
 export const acceptTrade = async (address, inviterAddress) => {
   //input error handling

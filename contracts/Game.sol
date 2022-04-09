@@ -14,6 +14,7 @@ contract Game is IGame, GameMaster, Trade{
     // equipment attributes
     //mapping(address => Player) public players;
     mapping(address => address) public duel_match;
+    mapping(address => address[]) public duel_inviter_show;
     Player[] public all_players;
     Equipment empty = Equipment(0, 0, "");
 
@@ -163,9 +164,14 @@ contract Game is IGame, GameMaster, Trade{
         players[msg.sender].is_pending = true;
         players[invitee].is_pending = true;
         duel_match[msg.sender] = invitee;
+        // add for inviter show
+        duel_inviter_show[invitee].push(msg.sender);
         super.setApprovalForAll(invitee, true);
     }
 
+     function get_duel_inviter() external view returns (address[] memory inviterAddress){ 
+        inviterAddress = duel_inviter_show[msg.sender];
+     }
     /*
      * @notice accepts another player to duel. Depends if you receive an invite
      * Modifies: duel_match, current_health, max_health, opponent_life
@@ -231,6 +237,18 @@ contract Game is IGame, GameMaster, Trade{
         players[msg.sender].is_pending = false;
         players[inviter].is_pending = false;
         delete duel_match[inviter];
+
+        // remove this inviter in the invitee's list
+        for (uint256 i = 0; i < duel_inviter_show[msg.sender].length; i++) {
+
+            uint length = duel_inviter_show[msg.sender].length - 1;
+
+            if (duel_inviter_show[msg.sender][i] == inviter) {
+                duel_inviter_show[msg.sender][i] = duel_inviter_show[msg.sender][length];
+                duel_inviter_show[msg.sender].pop();
+                break;
+            }
+        }
         return result;
     }
 
@@ -243,6 +261,17 @@ contract Game is IGame, GameMaster, Trade{
         players[msg.sender].is_pending = false;
         players[inviter].is_pending = false;
         delete duel_match[inviter];
+        // remove this inviter in the invitee's list
+        for (uint256 i = 0; i < duel_inviter_show[msg.sender].length; i++) {
+
+            uint length = duel_inviter_show[msg.sender].length - 1;
+
+            if (duel_inviter_show[msg.sender][i] == inviter) {
+                duel_inviter_show[msg.sender][i] = duel_inviter_show[msg.sender][length];
+                duel_inviter_show[msg.sender].pop();
+                break;
+            }
+        }
     }
 
     /*
