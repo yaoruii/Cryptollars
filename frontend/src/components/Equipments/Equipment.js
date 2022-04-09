@@ -39,12 +39,7 @@ export default function Equipment(props) {
   const [walletAddress, setwalletAddress] = useState(player_address);
 
   let data1 = [
-    {
-      name: "0xC7Ad6d9B5653A01E8ea84C419155c538074e085e",
-    },
-    {
-      name: "0x9e834E6b4b8aC655c4b60ceAb4194B4B740c5c3F",
-    },
+ 
   ];
   // this function is for Equip
   const equipThisEquipment = async (equipment_id) => {
@@ -70,8 +65,8 @@ export default function Equipment(props) {
     {
       title: "All Inviter Address",
       dataIndex: "name",
-      key: "3",
-      render: (text) => <a>{text}</a>,
+      key: "name",
+      render: (text) => text
     },
     {
       title: "Action",
@@ -132,10 +127,10 @@ export default function Equipment(props) {
         for (let i = 0; i < allInviter.length - 1; i++) {
           data1.append({ name: allInviter[i] });
         }
-        console.log("test inviter1");
+        console.log("test inviter1 data1");
         console.log(data1);
-        console.log("test inviter");
-        //console.log(allInviter);
+        console.log("test inviter allInviter");
+        console.log(allInviter);
         console.log("test inviter");
         //await giveMoreEquip(walletAddress);
         console.log("more equipments have given");

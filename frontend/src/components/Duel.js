@@ -17,13 +17,7 @@ function DeclineADuel(){
 
 }
 const data1 = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
+ 
 ];
 
 function Duel(props) {
@@ -104,8 +98,8 @@ function Duel(props) {
     {
       title: 'All Inviter Address',
       dataIndex: 'name',
-      key: '',
-      render: record => <a>{record}</a>,
+      key: 'name',
+      render: text => text,
     },
     {
       title: "Action",
@@ -152,6 +146,10 @@ function Duel(props) {
 
         const allInviter = await loadAllInviter();
         setAllInviter(allInviter);
+        // here is for changing [] into the special structure
+        for (let i = 0; i < allInviter.length - 1; i++) {
+          data1.append({ name: allInviter[i] });
+        }
         // const currentPlayer = await loadCurrentPlayer(walletAddress);
         // setCurrentPlayer(currentPlayer);
       }
@@ -184,7 +182,7 @@ function Duel(props) {
       <Divider orientation="left">ACCOUNT TABLES</Divider>
       <Table columns={columns} dataSource={allOtherPlayers} />
       <Divider orientation="left">RECEIVED INVITATION</Divider>
-      <Table columns={columns1} dataSource={allInviter} /></>
+      <Table columns={columns1} dataSource={data1} /></>
   );
 }
 export default Duel;
