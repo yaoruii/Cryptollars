@@ -313,6 +313,8 @@ export const getInviter = async () => {
   //address is the address of the player
   //const address = [];
   const allInviter = await game.methods.get_inviter().call();
+  console.log("all inviter: ");
+  console.log(allInviter);
   return allInviter;
 };
 
