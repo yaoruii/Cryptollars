@@ -13,8 +13,6 @@ contract Trade is ITrade, GameItems {
      mapping(address => Trade) trades;
      mapping(address => address[]) knowInviterAddress;
      mapping(address => Player) players;
-
-     constructor(){
      }
 
      /**

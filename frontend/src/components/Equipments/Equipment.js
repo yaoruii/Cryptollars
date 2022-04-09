@@ -84,7 +84,7 @@ export default function Equipment(props) {
             }}
             onClick={() => {
               console.log(text.name);
-              acceptATrade(text);
+              acceptATrade(text.name);
             }}
           >
             Accept{" "}
@@ -100,7 +100,7 @@ export default function Equipment(props) {
               backgroundColor: "#fff",
               bordeRradius: "5px",
             }}
-            onClick={() => declineATrade()}
+            onClick={() => declineATrade(text.name)}
           >
             Decline{" "}
           </Button>
