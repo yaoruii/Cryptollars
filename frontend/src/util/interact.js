@@ -34,6 +34,8 @@ export const loadAllInviter = async (address) => {
   return allInviter;
 };
 
+
+
 export const loadCurrentPlayer = async (account) => {
   console.log("beforeeeeee single!");
   console.log(game);
@@ -210,6 +212,93 @@ export const inviteAPlayer = async (fromaddress, address) => {
     };
   }
 };
+
+export const AcceptADuel = async (fromaddress, address) => {
+  console.log("interact : " + address);
+  //input error handling
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+        "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+
+  //set up transaction parameters
+  const transactionParameters = {
+    to: contractGameAddress, // Required except during contract publications.
+    from: fromaddress, // must match user's active address.
+    data: game.methods.accept_duel(address).encodeABI(),
+  };
+
+  //sign the transaction
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+        <span>
+          ✅{" "}
+          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+            View the status of your transaction on Etherscan!
+          </a>
+          <br />
+          ℹ️ Once the transaction is verified by the network, the message will
+          be updated automatically.
+        </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+
+}
+export const DeclineADuel = async (fromaddress, address) => {
+  console.log("interact : " + address);
+  //input error handling
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+        "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+
+  //set up transaction parameters
+  const transactionParameters = {
+    to: contractGameAddress, // Required except during contract publications.
+    from: fromaddress, // must match user's active address.
+    data: game.methods.reject_duel(address).encodeABI(),
+  };
+
+  //sign the transaction
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+        <span>
+          ✅{" "}
+          <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+            View the status of your transaction on Etherscan!
+          </a>
+          <br />
+          ℹ️ Once the transaction is verified by the network, the message will
+          be updated automatically.
+        </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+
+}
 
 //here are the async functions for equipment:
 //For equipment

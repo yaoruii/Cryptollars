@@ -5,20 +5,14 @@ import {
   loadCurrentAllAccounts,
   loadCurrentPlayer,
   inviteAPlayer,
-  loadAllInviter
+  loadAllInviter,
+  AcceptADuel,
+  DeclineADuel,
 } from "../util/interact.js";
 
 
 
-function AcceptADuel(){
 
-}
-function DeclineADuel(){
-
-}
-const data1 = [
- 
-];
 
 function Duel(props) {
   //State variables
@@ -116,7 +110,7 @@ function Duel(props) {
                         backgroundColor: "#FF5733",
                         borderRadius: "5px",
                       }}
-                      onClick={() =>AcceptADuel() }
+                      onClick={() =>AcceptADuel(record.name) }
               >Accept </Button>
               <Button type="primary"
                       style={{
@@ -147,9 +141,7 @@ function Duel(props) {
         const allInviter = await loadAllInviter(walletAddress);
         setAllInviter(allInviter);
         // here is for changing [] into the special structure
-        for (let i = 0; i < allInviter.length; i++) {
-          data1.push({ "name": allInviter[i] });
-        }
+        
         // const currentPlayer = await loadCurrentPlayer(walletAddress);
         // setCurrentPlayer(currentPlayer);
       }
@@ -167,6 +159,16 @@ function Duel(props) {
    console.log("duel :" + invitee);
   const { status } = await inviteAPlayer(walletAddress,invitee);
 };
+const AcceptADuelPressed = async(inviter) => {
+  console.log("decline duel: " + inviter);
+  const {status} = await AcceptADuel(walletAddress, inviter);
+
+}
+const DeclineADuelPressed = async(inviter) => {
+  console.log("decline duel: " + inviter);
+  const {status} = await DeclineADuel(walletAddress, inviter);
+
+}
   
 
  
@@ -175,13 +177,17 @@ function Duel(props) {
   for(var i = 0; i<Object.keys(allPlayers).length; i++){
     allOtherPlayers = allPlayers.filter((item) => item.walletAddress.toUpperCase() !== walletAddress.toUpperCase());
   }
+  let allInviterJsonArray = []
+  for (let i = 0; i < allInviter.length; i++) {
+    allInviterJsonArray.push({ name: allInviter[i] });
+  }
 
   return (
     <>
       <Divider orientation="left">ACCOUNT TABLES</Divider>
       <Table columns={columns} dataSource={allOtherPlayers} />
       <Divider orientation="left">RECEIVED INVITATION</Divider>
-      <Table columns={columns1} dataSource={data1} /></>
+      <Table columns={columns1} dataSource={allInviterJsonArray} /></>
   );
 }
 export default Duel;
