@@ -13,7 +13,7 @@ const contractGameAddress = "0x06a900108fc37080616421863D419A36CE5E4Bc5";
 export const game = new web3.eth.Contract(contractGame, contractGameAddress);
 
 const contractBank = require("../contract-abi.json");
-const contractBankAddress = "0xDf57baD6a55bb6f2022BCAd2fC8B355a29fEfE76";
+const contractBankAddress = "0xE049b1693a58137469bC1a5DC429Dc6aD88Cca09";
 
  export const bank = new web3.eth.Contract(
   contractBank,

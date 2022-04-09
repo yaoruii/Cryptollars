@@ -97,9 +97,9 @@ contract Bank is IBank, GameItems{
      * @notice Players can get initial gold coins and silver coins.
      */
      function test_mint_initial(address _to) public {
-          require(msg.sender == admin);
-          super.mint_money_silver(_to, 130000000);
-          super.mint_money_gold(_to, 130000000);
+          // require(msg.sender == admin);
+          super.mint_money_silver(_to, 100000000);
+          // super.mint_money_gold(_to, 130000000);
      }
 
 }
