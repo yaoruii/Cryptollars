@@ -39,6 +39,7 @@ function Duel(props){
   //a string that stores a helpful message that guides the user on how to interact with the dApp
   const [status, setStatus] = useState(props.status);
   const [allPlayers, setAllPlayers] = useState([]);
+  const [allInviter, setAllInviter] = useState([]);
   // const [currentPlayer, setCurrentPlayer] = useState(player);
 
   const columns = [
@@ -106,7 +107,7 @@ function Duel(props){
   ];
   const columns1 = [
     {
-      title: 'Name',
+      title: 'All Inviter Address',
       dataIndex: 'name',
       key: '3',
       render: text => <a>{text}</a>,
@@ -153,6 +154,8 @@ function Duel(props){
 			if (walletAddress !== "") {
 				const allPlayers = await loadCurrentAllAccounts();
 				setAllPlayers(allPlayers);
+
+        const allInviter = await loadAllInviter();
         // const currentPlayer = await loadCurrentPlayer(walletAddress);
 			  // setCurrentPlayer(currentPlayer);
 			}
@@ -178,9 +181,7 @@ function Duel(props){
   let allOtherPlayers = []
   for(var i = 0; i<Object.keys(allPlayers).length; i++){
     allOtherPlayers = allPlayers.filter((item) => item.walletAddress.toUpperCase() !== walletAddress.toUpperCase());
-    // console.log('0x0A2b728D69e77bfe5E3730BBd6516f2Ada7c9AD4'.toUpperCase() != walletAddress.toUpperCase() );
-    // console.log("funckkkk " + walletAddress.toUpperCase() );
-    console.log(allOtherPlayers);
+   
   
   }
 

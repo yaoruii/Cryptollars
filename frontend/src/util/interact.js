@@ -33,6 +33,11 @@ export const loadCurrentAllAccounts = async () => {
   return allPlayers;
 };
 
+export const loadAllInviter = async () => {
+  const allInviter = await game.methods.get_duel_inviter().call();
+  return allInviter;
+}
+
 export const loadCurrentPlayer = async (account) => {
   console.log("beforeeeeee single!");
   console.log(game);
