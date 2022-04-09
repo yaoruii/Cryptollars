@@ -7,7 +7,7 @@ const web3 = createAlchemyWeb3(alchemyKey);
 
 //export our contracts:(replace the values when we deploy them)
 const contractGame = require("../contract-abi.json");
-const contractGameAddress = "0x2BC730C746A56B5BcF1BBeF2bD7f7B60b228B576";
+const contractGameAddress = "0xd173BfEF425304F1cf24f7fa487504ca40684662";
 
 export const game = new web3.eth.Contract(
   contractGame,
@@ -35,6 +35,7 @@ export const loadCurrentAllAccounts = async () => {
 
 export const loadAllInviter = async () => {
   const allInviter = await game.methods.get_duel_inviter().call();
+  console.log(allInviter);
   return allInviter;
 }
 

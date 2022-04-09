@@ -4,11 +4,9 @@ import * as CONSTANTS from "../constants.js"
 import{
   loadCurrentAllAccounts,
   loadCurrentPlayer,
-  inviteAPlayer
+  inviteAPlayer,
+  loadAllInviter
 } from "../util/interact.js";
-
-
-
 
 
 
@@ -68,7 +66,7 @@ function Duel(props){
       title: 'Walletaddress',
       dataIndex: 'walletAddress',
       key:'walletAddress',
-      className:"notshow",
+      // className:"notshow",
       
     },
     
@@ -109,7 +107,7 @@ function Duel(props){
     {
       title: 'All Inviter Address',
       dataIndex: 'name',
-      key: '3',
+      key: '',
       render: text => <a>{text}</a>,
     },
     {
@@ -139,7 +137,7 @@ function Duel(props){
                         backgroundColor: "#fff",
                         bordeRradius: "5px",
                       }}
-                      onClick={() =>DeclineADuel() }
+                      onClick={() =>DeclineADuel(record) }
               >Decline </Button>
         </Space>
       ),
@@ -156,6 +154,7 @@ function Duel(props){
 				setAllPlayers(allPlayers);
 
         const allInviter = await loadAllInviter();
+        setAllInviter(allInviter);
         // const currentPlayer = await loadCurrentPlayer(walletAddress);
 			  // setCurrentPlayer(currentPlayer);
 			}
@@ -181,8 +180,6 @@ function Duel(props){
   let allOtherPlayers = []
   for(var i = 0; i<Object.keys(allPlayers).length; i++){
     allOtherPlayers = allPlayers.filter((item) => item.walletAddress.toUpperCase() !== walletAddress.toUpperCase());
-   
-  
   }
 
 
@@ -194,7 +191,7 @@ function Duel(props){
       <Divider orientation="left">ACCOUNT TABLES</Divider>
       <Table columns={columns} dataSource={allOtherPlayers} />
       <Divider orientation="left">RECEIVED INVITATION</Divider>
-      <Table columns={columns1} dataSource={data1} /></>
+      <Table columns={columns1} dataSource={allInviter} /></>
   );
 }
 export default Duel;
