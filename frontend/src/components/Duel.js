@@ -148,7 +148,7 @@ function Duel(props) {
         setAllInviter(allInviter);
         // here is for changing [] into the special structure
         for (let i = 0; i < allInviter.length; i++) {
-          data1.append({ name: allInviter[i] });
+          data1.push({ "name": allInviter[i] });
         }
         // const currentPlayer = await loadCurrentPlayer(walletAddress);
         // setCurrentPlayer(currentPlayer);
@@ -166,7 +166,6 @@ function Duel(props) {
  const onInviteAPlayerPressed = async (invitee) => {
    console.log("duel :" + invitee);
   const { status } = await inviteAPlayer(walletAddress,invitee);
-  
 };
   
 

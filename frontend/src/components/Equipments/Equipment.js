@@ -38,7 +38,7 @@ export default function Equipment(props) {
   const [allInviter, setInviter] = useState("");
   const [walletAddress, setwalletAddress] = useState(player_address);
 
-  let data1 = [];
+  
   // this function is for Equip
   const equipThisEquipment = async (equipment_id) => {
     await Equip(walletAddress, equipment_id);
@@ -83,8 +83,8 @@ export default function Equipment(props) {
               borderRadius: "5px",
             }}
             onClick={() => {
-              console.log(text.name);
-              acceptATrade(text);
+              console.log(record.name);
+              acceptATrade(record.name);
             }}
           >
             Accept{" "}
@@ -123,12 +123,7 @@ export default function Equipment(props) {
         console.log("test inviter allInviter");
         console.log(allInviter);
 
-        // here is for changing [] into the special structure
-        for (let i = 0; i < allInviter.length; i++) {
-          data1.append({ name: allInviter[i] });
-        }
-        console.log("test inviter1 data1");
-        console.log(data1);
+        
         
         console.log("test inviter");
         //await giveMoreEquip(walletAddress);
@@ -154,8 +149,18 @@ export default function Equipment(props) {
       },
     });
   }
+  
+  let data1 = [];
+    // here is for changing [] into the special structure
+    for (let i = 0; i < allInviter.length; i++) {
+      data1.push({ name: allInviter[i] });
+    }
+    console.log("test inviter1 data1");
+    console.log(data1);
 
   return (
+    
+
     <>
       <Layout>
         <Content>
