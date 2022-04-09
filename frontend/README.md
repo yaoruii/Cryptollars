@@ -1,5 +1,5 @@
 # https://dashboard.alchemyapi.io/apps/79bwmkitkc57i937
-# reminder: set .env file by themself: REACT_APP_ALCHEMY_KEY = wss://eth-rinkeby.alchemyapi.io/v2/n419E-mUUzxZM4zv2m6OdBoQyDBu9N-E
+# reminder: set .env file by themself: REACT_APP_ALCHEMY_KEY = wss://eth-ropsten.alchemyapi.io/v2/8PtnnCKHAkXgbKf6ArDBt3fQCBOXKuZg
 # follow the following steps, it should run successfully, play with this set up structure then begin code the real components
 # ✅ [Completed]  Hello World Part 4 Tutorial
 
