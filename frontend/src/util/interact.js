@@ -28,8 +28,8 @@ export const loadCurrentAllAccounts = async () => {
   return allPlayers;
 };
 
-export const loadAllInviter = async () => {
-  const allInviter = await game.methods.get_duel_inviter().call();
+export const loadAllInviter = async (address) => {
+  const allInviter = await game.methods.get_duel_inviter().call({from: address});
   console.log(allInviter);
   return allInviter;
 };

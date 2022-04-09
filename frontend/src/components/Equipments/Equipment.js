@@ -120,6 +120,8 @@ export default function Equipment(props) {
         console.log(presentEquipment[0]);
         const allInviter = await getInviter(walletAddress);
         setInviter(allInviter);
+        console.log("test inviter allInviter");
+        console.log(allInviter);
 
         // here is for changing [] into the special structure
         for (let i = 0; i < allInviter.length; i++) {
@@ -127,8 +129,7 @@ export default function Equipment(props) {
         }
         console.log("test inviter1 data1");
         console.log(data1);
-        console.log("test inviter allInviter");
-        console.log(allInviter);
+        
         console.log("test inviter");
         //await giveMoreEquip(walletAddress);
         console.log("more equipments have given");

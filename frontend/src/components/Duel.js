@@ -144,7 +144,7 @@ function Duel(props) {
 				const allPlayers = await loadCurrentAllAccounts();
 				setAllPlayers(allPlayers);
 
-        const allInviter = await loadAllInviter();
+        const allInviter = await loadAllInviter(walletAddress);
         setAllInviter(allInviter);
         // here is for changing [] into the special structure
         for (let i = 0; i < allInviter.length; i++) {

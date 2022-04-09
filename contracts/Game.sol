@@ -14,7 +14,7 @@ contract Game is IGame, GameMaster, Trade{
     // equipment attributes
     //mapping(address => Player) public players;
     mapping(address => address) public duel_match;
-    mapping(address => address[]) public duel_inviter_show;
+    mapping(address => address) public duel_inviter_show;
     Player[] public all_players;
     Equipment empty = Equipment(0, 0, "");
 
@@ -165,11 +165,11 @@ contract Game is IGame, GameMaster, Trade{
         players[invitee].is_pending = true;
         duel_match[msg.sender] = invitee;
         // add for inviter show
-        duel_inviter_show[invitee].push(msg.sender);
+        duel_inviter_show[invitee]= msg.sender;
         super.setApprovalForAll(invitee, true);
     }
 
-     function get_duel_inviter() external view returns (address[] memory inviterAddress){ 
+     function get_duel_inviter() external view returns (address memory inviterAddress){ 
         inviterAddress = duel_inviter_show[msg.sender];
      }
     /*
