@@ -5,7 +5,6 @@ import {
   loadCurrentAllAccounts,
   loadCurrentPlayer,
   inviteAPlayer,
-<<<<<<< HEAD
   loadAllInviter
 } from "../util/interact.js";
 
@@ -17,12 +16,6 @@ function AcceptADuel(){
 function DeclineADuel(){
 
 }
-=======
-} from "../util/interact.js";
-
-function AcceptADuel() {}
-function DeclineADuel() {}
->>>>>>> eafaa95d20b8de2ed92cdabe868fdca47428e7fc
 const data1 = [
   {
     key: "1",
@@ -68,7 +61,6 @@ function Duel(props) {
       title: 'Walletaddress',
       dataIndex: 'walletAddress',
       key:'walletAddress',
-      // className:"notshow",
       
     },
 
@@ -113,7 +105,7 @@ function Duel(props) {
       title: 'All Inviter Address',
       dataIndex: 'name',
       key: '',
-      render: text => <a>{text}</a>,
+      render: record => <a>{record}</a>,
     },
     {
       title: "Action",
