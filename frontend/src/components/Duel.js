@@ -110,7 +110,7 @@ function Duel(props) {
                         backgroundColor: "#FF5733",
                         borderRadius: "5px",
                       }}
-                      onClick={() =>AcceptADuel(record.name) }
+                      onClick={() =>AcceptADuelPressed(record.name) }
               >Accept </Button>
               <Button type="primary"
                       style={{
@@ -122,7 +122,7 @@ function Duel(props) {
                         backgroundColor: "#fff",
                         bordeRradius: "5px",
                       }}
-                      onClick={() =>DeclineADuel(record) }
+                      onClick={() =>DeclineADuelPressed(record.name) }
               >Decline </Button>
         </Space>
       ),
