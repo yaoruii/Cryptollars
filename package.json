@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "npx hardhat --network ropsten run scripts/deploy.js"  },
+    "deploy": "npx hardhat --network ropsten run scripts/deploy.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://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@github.com/yaoruii/Cryptollars.git"

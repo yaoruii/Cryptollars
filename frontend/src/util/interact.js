@@ -32,7 +32,7 @@ export const loadAllInviter = async () => {
   const allInviter = await game.methods.get_duel_inviter().call();
   console.log(allInviter);
   return allInviter;
-}
+};
 
 export const loadCurrentPlayer = async (account) => {
   console.log("beforeeeeee single!");
@@ -308,7 +308,6 @@ export const Equip = async (address, equipment_id) => {
   }
 };
 
-
 // only testing purposes!
 // for testing and giving the player more equipments
 export const giveMoreEquip = async (address) => {
@@ -405,14 +404,12 @@ export const createTrade = async (
 };
 
 // for trade inviter show
-export const getInviter = async () => {
+export const getInviter = async (address) => {
   //address is the address of the player
   //const address = [];
-  const allInviter = await game.methods.get_inviter().call();
+  const allInviter = await game.methods.get_inviter().call({ from: address });
   return allInviter;
 };
-
-
 
 //accept_trade
 export const acceptTrade = async (address, inviterAddress) => {

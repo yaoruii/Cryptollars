@@ -64,7 +64,7 @@ export default function Equipment(props) {
       title: "All Inviter Address",
       dataIndex: "name",
       key: "name",
-      render: (text) => text
+      render: (text) => text,
     },
     {
       title: "Action",
@@ -118,11 +118,11 @@ export default function Equipment(props) {
         setEquipment(presentEquipment);
         console.log(presentEquipment);
         console.log(presentEquipment[0]);
-        const allInviter = await getInviter();
+        const allInviter = await getInviter(walletAddress);
         setInviter(allInviter);
 
         // here is for changing [] into the special structure
-        for (let i = 0; i < allInviter.length - 1; i++) {
+        for (let i = 0; i < allInviter.length; i++) {
           data1.append({ name: allInviter[i] });
         }
         console.log("test inviter1 data1");
