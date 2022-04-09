@@ -38,13 +38,16 @@ export default function Bank(props) {
     const [index, setIndex] = useState(2);
     const [estimatedGold, setEstimatedGold] = useState("0");
     const [estimatedSilver, setEstimatedSilver] = useState("0");
-
+    const [temp, setTemp] = useState(0);
     useEffect(() => { //TODO: implement
         async function fetchData() {
           
                 if (walletAddress !== "") {
-                    //const silver = await currentSilverBalance(player_address);
-                   // setSilverBalance(silver);
+                    const silver = await currentSilverBalance(player_address);
+                    console.log("silver");
+                    console.log(silver);
+                    console.log("silver");
+                    setSilverBalance(silver);
                     const gold = await currentGoldBalance(player_address);
                     setGoldBalance(gold);
             // const currentPlayer = await loadCurrentPlayer(walletAddress);
@@ -65,10 +68,14 @@ export default function Bank(props) {
     const handleInput2 = event => {
         setEstimatedSilver(event.target.value);
     };
+    const handleInput3 = event => {
+        setTemp(event.target.value);
+    };
     const changeIndexPressed = async (newIndex) => {
-        const currentIndex = await updatedIndex(walletAddress, newIndex);
-        setIndex(currentIndex);
+        await updatedIndex(walletAddress, newIndex);
+        setIndex(temp);
     }
+   
     const purchaseGoldPressed = async (silvercoins) => {
         await buyGold(walletAddress, silvercoins);
     }
@@ -144,26 +151,27 @@ export default function Bank(props) {
                         </Space>
                     </Card>
                 </div>
+                
                 <div id="indexCard">
-                    <Card style={{ width: 300 }}>
-                        <p>Edit Index</p>
-                        <Space>
-                            <div id="ninth">
-                                <Alert message="New Index:" type="error" />
-                            </div>
-                            <div id="tenth">
-                                <Input placeholder="" />
-                            </div>
-                        </Space>
-                        <div class="button">
-                            <Form.Item {...buttonItemLayout}>
-                                <Button type="primary"
-                        //     onClick={changeIndexPressed(walletAddress,5)}
-                                >Change</Button>
-                            </Form.Item>   
-                        </div>
-                    </Card>
-                </div>
+    <Card style={{ width: 250 }}>
+        <p>Edit Index</p>
+        <Space>
+            <div id="ninth">
+                <Alert message="New Index:" type="error" />
+            </div>
+            <div id="tenth">
+                <Input placeholder="" onChange={handleInput3} />
+            </div>
+        </Space>
+        <div class="button">
+            <Form.Item {...buttonItemLayout} style={{ width: 100 }}>
+                <Button type="primary"
+                        onClick={() => {changeIndexPressed(temp);}}
+                >Change</Button>
+            </Form.Item>   
+        </div>
+    </Card>
+</div>
 
                 <div class="Form">
                     <Form
@@ -223,7 +231,7 @@ export default function Bank(props) {
                                     
                 
                                     <Button type="primary"
-                                       //     onClick={purchaseGoldPressed(walletAddress,5)}
+                                            onClick={()=>{purchaseGoldPressed(5);}}
                                             >Purchase</Button>
                                            
                                 </Form.Item>
