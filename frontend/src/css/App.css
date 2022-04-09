@@ -135,6 +135,10 @@ html {
   border: none;
 }
 
+.hidden {
+  display: none;
+}
+
 .Form {
   text-align: center;
   width: 500px;
@@ -221,7 +225,7 @@ html {
 }
 
 #tenth {
-  width: 130px;
+  width: 80px;
 }
 
 #tenth Input{

@@ -12,8 +12,8 @@ const contractGameAddress = "0x06a900108fc37080616421863D419A36CE5E4Bc5";
 
 export const game = new web3.eth.Contract(contractGame, contractGameAddress);
 
- const contractBank = require("../contract-abi.json");
-const contractBankAddress = "0x05021e526f4aeC894E07903851317f9C90865Ef7";
+const contractBank = require("../contract-abi.json");
+const contractBankAddress = "0xDf57baD6a55bb6f2022BCAd2fC8B355a29fEfE76";
 
  export const bank = new web3.eth.Contract(
   contractBank,
@@ -491,7 +491,7 @@ export const declineTrade = async (address, inviterAddress) => {
   }
 };
 //above are functions for equipments :)
-const FACTOR = 10e6;
+const FACTOR = 10e5;
 
 export const currentSilverBalance = async (address) => {
   const silverBalance = await bank.methods.view_silver_number(address).call();
@@ -565,7 +565,7 @@ export const buyGold = async (address, silverCoins) => {
   const transactionParameters = {
     to: contractBankAddress, // Required except during contract publications.
     from: address, // must match user's active address.
-    data: bank.methods.buy_gold(silverCoins).encodeABI(),
+    data: bank.methods.buy_gold(silverCoins * FACTOR).encodeABI(),
   };
   try {
     const txHash = await window.ethereum.request({
@@ -603,7 +603,44 @@ export const exchangeSilver = async (address, goldCoins) => {
   const transactionParameters = {
     to: contractBankAddress, // Required except during contract publications.
     from: address, // must match user's active address.
-    data: bank.methods.exchange_silver(goldCoins).encodeABI(),
+    data: bank.methods.exchange_silver(goldCoins * FACTOR).encodeABI(),
+  };
+  try {
+    const txHash = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParameters],
+    });
+    return {
+      status: (
+          <span>
+            ✅{" "}
+            <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+              View the status of your transaction on Etherscan!
+            </a>
+            <br />
+            ℹ️ Once the transaction is verified by the network, the message will
+            be updated automatically.
+          </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+}
+
+export const initSilver = async (address) => {
+  if (!window.ethereum || address === null) {
+    return {
+      status:
+          "💡 Connect your Metamask wallet to update the message on the blockchain.",
+    };
+  }
+  const transactionParameters = {
+    to: contractBankAddress, // Required except during contract publications.
+    from: address, // must match user's active address.
+    data: bank.methods.test_mint_initial(address).encodeABI(),
   };
   try {
     const txHash = await window.ethereum.request({

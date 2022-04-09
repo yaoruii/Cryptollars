@@ -59,11 +59,11 @@ interface IBank {
      * @notice Everyone can view the number of his own gold coins.
      * return is the number of gold coins a player had.
      */
-    function view_gold_number() external view returns(uint256 gold_number);
+    function view_gold_number(address player) external view returns(uint256 gold_number);
 
     /**
      * @notice Everyone can view the number of his own silver coins.
      * return is the number of silver coins a player had.
      */
-    function view_silver_number() external view returns(uint256 silver_number);
+    function view_silver_number(address player) external view returns(uint256 silver_number);
 }

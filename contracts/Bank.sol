@@ -10,9 +10,10 @@ contract Bank is IBank, GameItems{
      uint256 public index_admin_value;
      address public admin;
 
-     constructor (uint256 initial_index) {
+     constructor () {
         admin = msg.sender;
-        index_admin_value = initial_index;
+        index_admin_value = 2;
+        super.mint_money_silver(msg.sender, 100000000);
      }
 
     /**
@@ -79,15 +80,15 @@ contract Bank is IBank, GameItems{
     /**
      * @notice Everyone can view the number of his own gold coins.
      */
-     function view_gold_number() public override view returns (uint256 gold_number){
-          gold_number = super.balanceOf(msg.sender, 0);
+     function view_gold_number(address player) public override view returns (uint256 gold_number){
+          gold_number = super.balanceOf(player, 0);
      }
 
     /**
      * @notice Everyone can view the number of his own silver coins.
      */
-     function view_silver_number() public override view returns (uint256 silver_number){
-          silver_number = super.balanceOf(msg.sender, 1);
+     function view_silver_number(address player) public override view returns (uint256 silver_number){
+          silver_number = super.balanceOf(player, 1);
      }
 
      /**

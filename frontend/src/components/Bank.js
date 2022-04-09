@@ -5,15 +5,11 @@ import { Form, Input, Button, Radio, Space } from 'antd';
 import { Alert } from 'antd';
 import App from "../css/App.css";
 import{
-    loadCurrentAllAccounts,
-    loadCurrentPlayer,
-    inviteAPlayer,
     currentSilverBalance,
     currentGoldBalance,
     updatedIndex,
-    index,
-    estimatedGold,
-    estimatedSilver,
+    getIndex,
+    initSilver,
     buyGold,
     exchangeSilver
 } from "../util/interact.js";
@@ -31,37 +27,35 @@ export default function Bank(props) {
     const player_address = props.accountAddress;
     const [walletAddress, setwalletAddress] = useState(player_address);
 
-    // const [allPlayers, setAllPlayers] = useState([]);
-
-    const [silverBalance, setSilverBalance] = useState(100);
+    const [visible, setVisible] = useState(false);
+    const [silverBalance, setSilverBalance] = useState(0);
     const [goldBalance, setGoldBalance] = useState(0);
-    const [index, setIndex] = useState(2);
+    const [index, setIndex] = useState(1);
     const [estimatedGold, setEstimatedGold] = useState("0");
     const [estimatedSilver, setEstimatedSilver] = useState("0");
     const [temp, setTemp] = useState(0);
+
     useEffect(() => { //TODO: implement
         async function fetchData() {
-          
                 if (walletAddress !== "") {
+                    setVisible(true);
                     const silver = await currentSilverBalance(player_address);
                     console.log("silver");
                     console.log(silver);
                     console.log("silver");
                     setSilverBalance(silver);
                     const gold = await currentGoldBalance(player_address);
+                    console.log("gold");
+                    console.log(gold);
+                    console.log("gold");
                     setGoldBalance(gold);
-            // const currentPlayer = await loadCurrentPlayer(walletAddress);
-                  // setCurrentPlayer(currentPlayer);
-           
+                    const idx = await getIndex();
+                    setIndex(idx);
                 }
-                
-                addSmartContractListener();			
             }
             fetchData();
-      }, []);
-      function addSmartContractListener() { //TODO: implement
-    
-      }
+      }, [silverBalance, goldBalance, index]);
+
     const handleInput = event => {
         setEstimatedGold(event.target.value);
       };
@@ -71,6 +65,7 @@ export default function Bank(props) {
     const handleInput3 = event => {
         setTemp(event.target.value);
     };
+
     const changeIndexPressed = async (newIndex) => {
         await updatedIndex(walletAddress, newIndex);
         setIndex(temp);
@@ -104,7 +99,7 @@ export default function Bank(props) {
         formLayout === 'horizontal'
             ? {
                 wrapperCol: {
-                    span: 14,
+                    span: 16,
                     offset: 4,
                 },
             }
@@ -117,7 +112,7 @@ export default function Bank(props) {
             <div id="Title">
                 <h2 id="Bank">Bank</h2>
             </div>
-            <div>
+            <div className={visible? '':'hidden'}>
                 <List
                     grid={{
                         gutter: 16,
@@ -135,7 +130,7 @@ export default function Bank(props) {
                     )}
                 />
                 <div class="card">
-                    <Card style={{ width: 300 }}>
+                    <Card style={{ width: 250 }}>
                         <p>Current Balance</p>
                         <Space>
                             <div id="currentSilver">
@@ -153,7 +148,7 @@ export default function Bank(props) {
                 </div>
                 
                 <div id="indexCard">
-    <Card style={{ width: 250 }}>
+    <Card style={{ width: 250, height: 180 }}>
         <p>Edit Index</p>
         <Space>
             <div id="ninth">
@@ -208,7 +203,7 @@ export default function Bank(props) {
                                             <Alert message="Silver" type="info" />
                                         </div>
                                         <div id="second">
-                                            <Input placeholder="The number of silver coins" onChange={handleInput} />
+                                            <Input placeholder="0" onChange={handleInput} />
                                         </div>
                                     </Space>
                                 </div>
@@ -231,7 +226,7 @@ export default function Bank(props) {
                                     
                 
                                     <Button type="primary"
-                                            onClick={()=>{purchaseGoldPressed(5);}}
+                                            onClick={()=>{purchaseGoldPressed(estimatedGold);}}
                                             >Purchase</Button>
                                            
                                 </Form.Item>
@@ -248,7 +243,7 @@ export default function Bank(props) {
                                             <Alert message="Gold" type="info" />
                                         </div>
                                         <div id="sixth">
-                                            <Input placeholder="The number of gold coins" onChange={handleInput2}/>
+                                            <Input placeholder="0" onChange={handleInput2}/>
                                         </div>
                                     </Space>
                                 </div>
@@ -270,7 +265,7 @@ export default function Bank(props) {
                                 
                 
                                     <Button type="primary"
-                                       //     onClick={purchaseGoldPressed(walletAddress,5)}
+                                            onClick={()=>{exchangeSilverPressed(estimatedSilver);}}
                                             >Exchange</Button>
                                             
                                 </Form.Item>
