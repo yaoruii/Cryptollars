@@ -1,20 +1,27 @@
 //SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
 import "./IBank.sol";
+import "./GameItems.sol";
 
-import "./GameMaster.sol";
 /**
  * @title Bank contract
  */
-contract Bank is IBank{
+contract Bank is IBank, GameItems{
      uint256 public index_admin_value;
      address public admin;
-     GameMaster gameMaster;
-     constructor (uint256 initial_index, GameMaster tokenAddress) {
+
+     constructor () {
+        admin = msg.sender;
+        index_admin_value = 2;
+        super.mint_money_silver(msg.sender, 100000000);
+     }
+     
+     /*
+     constructor (uint256 initial_index) {
         admin = msg.sender;
         index_admin_value = initial_index;
-        gameMaster = tokenAddress;
      }
+     */
 
     /**
      * @notice Player use silver coins to get gold coins.
@@ -22,10 +29,10 @@ contract Bank is IBank{
      * @notice in this function, player can get gold coins and reduce the number of silver coins.
      */
      function buy_gold(uint256 silver_number) public override returns (uint256 gold_number){
-          require(gameMaster.balanceOf(msg.sender, 1) > silver_number, "silver coins are not enough");
-          gameMaster.burn_money_silver(msg.sender, silver_number);
+          require(super.balanceOf(msg.sender, 1) > silver_number, "silver coins are not enough");
+          super.burn_money_silver(msg.sender, silver_number);
           gold_number = silver_number/index_admin_value;
-          gameMaster.mint_money_gold(msg.sender, gold_number); 
+          super.mint_money_gold(msg.sender, gold_number); 
      }
 
     /**
@@ -35,8 +42,8 @@ contract Bank is IBank{
      * @notice in this function, player can get silver coins and reduce the number of gold coins.
      */
      function exchange_silver(uint256 gold_number) public override returns (uint256 silver_number){
-          require(gameMaster.balanceOf(msg.sender, 0) > gold_number, "gold coins are not enough");
-          gameMaster.burn_money_gold(msg.sender, gold_number);
+          require(super.balanceOf(msg.sender, 0) > gold_number, "gold coins are not enough");
+          super.burn_money_gold(msg.sender, gold_number);
           silver_number = gold_number * index_admin_value;
           super.mint_money_silver(msg.sender, silver_number);
      }
@@ -80,15 +87,15 @@ contract Bank is IBank{
     /**
      * @notice Everyone can view the number of his own gold coins.
      */
-     function view_gold_number(address player_address) public override view returns (uint256 gold_number){
-          gold_number = super.balanceOf(player_address, 0);
+     function view_gold_number(address player) public override view returns (uint256 gold_number){
+          gold_number = super.balanceOf(player, 0);
      }
 
     /**
      * @notice Everyone can view the number of his own silver coins.
      */
-     function view_silver_number(address player_address) public override view returns (uint256 silver_number){
-          silver_number =super.balanceOf(player_address, 1);
+     function view_silver_number(address player) public override view returns (uint256 silver_number){
+          silver_number = super.balanceOf(player, 1);
      }
 
      /**
@@ -97,9 +104,9 @@ contract Bank is IBank{
      * @notice Players can get initial gold coins and silver coins.
      */
      function test_mint_initial(address _to) public {
-          require(msg.sender == admin);
-          super.mint_money_silver(_to, 130000000);
-          super.mint_money_gold(_to, 130000000);
+          // require(msg.sender == admin);
+          super.mint_money_silver(_to, 100000000);
+          // super.mint_money_gold(_to, 130000000);
      }
 
 }
