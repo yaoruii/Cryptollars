@@ -1,6 +1,6 @@
 import "../css/App.css";
 import Game from "./Game";
-import HuntMonsters from "./HuntMonster";
+import HuntMonsters from "./HuntMonster/HuntMonster.js";
 import Duel from "./Duel";
 import Equipment from "./Equipments/Equipment";
 import Bank from "./Bank";
@@ -91,16 +91,10 @@ function App() {
           <Game accountAddress={walletAddress} />
         );
       // eslint-disable-next-line no-duplicate-case
-      case "2":
-        return <HuntMonsters />;
-      case "3":
-        return (
-          <Duel
-            accountAddress={walletAddress}
-            status={status}
-            currentPlayer={currentPlayer}
-          />
-        );
+      case '2':
+        return (<HuntMonsters accountAddress={walletAddress} status={status} currentPlayer={currentPlayer}/>);
+      case '3':
+        return (<Duel accountAddress={walletAddress} status={status} currentPlayer={currentPlayer}/>);
       case "4":
         return (
           <Equipment
@@ -110,7 +104,9 @@ function App() {
           />
         );
       case "5":
-        return <Bank />;
+        return <Bank accountAddress={walletAddress}
+        status={status}
+        currentPlayer={currentPlayer}/>;
       default:
         break;
     }

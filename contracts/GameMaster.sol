@@ -15,8 +15,8 @@ contract GameMaster is IGameMaster, GameItems {
     Monster[] public allMonsters;
     address public admin;
     uint256 public monsterCounter;
-    uint256 public monster_maximum_health = 200;
-    uint256 public monster_maximum_attack = 12;
+    uint256 public monster_maximum_health = 400;
+    uint256 public monster_maximum_attack = 18;
     uint256 public monster_minimum_attack = 8;
     bool public is_going ;
 
@@ -26,7 +26,9 @@ contract GameMaster is IGameMaster, GameItems {
         is_going = true;
         // system_monster_health = _system_monster_health;
         //initialize some monsters firstly? ?
-        create_monster();
+        
+            create_monster();
+        
     }
 
     /**
