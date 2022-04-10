@@ -723,6 +723,19 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "get_inviter",
+		"outputs": [
+			{
+				"internalType": "address[]",
+				"name": "inviterAddress",
+				"type": "address[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -1504,7 +1517,8 @@
 		],
 		"stateMutability": "view",
 		"type": "function"
-	},
+	}
+,
 	
 		{
 			"inputs": [
