@@ -209,54 +209,7 @@ export const inviteAPlayer = async (fromaddress, address) => {
     };
   }
 };
-//For huntMonsters.js
-export const getMonsters = async()=>{
-  const all_Monsters = await game.methods.get_all_monster().call();
-  return all_Monsters;
-}
-export const attack = async(address,monster_id)=>{
-  //const result = await game.methods.attack_monster(monster_id).call({from:address});
-    //input error handling
-    if (!window.ethereum || address === null) {
-      return {
-        status:
-          "💡 Connect your Metamask wallet to update the message on the blockchain.",
-      };
-    }
-  
-    //set up transaction parameters
-    const transactionParameters = {
-      to: contractGameAddress, // Required except during contract publications.
-      from: address, // must match user's active address.
-      data: game.methods.attack_monster(monster_id).encodeABI(),
-    };
-  
-    //sign the transaction
-    try {
-      const txHash = await window.ethereum.request({
-        method: "eth_sendTransaction",
-        params: [transactionParameters],
-      });
-      console.log(txHash);
-      return {
-        status: (
-          <span>
-            ✅{" "}
-            <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
-              View the status of your transaction on Etherscan!
-            </a>
-            <br />
-            ℹ️ Once the transaction is verified by the network, the message will
-            be updated automatically.
-          </span>
-        ),
-      };
-    } catch (error) {
-      return {
-        status: "😥 " + error.message,
-      };
-    }
-};
+
 //here are the async functions for equipment:
 //For equipment
 //need to get the current total equipment of player and show them on the interface
@@ -629,3 +582,51 @@ export const exchangeSilver = async (address, goldCoins) => {
     };
   }
 }
+//For huntMonsters.js
+export const getMonsters = async()=>{
+  const all_Monsters = await game.methods.get_all_monster().call();
+  return all_Monsters;
+}
+export const attack = async(address,monster_id)=>{
+  //const result = await game.methods.attack_monster(monster_id).call({from:address});
+    //input error handling
+    if (!window.ethereum || address === null) {
+      return {
+        status:
+          "💡 Connect your Metamask wallet to update the message on the blockchain.",
+      };
+    }
+  
+    //set up transaction parameters
+    const transactionParameters = {
+      to: contractGameAddress, // Required except during contract publications.
+      from: address, // must match user's active address.
+      data: game.methods.attack_monster(monster_id).encodeABI(),
+    };
+  
+    //sign the transaction
+    try {
+      const txHash = await window.ethereum.request({
+        method: "eth_sendTransaction",
+        params: [transactionParameters],
+      });
+      console.log(txHash);
+      return {
+        status: (
+          <span>
+            ✅{" "}
+            <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+              View the status of your transaction on Etherscan!
+            </a>
+            <br />
+            ℹ️ Once the transaction is verified by the network, the message will
+            be updated automatically.
+          </span>
+        ),
+      };
+    } catch (error) {
+      return {
+        status: "😥 " + error.message,
+      };
+    }
+};
