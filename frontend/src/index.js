@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'antd/dist/antd.css';
 import App from './components/App';
+import HuntMonsters from './components/HuntMonster/HuntMonster'
 import reportWebVitals from './reportWebVitals';
 
 
