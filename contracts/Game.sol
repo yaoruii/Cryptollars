@@ -1,21 +1,22 @@
 //SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0;
+import "./IGame.sol";
 
-import "./IPlayer.sol";
 import "./GameMaster.sol";
 import "./Trade.sol";
-import "./IGame.sol";
 
 /**
  * @title Game contract
  */
 
-contract Game is IGame, GameMaster, Trade{
-    
+contract Game is IGame, Trade, GameMaster{
+    // equipment attributes
+    //mapping(address => Player) public players;
+    mapping(address => address) public duel_match;
+    Player[] public all_players;
     Equipment empty = Equipment(0, 0, "");
-
-   // mapping(address => Equipment[]) public equipments;
-
+   
+   
     modifier check_isinitialized() {
         require(
             players[msg.sender].is_initialized == true,
@@ -56,6 +57,9 @@ contract Game is IGame, GameMaster, Trade{
     function get_is_pending(address addr)public view returns(bool ){
         return players[addr].is_pending;
     }
+    function get_address(address addr)public view returns(address){
+        return players[addr].walletAddress;
+    }
     function set_health(address addr,uint256 ch)public {
         players[addr].current_health = ch;
     }
@@ -67,8 +71,14 @@ contract Game is IGame, GameMaster, Trade{
         players[msg.sender].player_name = _name;
         players[msg.sender].is_initialized = true;      
         mint_new_sword(players[msg.sender], msg.sender);
+        mint_money_silver(msg.sender, 100);
         equip(2);
         players[msg.sender].is_pending = false;
+        players[msg.sender].walletAddress = msg.sender;
+
+        //store this player:
+        all_players.push(players[msg.sender]);
+        
     }
 
    
@@ -104,7 +114,7 @@ contract Game is IGame, GameMaster, Trade{
              uint256 amount = get_random(
                 10000000
             );
-            super.mint_money_silver(msg.sender, amount);
+            mint_money_silver(msg.sender, amount);
             return true;
         }
         reborn(msg.sender);
