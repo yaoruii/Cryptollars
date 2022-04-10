@@ -8,7 +8,7 @@ const web3 = createAlchemyWeb3(alchemyKey);
 //export our contracts:(replace the values when we deploy them)
 const contractGame = require("../contract-abi.json");
 //const contractGameAddress = "0x2BC730C746A56B5BcF1BBeF2bD7f7B60b228B576";
-const contractGameAddress = "0xd173BfEF425304F1cf24f7fa487504ca40684662";
+const contractGameAddress = "0x201308f4c2a7Bf4708e76de8f64252adaA3467b8";
 
 export const game = new web3.eth.Contract(contractGame, contractGameAddress);
 const contractBank = require("../contract-abi.json");
