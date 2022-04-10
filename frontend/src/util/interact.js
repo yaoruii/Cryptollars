@@ -1,4 +1,3 @@
-
 require("dotenv").config();
 //imported the Alchemy key from our .env file
 const alchemyKey = process.env.REACT_APP_ALCHEMY_KEY;
@@ -8,36 +7,21 @@ const web3 = createAlchemyWeb3(alchemyKey);
 
 //export our contracts:(replace the values when we deploy them)
 const contractGame = require("../contract-abi.json");
-<<<<<<< HEAD
 //const contractGameAddress = "0x2BC730C746A56B5BcF1BBeF2bD7f7B60b228B576";
 const contractGameAddress = "0xd173BfEF425304F1cf24f7fa487504ca40684662";
-=======
-const contractGameAddress = "0x06a900108fc37080616421863D419A36CE5E4Bc5";
->>>>>>> yuqing
 
 export const game = new web3.eth.Contract(contractGame, contractGameAddress);
 const contractBank = require("../contract-abi.json");
 const contractBankAddress = "0xE049b1693a58137469bC1a5DC429Dc6aD88Cca09";
 
-<<<<<<< HEAD
 export const bank = new web3.eth.Contract(
     contractBank,
     contractBankAddress
 );
 //Now that we have our contract loaded
-=======
- const contractBank = require("../contract-abi.json");
-const contractBankAddress = "0x05021e526f4aeC894E07903851317f9C90865Ef7";
 
- export const bank = new web3.eth.Contract(
-  contractBank,
-  contractBankAddress
-);
-// Now that we havxse our contract loaded
->>>>>>> yuqing
-
-// A function to call to your smart contract function
-// a simple async web3 call to read from our contracts
+//A function to call to your smart contract function
+//a simple async web3 call to read from our contracts
 export const loadCurrentAllAccounts = async () => {
   const allPlayers = await game.methods.get_all_players().call();
 
@@ -53,12 +37,12 @@ export const loadAllInviter = async (address) => {
 
 
 export const loadCurrentPlayer = async (account) => {
-  // console.log("beforeeeeee single!");
-  // console.log(game);
-  // console.log(account);
+  console.log("beforeeeeee single!");
+  console.log(game);
+  console.log(account);
   const currentPlayer = await game.methods.get_player(account).call();
-  // console.log(currentPlayer);
-  // console.log(typeof currentPlayer);
+  console.log(currentPlayer);
+  console.log(typeof currentPlayer);
   return currentPlayer;
 };
 
@@ -66,10 +50,6 @@ export const loadCurrentPlayer = async (account) => {
 export const connectWallet = async () => {
   if (window.ethereum) {
     try {
-      // rui: add
-      window.web3 = new web3(window.ethereum);
-      window.ethereum.enable();
-      // end rui
       const addressArray = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
@@ -606,12 +586,8 @@ export const declineTrade = async (address, inviterAddress) => {
   }
 };
 //above are functions for equipments :)
-<<<<<<< HEAD
 
 const FACTOR = 10e5;
-=======
-const FACTOR = 10e6;
->>>>>>> yuqing
 
 export const currentSilverBalance = async (address) => {
   const silverBalance = await bank.methods.view_silver_number(address).call();
@@ -685,11 +661,7 @@ export const buyGold = async (address, silverCoins) => {
   const transactionParameters = {
     to: contractBankAddress, // Required except during contract publications.
     from: address, // must match user's active address.
-<<<<<<< HEAD
     data: bank.methods.buy_gold(silverCoins * FACTOR).encodeABI(),
-=======
-    data: bank.methods.buy_gold(silverCoins).encodeABI(),
->>>>>>> yuqing
   };
   try {
     const txHash = await window.ethereum.request({
@@ -727,11 +699,7 @@ export const exchangeSilver = async (address, goldCoins) => {
   const transactionParameters = {
     to: contractBankAddress, // Required except during contract publications.
     from: address, // must match user's active address.
-<<<<<<< HEAD
     data: bank.methods.exchange_silver(goldCoins * FACTOR).encodeABI(),
-=======
-    data: bank.methods.exchange_silver(goldCoins).encodeABI(),
->>>>>>> yuqing
   };
   try {
     const txHash = await window.ethereum.request({
@@ -757,7 +725,6 @@ export const exchangeSilver = async (address, goldCoins) => {
     };
   }
 }
-<<<<<<< HEAD
 
 export const initSilver = async (address) => {
   if (!window.ethereum || address === null) {
@@ -778,8 +745,25 @@ export const initSilver = async (address) => {
     });
     return {
       status: (
-=======
-//For huntMonsters.js
+          <span>
+            ✅{" "}
+            <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
+              View the status of your transaction on Etherscan!
+            </a>
+            <br />
+            ℹ️ Once the transaction is verified by the network, the message will
+            be updated automatically.
+          </span>
+      ),
+    };
+  } catch (error) {
+    return {
+      status: "😥 " + error.message,
+    };
+  }
+}
+
+// above is for bank
 export const getMonsters = async()=>{
   const all_Monsters = await game.methods.get_all_monster().call();
   return all_Monsters;
@@ -810,7 +794,6 @@ export const attack = async(address,monster_id)=>{
       console.log(txHash);
       return {
         status: (
->>>>>>> yuqing
           <span>
             ✅{" "}
             <a target="_blank" href={`https://ropsten.etherscan.io/tx/${txHash}`}>
@@ -820,7 +803,6 @@ export const attack = async(address,monster_id)=>{
             ℹ️ Once the transaction is verified by the network, the message will
             be updated automatically.
           </span>
-<<<<<<< HEAD
       ),
     };
   } catch (error) {
@@ -829,15 +811,3 @@ export const attack = async(address,monster_id)=>{
     };
   }
 }
-
-// above is for bank
-=======
-        ),
-      };
-    } catch (error) {
-      return {
-        status: "😥 " + error.message,
-      };
-    }
-};
->>>>>>> yuqing
