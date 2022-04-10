@@ -31,15 +31,15 @@ export default function Bank(props) {
     const [silverBalance, setSilverBalance] = useState(100);
     const [goldBalance, setGoldBalance] = useState(0);
     const [index, setIndex] = useState("");
-    const [estimatedGold, setEstimatedGold] = useState("");
-    const [estimatedSilver, setEstimatedSilver] = useState("");
+    const [estimatedGold, setEstimatedGold] = useState("0");
+    const [estimatedSilver, setEstimatedSilver] = useState("0");
     const [temp, setTemp] = useState(0);
 
     useEffect(() => { //TODO: implement
         async function fetchData() {
                 if (walletAddress !== "") {
                     setVisible(true);
-                    await initSilver(walletAddress);
+                    //await initSilver(walletAddress);
                     const silver = await currentSilverBalance(player_address);
                     console.log("silver");
                     console.log(silver);
