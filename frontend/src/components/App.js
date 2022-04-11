@@ -45,7 +45,7 @@ function App() {
     fetchWallet();
     addWalletListener();
     componentsSwitch(selectedMenuItem);
-  }, [walletAddress, selectedMenuItem, isInitialized,currentPlayer]);
+  }, [walletAddress, selectedMenuItem, isInitialized, currentPlayer]);
 
   const connectWalletPressed = async (name) => {
     const walletResponse = await connectWallet();
@@ -91,10 +91,22 @@ function App() {
           <Game accountAddress={walletAddress} />
         );
       // eslint-disable-next-line no-duplicate-case
-      case '2':
-        return (<HuntMonsters accountAddress={walletAddress} status={status} currentPlayer={currentPlayer}/>);
-      case '3':
-        return (<Duel accountAddress={walletAddress} status={status} currentPlayer={currentPlayer}/>);
+      case "2":
+        return (
+          <HuntMonsters
+            accountAddress={walletAddress}
+            status={status}
+            currentPlayer={currentPlayer}
+          />
+        );
+      case "3":
+        return (
+          <Duel
+            accountAddress={walletAddress}
+            status={status}
+            currentPlayer={currentPlayer}
+          />
+        );
       case "4":
         return (
           <Equipment
@@ -104,9 +116,13 @@ function App() {
           />
         );
       case "5":
-        return <Bank accountAddress={walletAddress}
-        status={status}
-        currentPlayer={currentPlayer}/>;
+        return (
+          <Bank
+            accountAddress={walletAddress}
+            status={status}
+            currentPlayer={currentPlayer}
+          />
+        );
       default:
         break;
     }
