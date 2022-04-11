@@ -133,7 +133,7 @@ export default function Equipment(props) {
       }
     }
     fetchData();
-  }, [walletAddress]);
+  }, [walletAddress, allInviter, presentEquipment]);
 
   // This is for equip new equipment and it has been verified
   function showConfirm(input) {
