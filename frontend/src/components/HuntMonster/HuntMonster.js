@@ -53,7 +53,7 @@ export default function HuntMonster(props) {
 			addSmartContractListener();			
 		}
 		fetchData();
-  }, []);
+  }, [allMonsters]);
   function addSmartContractListener() { //TODO: implement
 
   }

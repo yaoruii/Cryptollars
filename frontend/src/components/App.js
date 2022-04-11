@@ -45,7 +45,7 @@ function App() {
     fetchWallet();
     addWalletListener();
     componentsSwitch(selectedMenuItem);
-  }, [walletAddress, selectedMenuItem, isInitialized]);
+  }, [walletAddress, selectedMenuItem, isInitialized,currentPlayer]);
 
   const connectWalletPressed = async (name) => {
     const walletResponse = await connectWallet();
